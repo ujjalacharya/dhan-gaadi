@@ -1,0 +1,21 @@
+{
+  "name": "dhan-gaadi",
+  "version": "1.0.0",
+  "main": "server.js",
+  "repository": "https://github.com/ujjalacharya/dhan-gaadi.git",
+  "author": "Ujjal Acharya <acharyaujjal1@gmail.com>",
+  "license": "MIT",
+  "scripts": {
+    "start": "node server.js",
+    "client": "cd client && yarn start",
+    "server": "nodemon server.js",
+    "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
+  },
+  "dependencies": {
+    "dotenv": "^8.1.0",
+    "express": "^4.17.1",
+    "global": "^4.4.0",
+    "mongoose": "^5.6.10",
+    "nodemon": "^1.19.1"
+  }
+}
