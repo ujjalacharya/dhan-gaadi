@@ -17,6 +17,7 @@
     "global": "^4.4.0",
     "mongoose": "^5.6.10",
     "mongoose-slug-generator": "^1.0.4",
-    "nodemon": "^1.19.1"
+    "nodemon": "^1.19.1",
+    "uuid": "^3.3.3"
   }
 }
