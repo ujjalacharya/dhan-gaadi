@@ -15,6 +15,14 @@ const ownerSchema = new mongoose.Schema({
         required: true,
         maxlength: 32
     },
+    phone: {
+        type: Number,
+        maxlength: 10,
+        required: true
+    },
+    isVerified: {
+        default: false
+    },
     email: {
         type: String,
         trim: true
@@ -29,6 +37,7 @@ const ownerSchema = new mongoose.Schema({
     salt: String,
     role: {
         type: String,
+        enum: ["owner", "superadmin"],
         default: "owner"
     }
 }, { timestamps: true });
