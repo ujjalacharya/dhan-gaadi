@@ -5,6 +5,7 @@ const path = require("path");
 const cors = require("cors");
 const expressValidator = require("express-validator");
 const dbConnection = require("./helpers/dbConnection");
+const { errorHandler } = require("./helpers/dbErrorHandler");
 const app = express();
 require("dotenv").config();
 
@@ -30,8 +31,9 @@ app.use("/api/auth-owner", require("./routes/auth-owner"));
 
 // Error handling middleware
 app.use(function(err, req, res, next) {
-  console.log(err);
-  res.status(500).send("Something failed...");
+  return res.status(500).json({
+    error: errorHandler(err) || "Something went wrong!"
+  });
 });
 
 const port = process.env.PORT || 8000;
