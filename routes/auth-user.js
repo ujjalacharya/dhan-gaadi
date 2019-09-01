@@ -8,7 +8,6 @@ const {
   resetPassword
 } = require("../controllers/auth-user");
 
-const { userById } = require("../controllers/user");
 const { userSignupValidator, passwordResetValidator } = require("../validator");
 
 const router = express.Router();
@@ -20,8 +19,5 @@ router.post("/social-login", socialLogin);
 
 router.put("/forgot-password", forgotPassword);
 router.put("/reset-password", passwordResetValidator, resetPassword);
-
-// any route containing :userId, our app will first execute userByID()
-router.param("userId", userById);
 
 module.exports = router;

@@ -125,7 +125,6 @@ exports.socialLogin = async (req, res) => {
     // update existing user with new social info and login
     req.profile = user;
     user = _.extend(user, req.body);
-    user.updated = Date.now();
     user.save();
     // generate a token with user id and secret
     const token = jwt.sign(
