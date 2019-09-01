@@ -17,7 +17,7 @@ const ownerSchema = new mongoose.Schema({
     },
     phone: {
         type: Number,
-        maxlength: 10,
+        max : 9999999999,
         required: true
     },
     isVerified: {

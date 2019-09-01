@@ -5,6 +5,12 @@ const _ = require("lodash");
 const { sendEmail } = require("../helpers/mailer");
 
 exports.signup = async (req, res) => {
+  const userExists = await User.findOne({ email: req.body.email });
+  if (userExists)
+    return res.status(403).json({
+      error: "Email is taken!"
+    });
+
   const newuser = new User(req.body);
   const user = await newuser.save();
 

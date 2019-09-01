@@ -2,8 +2,12 @@ const Owner = require("../models/Owner");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 
-
 exports.signup = async (req, res) => {
+  const ownerExists = await Owner.findOne({ email: req.body.email });
+  if (ownerExists)
+    return res.status(403).json({
+      error: "Email is taken!"
+    });
   const newowner = new Owner(req.body);
   const owner = await newowner.save();
 
