@@ -34,6 +34,9 @@ exports.errorHandler = error => {
       default:
     }
   } else {
+    if (error.message.indexOf("Cast to ObjectId failed") !== -1) {
+      message = "No data found";
+    }
     for (let errorName in error.errors) {
       if (error.errors[errorName].message) {
         message = error.errors[errorName].message;
