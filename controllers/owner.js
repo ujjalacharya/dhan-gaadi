@@ -10,7 +10,7 @@ exports.ownerById = async (req, res, next, id) => {
   if (owner) {
     owner.salt = undefined;
     owner.hashed_password = undefined;
-    req.profile = owner;
+    req.ownerprofile = owner;
     next();
   } else {
     res.status(400).json({ error: "Owner not found!" });
@@ -18,5 +18,5 @@ exports.ownerById = async (req, res, next, id) => {
 };
 
 exports.read = (req, res) => {
-  return res.json(req.profile);
+  return res.json(req.ownerprofile);
 };

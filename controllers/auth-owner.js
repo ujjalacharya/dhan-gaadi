@@ -47,7 +47,7 @@ exports.signin = async (req, res) => {
   return res.json({ token });
 };
 
-exports.requireSignin = async (req, res, next) => {
+exports.requireOwnerSignin = async (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
@@ -56,7 +56,7 @@ exports.requireSignin = async (req, res, next) => {
     const foundowner = await Owner.findById(owner._id).select("name");
 
     if (foundowner) {
-      req.auth = foundowner;
+      req.ownerauth = foundowner;
       next();
     } else res.status(401).json({ error: "Not authorized!" });
   } else {
@@ -72,11 +72,11 @@ function parseToken(token) {
   }
 }
 
-exports.isAuth = (req, res, next) => {
+exports.isOwner = (req, res, next) => {
   let owner =
-    req.profile &&
-    req.auth &&
-    req.profile._id.toString() === req.auth._id.toString();
+    req.ownerprofile &&
+    req.ownerauth &&
+    req.ownerprofile._id.toString() === req.ownerauth._id.toString();
   if (!owner) {
     return res.status(403).json({
       error: "Access denied"

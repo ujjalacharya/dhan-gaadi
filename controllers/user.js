@@ -11,7 +11,7 @@ exports.userById = async (req, res, next, id) => {
   if (user) {
     user.salt = undefined;
     user.hashed_password = undefined;
-    req.profile = user;
+    req.userprofile = user;
     next();
   } else {
     res.status(400).json({ error: "User not found!" });
@@ -19,5 +19,5 @@ exports.userById = async (req, res, next, id) => {
 };
 
 exports.read = (req, res) => {
-  return res.json(req.profile);
+  return res.json(req.userprofile);
 };

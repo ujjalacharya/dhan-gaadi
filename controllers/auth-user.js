@@ -50,7 +50,7 @@ exports.signin = async (req, res) => {
   return res.json({ token });
 };
 
-exports.requireSignin = async (req, res, next) => {
+exports.requireUserSignin = async (req, res, next) => {
   const token = req.headers.authorization;
 
   if (token) {
@@ -59,7 +59,7 @@ exports.requireSignin = async (req, res, next) => {
     const founduser = await User.findById(user._id).select("name");
 
     if (founduser) {
-      req.auth = founduser;
+      req.userauth = founduser;
       next();
     } else res.status(401).json({ error: "Not authorized!" });
   } else {
@@ -75,11 +75,11 @@ function parseToken(token) {
   }
 }
 
-exports.isAuth = (req, res, next) => {
+exports.isUser = (req, res, next) => {
   let user =
-    req.profile &&
-    req.auth &&
-    req.profile._id.toString() === req.auth._id.toString();
+    req.userprofile &&
+    req.userauth &&
+    req.userprofile._id.toString() === req.userauth._id.toString();
   if (!user) {
     return res.status(403).json({
       error: "Access denied"
@@ -117,7 +117,7 @@ exports.socialLogin = async (req, res) => {
   if (!user) {
     // create a new user and login
     user = new User(req.body);
-    req.profile = user;
+    req.userprofile = user;
     user.save();
     // generate a token with user id and secret
     const token = jwt.sign(
@@ -129,7 +129,7 @@ exports.socialLogin = async (req, res) => {
     return res.json({ token, user: { _id, name, email } });
   } else {
     // update existing user with new social info and login
-    req.profile = user;
+    req.userprofile = user;
     user = _.extend(user, req.body);
     user.save();
     // generate a token with user id and secret
