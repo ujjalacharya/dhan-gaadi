@@ -15,6 +15,15 @@ exports.read = (req, res) => {
   return res.json(req.bus);
 };
 
+
+exports.getBuses = async (req, res) => {
+ const buses = await Bus.find()
+   .populate("owner", "name")
+   .sort({ created: -1 });
+
+ res.json(buses);
+};
+
 exports.create = async (req, res) => {
   const busExists = await Bus.findOne({ busNumber: req.body.busNumber });
   if (busExists)

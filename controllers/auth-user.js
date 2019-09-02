@@ -165,7 +165,7 @@ exports.forgotPassword = async (req, res) => {
 
   // email data
   const emailData = {
-    from: "noreply@nepsanjaal.com",
+    from: "noreply@dhangaadi.com",
     to: email,
     subject: "Password Reset Instructions",
     text: `Please use the following link to reset your password: ${process.env.CLIENT_URL}/reset-password/${token}`,
