@@ -1,17 +1,21 @@
 const Booking = require("../models/Booking");
 const Bus = require("../models/Bus");
-const User = require("../models/User");
 
 exports.postBooking = async (req, res) => {
-    const booking = new Booking(req.body);
-    if(req.userauth){
-        booking.user = req.userauth;
-    }
+  const booking = new Booking(req.body);
+  if (req.userauth) {
+    booking.user = req.userauth;
+  }
 
-    console.log(req.bus)
-    booking.bus = req.bus;
+  const bus = await Bus.findOne({slug: req.bus.slug});
 
-    await booking.save();
+  bus.seatsAvailable -= req.body.passengers || booking.passengers;
 
-    res.json(booking)
-}
+  await bus.save();
+
+  booking.bus = bus;
+
+  await booking.save();
+
+  res.json(booking);
+};

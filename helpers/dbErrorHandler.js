@@ -43,6 +43,7 @@ exports.errorHandler = error => {
       }
     }
   }
-  console.log(message);
+  console.log("Error--> ", error);
+  console.log("Message--> ", message);
   return message;
 };
