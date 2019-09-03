@@ -10,6 +10,7 @@ const bookingSchema = new mongoose.Schema(
       type: Number,
       default: 1
     },
+    guest: {type: Schema.Types.ObjectId, ref: "Guest"},
     user: { type: Schema.Types.ObjectId, ref: "User" },
     bus: { type: Schema.Types.ObjectId, ref: "Bus" }
   },
