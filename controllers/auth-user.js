@@ -67,6 +67,21 @@ exports.requireUserSignin = async (req, res, next) => {
   }
 };
 
+exports.checkUserSignin = async (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (token) {
+    const user = parseToken(token);
+
+    const founduser = await User.findById(user._id).select("name");
+
+    if (founduser) {
+      req.userauth = founduser;
+    }
+  }
+  next();
+};
+
 function parseToken(token) {
   try {
     return jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);

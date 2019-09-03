@@ -5,8 +5,8 @@ const { read, create, busBySlug, getBuses } = require("../controllers/bus");
 
 router.get("/", getBuses);
 router.post("/add", requireOwnerSignin, create);
-router.get("/:slug", read);
+router.get("/:busSlug", read);
 
-router.param("slug", busBySlug);
+router.param("busSlug", busBySlug);
 
 module.exports = router;
