@@ -22,6 +22,7 @@
     "mongoose": "^5.6.10",
     "mongoose-slug-generator": "^1.0.4",
     "morgan": "^1.9.1",
+    "multer": "^1.4.2",
     "nodemailer": "^6.3.0",
     "uuid": "^3.3.3"
   }

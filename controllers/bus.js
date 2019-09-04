@@ -15,13 +15,12 @@ exports.read = (req, res) => {
   return res.json(req.bus);
 };
 
-
 exports.getBuses = async (req, res) => {
- const buses = await Bus.find()
-   .populate("owner", "name")
-   .sort({ created: -1 });
+  const buses = await Bus.find()
+    .populate("owner", "name")
+    .sort({ created: -1 });
 
- res.json(buses);
+  res.json(buses);
 };
 
 exports.create = async (req, res) => {
@@ -30,6 +29,10 @@ exports.create = async (req, res) => {
     return res.status(403).json({
       error: "Bus is already added!"
     });
+
+  if (req.file !== undefined) {
+    req.body.image = "busimage/" + req.file.filename;
+  }
 
   const bus = new Bus(req.body);
 
