@@ -10,9 +10,19 @@ const bookingSchema = new mongoose.Schema(
       type: Number,
       default: 1
     },
+    seatNumber: {
+      type: String
+    },
+    
     guest: {type: Schema.Types.ObjectId, ref: "Guest"},
     user: { type: Schema.Types.ObjectId, ref: "User" },
-    bus: { type: Schema.Types.ObjectId, ref: "Bus" }
+    bus: { type: Schema.Types.ObjectId, ref: "Bus" },
+
+    verification: {
+      type: String,
+      enum: ['verfied', 'notverified', 'payed'],
+      default: 'notverified'
+    }
   },
   { timestamps: true }
 );
