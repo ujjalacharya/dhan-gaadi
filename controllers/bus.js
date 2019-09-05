@@ -56,3 +56,9 @@ exports.update = async (req, res) => {
 
   res.json(bus);
 };
+
+exports.remove = async (req, res) => {
+  let bus = req.bus;
+  await bus.remove();
+  res.json({ message: "Bus removed successfully" });
+};
