@@ -12,7 +12,7 @@ router
 
 router.route("/:busSlug")
   .get(read)
-  .put(requireOwnerSignin, isPoster, update)
+  .put(requireOwnerSignin, isPoster, uploadBusImage, update)
   .delete(requireOwnerSignin, isPoster, remove)
 
 router.param("busSlug", busBySlug);

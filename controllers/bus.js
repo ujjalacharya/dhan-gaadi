@@ -1,5 +1,8 @@
 const Bus = require("../models/Bus");
 const _ = require("lodash");
+const sharp = require("sharp");
+const path = require("path");
+const fs = require("fs");
 
 exports.busBySlug = async (req, res, next, slug) => {
   const bus = await Bus.findOne({ slug }).populate("owner", "name role");
@@ -32,7 +35,15 @@ exports.create = async (req, res) => {
     });
 
   if (req.file !== undefined) {
-    req.body.image = "busimage/" + req.file.filename;
+    const { filename: image } = req.file;
+
+    //Compress image
+    await sharp(req.file.path)
+      .resize(800)
+      .jpeg({ quality: 100 })
+      .toFile(path.resolve(req.file.destination, "resized", image));
+    fs.unlinkSync(req.file.path);
+    req.body.image = "busimage/" + image;
   }
 
   const bus = new Bus(req.body);
@@ -46,7 +57,15 @@ exports.create = async (req, res) => {
 
 exports.update = async (req, res) => {
   if (req.file !== undefined) {
-    req.body.image = "busimage/" + req.file.filename;
+    const { filename: image } = req.file;
+
+    //Compress image
+    await sharp(req.file.path)
+      .resize(800)
+      .jpeg({ quality: 100 })
+      .toFile(path.resolve(req.file.destination, "resized", image));
+    fs.unlinkSync(req.file.path);
+    req.body.image = "busimage/" + image;
   }
 
   let bus = req.bus;
