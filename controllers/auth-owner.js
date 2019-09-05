@@ -53,7 +53,7 @@ exports.requireOwnerSignin = async (req, res, next) => {
   if (token) {
     const owner = parseToken(token);
 
-    const foundowner = await Owner.findById(owner._id).select("name");
+    const foundowner = await Owner.findById(owner._id).select("name role");
 
     if (foundowner) {
       req.ownerauth = foundowner;
@@ -72,14 +72,19 @@ function parseToken(token) {
   }
 }
 
-exports.isOwner = (req, res, next) => {
-  let owner =
-    req.ownerprofile &&
+exports.isPoster = (req, res, next) => {
+  let sameUser =
+    req.bus &&
     req.ownerauth &&
-    req.ownerprofile._id.toString() === req.ownerauth._id.toString();
-  if (!owner) {
+    req.bus.owner._id.toString() === req.ownerauth._id.toString();
+  let adminUser =
+    req.bus && req.ownerauth && req.ownerauth.role === "superadmin";
+
+  let isPoster = sameUser || adminUser;
+
+  if (!isPoster) {
     return res.status(403).json({
-      error: "Access denied"
+      error: "User is not authorized to perform this action"
     });
   }
   next();

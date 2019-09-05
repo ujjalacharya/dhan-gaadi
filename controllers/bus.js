@@ -1,4 +1,5 @@
 const Bus = require("../models/Bus");
+const _ = require("lodash");
 
 exports.busBySlug = async (req, res, next, slug) => {
   const bus = await Bus.findOne({ slug }).populate("owner", "name role");
@@ -37,6 +38,19 @@ exports.create = async (req, res) => {
   const bus = new Bus(req.body);
 
   bus.owner = req.ownerauth;
+
+  await bus.save();
+
+  res.json(bus);
+};
+
+exports.update = async (req, res) => {
+  if (req.file !== undefined) {
+    req.body.image = "busimage/" + req.file.filename;
+  }
+
+  let bus = req.bus;
+  bus = _.extend(bus, req.body);
 
   await bus.save();
 
