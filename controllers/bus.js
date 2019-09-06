@@ -3,6 +3,7 @@ const _ = require("lodash");
 const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
+const {checkDateAvailability} = require("../helpers/misc")
 
 exports.busBySlug = async (req, res, next, slug) => {
   const bus = await Bus.findOne({ slug }).populate("owner", "name role");
@@ -28,14 +29,15 @@ exports.getBuses = async (req, res) => {
 };
 
 exports.searchBus = async (req, res) => {
+  if (_.size(req.query) < 1)
+    return res.status(400).json({ error: "Invalid query" });
 
-  if(_.size(req.query) < 1) return res.status(400).json({error: "Invalid query"})
+  const { startLocation, endLocation, journeyDate } = req.query;
 
-  const {start, end, date} = req.query;
+  const bus = await Bus.find({startLocation, endLocation, journeyDate});
 
-  return res.json({start, end, date})
-
-}
+  return res.json(bus);
+};
 
 exports.create = async (req, res) => {
   const busExists = await Bus.findOne({ busNumber: req.body.busNumber });
@@ -57,6 +59,10 @@ exports.create = async (req, res) => {
   }
 
   const bus = new Bus(req.body);
+
+  if(!checkDateAvailability(req.body.journeyDate)){
+    bus.isAvailable = false;
+  }
 
   bus.owner = req.ownerauth;
 
@@ -80,6 +86,10 @@ exports.update = async (req, res) => {
 
   let bus = req.bus;
   bus = _.extend(bus, req.body);
+
+  if(!checkDateAvailability(req.body.journeyDate)){
+    bus.isAvailable = false;
+  }
 
   await bus.save();
 
