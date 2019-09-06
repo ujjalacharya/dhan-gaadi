@@ -1,7 +1,7 @@
 const express = require("express");
 const router = express.Router();
 const { requireOwnerSignin, isPoster } = require("../controllers/auth-owner");
-const { read, create, update, remove, busBySlug, getBuses } = require("../controllers/bus");
+const { read, create, update, remove, busBySlug, getBuses, searchBus } = require("../controllers/bus");
 const { uploadBusImage } = require("../helpers/multer");
 
 router
@@ -9,6 +9,7 @@ router
   .get(getBuses)
   .post(requireOwnerSignin, uploadBusImage, create);
 
+router.get("/search", searchBus)
 
 router.route("/:busSlug")
   .get(read)

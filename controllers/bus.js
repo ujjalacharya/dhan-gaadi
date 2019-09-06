@@ -27,6 +27,16 @@ exports.getBuses = async (req, res) => {
   res.json(buses);
 };
 
+exports.searchBus = async (req, res) => {
+
+  if(_.size(req.query) < 1) return res.status(400).json({error: "Invalid query"})
+
+  const {start, end, date} = req.query;
+
+  return res.json({start, end, date})
+
+}
+
 exports.create = async (req, res) => {
   const busExists = await Bus.findOne({ busNumber: req.body.busNumber });
   if (busExists)

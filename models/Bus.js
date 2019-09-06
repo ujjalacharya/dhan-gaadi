@@ -59,6 +59,17 @@ const busSchema = new mongoose.Schema(
             type: Boolean,
             default: false
         },
+        startLocation: {
+            type: ObjectId,
+            ref: "Location"
+        },
+        endLocation: {
+            type: ObjectId,
+            ref: "Location"
+        },
+        journeyDate: {
+            type: Date
+        },
         owner: {
             type: ObjectId,
             ref: "Owner"
