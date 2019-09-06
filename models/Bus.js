@@ -72,9 +72,11 @@ const busSchema = new mongoose.Schema(
             type: ObjectId,
             ref: "Owner"
         },
-        route: [{
-            type: ObjectId,
-            ref: "Location"
+        boardingPoints: [{
+            type: String
+        }],
+        droppingPoints: [{
+            type: String
         }],
         slug: {
             type: String,

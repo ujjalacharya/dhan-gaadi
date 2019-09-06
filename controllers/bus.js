@@ -34,7 +34,7 @@ exports.searchBus = async (req, res) => {
 
   const { startLocation, endLocation, journeyDate } = req.query;
 
-  const bus = await Bus.find({startLocation, endLocation, journeyDate});
+  const bus = await Bus.find({startLocation, endLocation, journeyDate, isAvailable: true});
 
   return res.json(bus);
 };
