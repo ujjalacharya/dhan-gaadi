@@ -11,7 +11,7 @@ export default class SideBar extends Component {
                      </div>
                      <div className="pull-left info">
                          <p>Ujjal Acharya</p>
-                         <a href="#"><i className="fa fa-circle text-warning"></i> Owner</a>
+                         <a href="#"><i className="fa fa-circle text-success"></i> Owner</a>
                      </div>
                  </div>
             
@@ -22,16 +22,21 @@ export default class SideBar extends Component {
                              <i className="fa fa-tachometer"></i>
                              <span>Dashboard</span>
                          </a>
-
                      </li>
 
-                     <li>
-                     <a href="pages/calendar.html">
+                     <li className="treeview">
+                     <a href="#">
                          <i className="fa fa-bus"></i> <span>My Buses</span>
                          <span className="pull-right-container">
-                         <small className="label pull-right bg-blue">17</small>
+                         <i className="fa fa-angle-left pull-right"></i>
+                         {/* <small className="label pull-right bg-blue">17</small> */}
                          </span>
                      </a>
+                     <ul className="treeview-menu">
+                         <li><a href="pages/charts/chartjs.html"><i className="fa fa-circle-o"></i> Available Buses</a></li>
+                         <li><a href="pages/charts/morris.html"><i className="fa fa-circle-o"></i> Unavailable Buses</a></li>
+                         <li><a href="pages/charts/inline.html"><i className="fa fa-plus"></i> Add new bus</a></li>
+                     </ul>
                      </li>
 
                      <li>
@@ -42,26 +47,11 @@ export default class SideBar extends Component {
                          </span>
                      </a>
                      </li>
-                     <li className="treeview">
-                     <a href="#">
-                         <i className="fa fa-pie-chart"></i>
-                         <span>Charts</span>
-                         <span className="pull-right-container">
-                         <i className="fa fa-angle-left pull-right"></i>
-                         </span>
-                     </a>
-                     <ul className="treeview-menu">
-                         <li><a href="pages/charts/chartjs.html"><i className="fa fa-circle-o"></i> ChartJS</a></li>
-                         <li><a href="pages/charts/morris.html"><i className="fa fa-circle-o"></i> Morris</a></li>
-                         <li><a href="pages/charts/flot.html"><i className="fa fa-circle-o"></i> Flot</a></li>
-                         <li><a href="pages/charts/inline.html"><i className="fa fa-circle-o"></i> Inline charts</a></li>
-                     </ul>
-                     </li>
+
                      <li>
-                     <ul className="treeview-menu">
-                         <li><a href="pages/tables/simple.html"><i className="fa fa-circle-o"></i> Simple tables</a></li>
-                         <li><a href="pages/tables/data.html"><i className="fa fa-circle-o"></i> Data tables</a></li>
-                     </ul>
+                     <a href="pages/widgets.html">
+                         <i className="fa fa-sign-out"></i> <span>Logout</span>
+                     </a>
                      </li>
 
                  </ul>
