@@ -5,7 +5,6 @@ import Home from "../Components/pages/Home";
 const MainRouter = () => (
  <Switch>
    <Route path="/" exact component={Home} />
-
  </Switch>
 );
 
