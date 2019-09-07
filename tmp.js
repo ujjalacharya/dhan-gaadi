@@ -1,37 +1,17 @@
-import React, { useState, useEffect} from "react";
+import React from "react";
 import { Link, withRouter } from "react-router-dom";
 
-const SideBar = ({ history}) => {
-
-  const [menu, setMenu] = useState({ display: "block" });
-
-
-  useEffect(() => {
-    if(history.location.pathname.includes("bus")){
-      setMenu({ display: "block"});
-    }
-  }, [])
+const SideBar = ({ history }) => {
+  console.log(history);
 
   const isActive = (history, path) => {
     if (history.location.pathname === path) {
       return "active";
-    } else if(history.location.pathname.includes("bus") && path === "bus") {
-            return "active";
     } else {
       return;
     }
   };
 
-  const toogleMenu = e => {
-    e.preventDefault();
-    if (menu.display === "none") {      
-      setMenu({ display: "block"});
-    } else {
-      setMenu({ display: "none" });
-    }
-  };
-
-  console.log(menu)
   return (
     <aside className="main-sidebar">
       <section className="sidebar">
@@ -60,35 +40,35 @@ const SideBar = ({ history}) => {
             </Link>
           </li>
 
-          <li className={isActive(history, "bus")}>
-            <a href="false" onClick={toogleMenu}>
+          <li className="treeview">
+            <a href="#" onClick={e=>e.preventDefault()}>
               <i className="fa fa-bus"></i> <span>My Buses</span>
               <span className="pull-right-container">
                 <i className="fa fa-angle-left pull-right"></i>
                 {/* <small className="label pull-right bg-blue">17</small> */}
               </span>
             </a>
-            <ul className="treeview-menu" style={menu}>
+            <ul className="treeview-menu">
               <li className={isActive(history, "/bus-available")}>
-                <Link to="/bus-available">
+                <Link to="bus-available">
                   <i className="fa fa-circle-o"></i> Available Buses
                 </Link>
               </li>
               <li className={isActive(history, "/bus-unavailable")}>
-                <Link to="/bus-unavailable">
+                <Link to="bus-unavailable">
                   <i className="fa fa-circle-o"></i> Unavailable Buses
                 </Link>
               </li>
               <li className={isActive(history, "/add-new-bus")}>
-                <Link to="/add-new-bus">
+                <Link to="add-new-bus">
                   <i className="fa fa-plus"></i> Add new bus
                 </Link>
               </li>
             </ul>
           </li>
 
-          <li className={isActive(history, "/my-bookings")}>
-            <Link to="my-bookings">
+          <li className={isActive(history, "/mybookings")}>
+            <Link to="mybookings">
               <i className="fa fa-calendar"></i> <span>My Bookings</span>
               <span className="pull-right-container">
                 <small className="label pull-right bg-green">new</small>
