@@ -35,7 +35,8 @@ exports.signin = async (req, res) => {
   const payload = {
     _id: owner.id,
     name: owner.name,
-    email: owner.email
+    email: owner.email,
+    role: owner.role
   };
 
   const token = jwt.sign(
