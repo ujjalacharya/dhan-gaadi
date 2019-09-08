@@ -6,10 +6,9 @@ import setAuthToken from "./Utils/setAuthToken";
 import "./App.css";
 
 
+setAuthToken(isAuthenticated().token);
+
 class App extends Component {
-  componentDidMount() {
-    setAuthToken(isAuthenticated().token);
-  }
 
   render() {
     return (

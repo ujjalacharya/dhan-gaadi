@@ -2,6 +2,13 @@
 # yarn lockfile v1
 
 
+"@ashvin27/react-datatable@^1.1.10":
+  version "1.1.10"
+  resolved "https://registry.yarnpkg.com/@ashvin27/react-datatable/-/react-datatable-1.1.10.tgz#d01566f0a1ac3369a74ad0d1eeb0af54cceb0660"
+  integrity sha512-3kqhCv5oAEiXl5+lelF5tsJl1su9P77j+hplqA4WgAXCxRzZmb1J1djj5f4r8yDJyPjFQEj5ipZxA8FrFhMH9Q==
+  dependencies:
+    lodash "^4.17.11"
+
 "@babel/code-frame@7.0.0-beta.44":
   version "7.0.0-beta.44"
   resolved "https://registry.yarnpkg.com/@babel/code-frame/-/code-frame-7.0.0-beta.44.tgz#2a02643368de80916162be70865c97774f3adbd9"
@@ -6881,6 +6888,11 @@ mkdirp@0.5.1, mkdirp@0.5.x, mkdirp@^0.5.0, mkdirp@^0.5.1, mkdirp@~0.5.1:
   integrity sha1-MAV0OOrGz3+MR2fzhkjWaX11yQM=
   dependencies:
     minimist "0.0.8"
+
+moment@^2.24.0:
+  version "2.24.0"
+  resolved "https://registry.yarnpkg.com/moment/-/moment-2.24.0.tgz#0d055d53f5052aa653c9f6eb68bb5d12bf5c2b5b"
+  integrity sha512-bV7f+6l2QigeBBZSM/6yTNq4P2fNpSWj/0e7jQcy87A8e7o2nAfP/34/2ky5Vw4B9S446EtIhodAzkFCcR4dQg==
 
 move-concurrently@^1.0.1:
   version "1.0.1"
