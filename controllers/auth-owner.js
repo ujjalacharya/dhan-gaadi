@@ -72,6 +72,23 @@ function parseToken(token) {
   }
 }
 
+exports.requireSuperadminSignin = async (req, res, next) => {
+  const token = req.headers.authorization;
+
+  if (token) {
+    const owner = parseToken(token);
+
+    const foundowner = await Owner.findById(owner._id).select("name role");
+
+    if (foundowner.role === "superadmin") {
+      req.ownerauth = foundowner;
+      next();
+    } else res.status(401).json({ error: "Not authorized!" });
+  } else {
+    res.status(401).json({ error: "Not authorized" });
+  }
+};
+
 exports.isPoster = (req, res, next) => {
   let sameUser =
     req.bus &&

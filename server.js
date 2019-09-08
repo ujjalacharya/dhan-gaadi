@@ -30,6 +30,7 @@ app.use("/api/auth-user", require("./routes/auth-user"));
 app.use("/api/auth-owner", require("./routes/auth-owner"));
 app.use("/api/bus", require("./routes/bus"));
 app.use("/api/bookings", require("./routes/booking"));
+app.use("/api/locations", require("./routes/location"));
 
 // Error handling middleware
 app.use(function(err, req, res, next) {
