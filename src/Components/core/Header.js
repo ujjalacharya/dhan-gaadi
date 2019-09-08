@@ -38,7 +38,7 @@ const Header = ({history}) => {
                   className="dropdown-toggle"
                   data-toggle="dropdown"
                 >
-                  <h4>Howdy! Admin</h4>
+                  <h4>Namaste! Admin</h4>
                 </a>
                 <ul className="dropdown-menu">
                   <li>

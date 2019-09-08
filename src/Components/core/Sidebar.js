@@ -1,9 +1,11 @@
 import React, { useState, useEffect } from 'react';
 import { Link, withRouter } from 'react-router-dom';
-import { signout } from '../../Utils/Requests/Auth';
+import { signout, isAuthenticated } from '../../Utils/Requests/Auth';
 
 const SideBar = ({ history }) => {
 	const [menu, setMenu] = useState({ display: 'block' });
+
+	const { user } = isAuthenticated();
 
 	useEffect(() => {
 		if (history.location.pathname.includes('bus')) {
@@ -36,8 +38,7 @@ const SideBar = ({ history }) => {
 			history.push('/');
 		}
 	};
-
-	console.log(menu);
+console.log(user)
 	return (
 		<aside className="main-sidebar">
 			<section className="sidebar">
@@ -46,9 +47,9 @@ const SideBar = ({ history }) => {
 						<img src="img/user2-160x160.jpg" className="img-circle" alt="UserImage" />
 					</div>
 					<div className="pull-left info">
-						<p>Ujjal Acharya</p>
+						<p>{user.name}</p>
 						<a href="false">
-							<i className="fa fa-circle text-success"></i> Owner
+							<i className="fa fa-circle text-success"></i>{user.role}
 						</a>
 					</div>
 				</div>
