@@ -4,6 +4,7 @@ import PrivateRoute from "./PrivateRoute";
 import Home from "../Components/pages/Home";
 import Signin from "../Components/pages/Signin";
 import MyBookings from "../Components/pages/MyBookings";
+import AddNewBus from "../Components/pages/AddNewBus";
 import BusAvailable from "../Components/pages/BusAvailable";
 import BusUnavailable from "../Components/pages/BusUnavailable";
 
@@ -12,6 +13,7 @@ const MainRouter = () => (
    <Route path="/signin" exact component={Signin} />
    <PrivateRoute path="/" exact component={Home} />
    <PrivateRoute path="/my-bookings" exact component={MyBookings} />
+   <PrivateRoute path="/add-bus" exact component={AddNewBus} />
    <PrivateRoute path="/bus-available" exact component={BusAvailable} />
    <PrivateRoute path="/bus-unavailable" exact component={BusUnavailable} />
  </Switch>

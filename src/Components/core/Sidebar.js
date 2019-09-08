@@ -87,8 +87,8 @@ const SideBar = ({ history}) => {
                   <i className="fa fa-circle-o"></i> Unavailable Buses
                 </Link>
               </li>
-              <li className={isActive(history, "/add-new-bus")}>
-                <Link to="/add-new-bus">
+              <li className={isActive(history, "/add-bus")}>
+                <Link to="/add-bus">
                   <i className="fa fa-plus"></i> Add new bus
                 </Link>
               </li>

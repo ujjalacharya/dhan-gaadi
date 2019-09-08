@@ -125,7 +125,7 @@ class BusUnavailable extends Component {
 
 	render() {
 		return (
-			<Layout>
+			<Layout title="My Buses > Unavailable buses">
 				<div className="d-flex" id="wrapper">
 					<div id="page-content-wrapper">
 						<div className="container-fluid">
@@ -133,7 +133,8 @@ class BusUnavailable extends Component {
 							<button
 								className="btn btn-outline-primary float-right mt-3 mr-2"
 								data-toggle="modal"
-								data-target="#add-user-modal"
+                data-target="#add-user-modal"
+								onClick={()=> this.props.history.push("/add-bus")}                
 							>
 								{' '}
 								Add Bus
