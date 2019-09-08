@@ -13,11 +13,11 @@ require("dotenv").config();
 dbConnection();
 
 // Middlewares
+app.use(cors());
 app.use(morgan("dev"));
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 app.use(expressValidator());
-app.use(cors());
 
 // Routes
 app.get("/", (req, res) => {
@@ -29,7 +29,7 @@ app.use("/api/owners", require("./routes/owner"));
 app.use("/api/auth-user", require("./routes/auth-user"));
 app.use("/api/auth-owner", require("./routes/auth-owner"));
 app.use("/api/bus", require("./routes/bus"));
-app.use("/api/bookings", require("./routes/booking"))
+app.use("/api/bookings", require("./routes/booking"));
 
 // Error handling middleware
 app.use(function(err, req, res, next) {

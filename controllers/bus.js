@@ -28,6 +28,20 @@ exports.getBuses = async (req, res) => {
   res.json(buses);
 };
 
+exports.getAvailableBusesOfOwner = async (req, res) => {
+  const buses = await Bus.find({owner: req.ownerauth, isAvailable: true})
+  .sort({ created: -1 });
+
+res.json(buses);
+}
+
+exports.getUnavailableBusesOfOwner = async (req, res) => {
+  const buses = await Bus.find({owner: req.ownerauth, isAvailable: false})
+  .sort({ created: -1 });
+
+res.json(buses);
+}
+
 exports.searchBus = async (req, res) => {
   if (_.size(req.query) < 1)
     return res.status(400).json({ error: "Invalid query" });
