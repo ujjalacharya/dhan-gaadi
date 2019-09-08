@@ -10,8 +10,8 @@ class BusUnavailable extends Component {
 
 		this.columns = [
 			{
-				key: '_id',
-				text: 'Id',
+				key: 'sn',
+				text: 'S.N',
 				className: 'id',
 				align: 'left',
 				sortable: true,
@@ -104,7 +104,7 @@ class BusUnavailable extends Component {
 	}
 
 	componentWillReceiveProps(nextProps) {
-		this.fetchAvailableBuses();
+		this.fetchUnavailableBuses();
 	}
 
 	fetchUnavailableBuses = async () => {
@@ -113,7 +113,11 @@ class BusUnavailable extends Component {
 		});
 		if (buses && buses.status === 200) {
 			buses.data.map(bus => {
-				return (bus.date = moment(bus.createdAt).format('MMMM Do, YYYY'));
+          let counter = 1;
+          bus.date = moment(bus.createdAt).format('MMMM Do, YYYY');
+          bus.sn = counter;
+          counter++;
+          return bus;
 			});
 			this.setState({ buses: buses.data, isLoading: false });
 		}
@@ -141,7 +145,7 @@ class BusUnavailable extends Component {
 							</button>
 							<h1 className="mt-2 text-primary">Unavailable Buses</h1>
 							{this.state.isLoading ? (
-								<h1>Loading</h1>
+								<img src="/img/spinner.gif" alt="" className="spinner"/>								
 							) : (
 								<ReactDatatable
 									config={this.config}

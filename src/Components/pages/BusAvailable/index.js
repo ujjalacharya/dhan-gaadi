@@ -10,8 +10,8 @@ class BusAvailable extends Component {
 
 		this.columns = [
 			{
-				key: '_id',
-				text: 'Id',
+				key: 'sn',
+				text: 'S.N',
 				className: 'id',
 				align: 'left',
 				sortable: true,
@@ -113,7 +113,11 @@ class BusAvailable extends Component {
 		});
 		if (buses && buses.status === 200) {
 			buses.data.map(bus => {
-				return (bus.date = moment(bus.createdAt).format('MMMM Do, YYYY'));
+				let counter = 1;
+				bus.date = moment(bus.createdAt).format('MMMM Do, YYYY');
+				bus.sn = counter;
+				counter++;
+				return bus;
 			});
 			this.setState({ buses: buses.data, isLoading: false });
 		}
@@ -134,14 +138,14 @@ class BusAvailable extends Component {
 								className="btn btn-outline-primary float-right mt-3 mr-2"
 								data-toggle="modal"
 								data-target="#add-user-modal"
-								onClick={()=> this.props.history.push("/add-bus")}
+								onClick={() => this.props.history.push('/add-bus')}
 							>
 								{' '}
 								Add Bus
 							</button>
 							<h1 className="mt-2 text-primary">Available Buses</h1>
 							{this.state.isLoading ? (
-								<h1>Loading</h1>
+								<img src="/img/spinner.gif" alt="" className="spinner" />
 							) : (
 								<ReactDatatable
 									config={this.config}
