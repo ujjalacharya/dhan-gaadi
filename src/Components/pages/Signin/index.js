@@ -1,7 +1,6 @@
 import React, { useState } from 'react';
 import SigninForm from './SigninForm';
 import { Redirect } from 'react-router-dom';
-import Layout from '../../core/Layout';
 import { signIn, authenticate, isAuthenticated } from '../../../Utils/Requests/Auth';
 
 const Login = () => {
