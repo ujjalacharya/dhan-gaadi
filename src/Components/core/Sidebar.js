@@ -1,5 +1,6 @@
 import React, { useState, useEffect} from "react";
 import { Link, withRouter } from "react-router-dom";
+import {signout} from "../../Utils/Requests/Auth"
 
 const SideBar = ({ history}) => {
 
@@ -10,7 +11,7 @@ const SideBar = ({ history}) => {
     if(history.location.pathname.includes("bus")){
       setMenu({ display: "block"});
     }
-  }, [])
+  }, [history.location.pathname])
 
   const isActive = (history, path) => {
     if (history.location.pathname === path) {
@@ -30,6 +31,13 @@ const SideBar = ({ history}) => {
       setMenu({ display: "none" });
     }
   };
+
+  const handleSignOut = e => {
+    e.preventDefault();
+    if (signout()) {
+      history.push("/");
+    }
+  }
 
   console.log(menu)
   return (
@@ -97,7 +105,7 @@ const SideBar = ({ history}) => {
           </li>
 
           <li>
-            <a href="pages/widgets.html">
+            <a href="false" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i> <span>Logout</span>
             </a>
           </li>
