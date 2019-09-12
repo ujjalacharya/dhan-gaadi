@@ -36,16 +36,37 @@ exports.signin = async (req, res) => {
     _id: owner.id,
     name: owner.name,
     email: owner.email,
-    role: owner.role
+    role: owner.role,
+    refresh_hash: owner.salt
   };
 
-  const token = jwt.sign(
-    payload,
-    process.env.JWT_SECRET
-    // {expiresIn:"1h"}
-  );
+  const token = jwt.sign(payload, process.env.JWT_SECRET /*{ expiresIn: 5 }*/);
 
   return res.json({ token });
+};
+
+exports.refreshToken = async (req, res) => {
+  console.log("naya token aayo", req.body && req.body.refresh_hash);
+
+  if (req.body && req.body.refresh_hash) {
+    const owner = await Owner.findOne({ salt: req.body.refresh_hash });
+
+    const payload = {
+      _id: owner.id,
+      name: owner.name,
+      email: owner.email,
+      role: owner.role,
+      refresh_hash: owner.salt
+    };
+
+    const token = jwt.sign(
+      payload,
+      process.env.JWT_SECRET /*{ expiresIn: 5 }*/
+    );
+
+    return res.json({ token });
+  }
+  return res.json({ error: "Invalid content" });
 };
 
 exports.requireOwnerSignin = async (req, res, next) => {
@@ -69,7 +90,7 @@ function parseToken(token) {
   try {
     return jwt.verify(token.split(" ")[1], process.env.JWT_SECRET);
   } catch (err) {
-    return res.status(400).json({ error: err.message });
+    return false;
   }
 }
 
