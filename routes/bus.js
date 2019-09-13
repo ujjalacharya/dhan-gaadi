@@ -11,7 +11,9 @@ const {
   getBuses,
   searchBus,
   getAvailableBusesOfOwner,
-  getUnavailableBusesOfOwner
+  getUnavailableBusesOfOwner,
+  getAllAvailableBuses,
+  getAllUnavailableBuses
 } = require("../controllers/bus");
 
 const { uploadBusImage } = require("../helpers/multer");
@@ -21,8 +23,11 @@ router
   .get(getBuses)
   .post(requireOwnerSignin, uploadBusImage, create);
 
-router.get("/bus-available", requireOwnerSignin, getAvailableBusesOfOwner);
-router.get("/bus-unavailable", requireOwnerSignin, getUnavailableBusesOfOwner);
+router.get("/owner-bus-available", requireOwnerSignin, getAvailableBusesOfOwner);
+router.get("/owner-bus-unavailable", requireOwnerSignin, getUnavailableBusesOfOwner);
+
+router.get("/all-bus-available", getAllAvailableBuses);
+router.get("/all-bus-unavailable", getAllUnavailableBuses);
 
 router.get("/search", searchBus);
 

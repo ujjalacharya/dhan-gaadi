@@ -3,7 +3,7 @@ const _ = require("lodash");
 const sharp = require("sharp");
 const path = require("path");
 const fs = require("fs");
-const {checkDateAvailability} = require("../helpers/misc")
+const { checkDateAvailability } = require("../helpers/misc");
 
 exports.busBySlug = async (req, res, next, slug) => {
   const bus = await Bus.findOne({ slug }).populate("owner", "name role");
@@ -28,19 +28,37 @@ exports.getBuses = async (req, res) => {
   res.json(buses);
 };
 
-exports.getAvailableBusesOfOwner = async (req, res) => {
-  const buses = await Bus.find({owner: req.ownerauth, isAvailable: true})
-  .sort({ created: -1 });
+exports.getAllAvailableBuses = async (req, res) => {
+  const buses = await Bus.find({ isAvailable: true })
+    .populate("owner", "name")
+    .sort({ created: -1 });
 
-res.json(buses);
-}
+  res.json(buses);
+};
+
+exports.getAllUnavailableBuses = async (req, res) => {
+  const buses = await Bus.find({ isAvailable: false })
+    .populate("owner", "name")
+    .sort({ created: -1 });
+
+  res.json(buses);
+};
+
+exports.getAvailableBusesOfOwner = async (req, res) => {
+  const buses = await Bus.find({ owner: req.ownerauth, isAvailable: true })
+    .populate("owner", "name")
+    .sort({ created: -1 });
+
+  res.json(buses);
+};
 
 exports.getUnavailableBusesOfOwner = async (req, res) => {
-  const buses = await Bus.find({owner: req.ownerauth, isAvailable: false})
-  .sort({ created: -1 });
+  const buses = await Bus.find({ owner: req.ownerauth, isAvailable: false })
+    .populate("owner", "name")
+    .sort({ created: -1 });
 
-res.json(buses);
-}
+  res.json(buses);
+};
 
 exports.searchBus = async (req, res) => {
   if (_.size(req.query) < 1)
@@ -48,7 +66,12 @@ exports.searchBus = async (req, res) => {
 
   const { startLocation, endLocation, journeyDate } = req.query;
 
-  const bus = await Bus.find({startLocation, endLocation, journeyDate, isAvailable: true});
+  const bus = await Bus.find({
+    startLocation,
+    endLocation,
+    journeyDate,
+    isAvailable: true
+  });
 
   return res.json(bus);
 };
@@ -74,7 +97,7 @@ exports.create = async (req, res) => {
 
   const bus = new Bus(req.body);
 
-  if(!checkDateAvailability(req.body.journeyDate)){
+  if (!checkDateAvailability(req.body.journeyDate)) {
     bus.isAvailable = false;
   }
 
@@ -101,7 +124,7 @@ exports.update = async (req, res) => {
   let bus = req.bus;
   bus = _.extend(bus, req.body);
 
-  if(!checkDateAvailability(req.body.journeyDate)){
+  if (!checkDateAvailability(req.body.journeyDate)) {
     bus.isAvailable = false;
   }
 
