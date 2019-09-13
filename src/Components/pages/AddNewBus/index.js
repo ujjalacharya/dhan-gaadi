@@ -6,7 +6,7 @@ import Success from './Success';
 
 class AddNewBus extends Component {
 	state = {
-		step: 1,
+		step: 3,
 		name: '',
 		type: 'Normal',
 		busNumber: '',
@@ -15,7 +15,6 @@ class AddNewBus extends Component {
 		description: '',
 		seatsAvailable: '',
 		numberOfSeats: '',
-		image: '',
 		departure_time: '',
 		isAvailable: false,
 		startLocation: '',
@@ -23,6 +22,8 @@ class AddNewBus extends Component {
 		journeyDate: '',
 		boardingPoints: '',
 		droppingPoints: '',
+		image: {},
+		buttonStyle: 'block',
 	};
 
 	// Proceed to next step
@@ -44,6 +45,18 @@ class AddNewBus extends Component {
 	// Handle fields change
 	handleChange = input => e => {
 		this.setState({ [input]: e.target.value });
+	};
+
+	//Handle image upload
+	onDrop = picture => {
+		console.log(picture);
+		if (picture.length === 0) {
+			return this.setState({ buttonStyle: 'block' });
+		}
+		this.setState({
+			image: picture[0],
+			buttonStyle: 'none',
+		});
 	};
 
 	// Handle checkbox change
@@ -71,6 +84,7 @@ class AddNewBus extends Component {
 			journeyDate,
 			boardingPoints,
 			droppingPoints,
+			buttonStyle,
 		} = this.state;
 
 		const values = {
@@ -90,6 +104,7 @@ class AddNewBus extends Component {
 			journeyDate,
 			boardingPoints,
 			droppingPoints,
+			buttonStyle,
 		};
 
 		switch (step) {
@@ -113,7 +128,9 @@ class AddNewBus extends Component {
 					/>
 				);
 			case 3:
-				return <Confirm nextStep={this.nextStep} prevStep={this.prevStep} values={values} />;
+				return (
+					<Confirm nextStep={this.nextStep} prevStep={this.prevStep} values={values} onDrop={this.onDrop} />
+				);
 			case 4:
 				return <Success />;
 			default:

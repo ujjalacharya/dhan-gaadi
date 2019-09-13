@@ -1,32 +1,30 @@
-import React, { Component } from 'react';
+import React from 'react';
+import ImageUploader from 'react-images-upload';
 import Layout from '../../core/Layout';
-import Swal from 'sweetalert2';
 
-export default class Confirm extends Component {
-	continue = e => {
-  e.preventDefault();
-  
-		this.props.nextStep();
-	};
-
+export default class Comfirm extends React.Component {
 	render() {
-		const { values, handleChange } = this.props;
-
+		const { nextStep, values, onDrop } = this.props;
+		console.log(values.buttonStyle);
 		return (
-			<Layout title="Photo Upoad">
-				<div className="form-group">
-					<label>Upload bus photo </label>
-					<input
-						type="text"
-						className="form-control"
-						required
-						placeholder="Enter the bus name"
-					/>
-				</div>
-
-				<button className="btn btn-info" onClick={this.continue}>
-					Submit
+			<Layout title="Image uploader">
+				<button
+					className="btn btn-success"
+					onClick={nextStep}
+					style={{ width: '100%', display: values.buttonStyle === 'none' ? 'block' : 'none' }}
+				>
+					Upload the photo and add the bus
 				</button>
+				<ImageUploader
+					withIcon={true}
+					buttonText="Choose photo"
+					onChange={onDrop}
+					imgExtension={['.jpg', '.gif', '.png', '.gif']}
+					maxFileSize={5242880}
+					singleImage={true}
+					withPreview={true}
+					buttonStyles={{ display: values.buttonStyle }}
+				/>
 			</Layout>
 		);
 	}

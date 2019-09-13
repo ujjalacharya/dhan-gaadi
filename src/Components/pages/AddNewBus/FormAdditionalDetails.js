@@ -1,7 +1,7 @@
 import React, { Component } from 'react';
 import Layout from '../../core/Layout';
 
-export default class FormPrimaryDetails extends Component {
+export default class FormAdditionalDetails extends Component {
 	continue = e => {
 		e.preventDefault();
 		this.props.nextStep();
@@ -103,7 +103,7 @@ export default class FormPrimaryDetails extends Component {
 				<button className="btn btn-info" onClick={this.back} style={{marginRight: '2rem'}}>
 					Back
 				</button>
-				<button className="btn btn-success mx-5" onClick={this.continue}>
+				<button className="btn btn-info mx-5" onClick={this.continue}>
 					Continue to submit
 				</button>
 			</Layout>
