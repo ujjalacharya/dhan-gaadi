@@ -14,7 +14,7 @@ const busSchema = new mongoose.Schema(
         },
         type: {
             type: String,
-            enum: ["AC", "delux", "normal"]
+            enum: ["AC", "Delux", "Normal", "Suspense AC", "Suspense Delux"]
         },
         busNumber: {
             type: String,
@@ -66,17 +66,19 @@ const busSchema = new mongoose.Schema(
             type: String
         },
         journeyDate: {
-            type: Date
+            type: String
         },
         owner: {
             type: ObjectId,
             ref: "Owner"
         },
         boardingPoints: [{
-            type: String
+            type: String,
+            trim: true
         }],
         droppingPoints: [{
-            type: String
+            type: String,
+            trim: true
         }],
         slug: {
             type: String,
