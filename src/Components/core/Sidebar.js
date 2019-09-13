@@ -1,8 +1,8 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, memo } from 'react';
 import { Link, withRouter } from 'react-router-dom';
 import { signout, isAuthenticated } from '../../Utils/Requests/Auth';
 
-const SideBar = ({ history }) => {
+const SideBar = memo(({ history }) => {
 	const [menu, setMenu] = useState({ display: 'block' });
 
 	const { user } = isAuthenticated();
@@ -10,7 +10,7 @@ const SideBar = ({ history }) => {
 	useEffect(() => {
 		if (history.location.pathname.includes('bus')) {
 			setMenu({ display: 'block' });
-    }
+		}
 	}, [history.location.pathname]);
 
 	const isActive = (history, path) => {
@@ -38,7 +38,7 @@ const SideBar = ({ history }) => {
 			history.push('/');
 		}
 	};
-console.log(user)
+	console.log(user);
 	return (
 		<aside className="main-sidebar">
 			<section className="sidebar">
@@ -49,7 +49,8 @@ console.log(user)
 					<div className="pull-left info">
 						<p>{user.name}</p>
 						<a href="false">
-							<i className="fa fa-circle text-success"></i>{user.role}
+							<i className="fa fa-circle text-success"></i>
+							{user.role}
 						</a>
 					</div>
 				</div>
@@ -108,6 +109,6 @@ console.log(user)
 			</section>
 		</aside>
 	);
-};
+});
 
 export default withRouter(SideBar);

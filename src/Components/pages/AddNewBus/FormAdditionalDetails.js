@@ -48,7 +48,7 @@ export default class FormPrimaryDetails extends Component {
 						type="date"
 						className="form-control"
 						onChange={handleChange('journeyDate')}
-						value={values.fare}
+						value={values.journeyDate}
 					/>
 				</div>
 
@@ -82,7 +82,7 @@ export default class FormPrimaryDetails extends Component {
 						type="text"
 						className="form-control"
 						required
-						placeholder="Enter the boarding points of bus"
+						placeholder="Enter names separated by comma"
 						onChange={handleChange('boardingPoints')}
 						value={values.boardingPoints}
 					/>
@@ -94,7 +94,7 @@ export default class FormPrimaryDetails extends Component {
 						type="text"
 						className="form-control"
 						required
-						placeholder="Enter the dropping points of bus"
+						placeholder="Enter names separated by comma"
 						onChange={handleChange('droppingPoints')}
 						value={values.droppingPoints}
 					/>
