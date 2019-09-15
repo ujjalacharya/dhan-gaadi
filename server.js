@@ -6,6 +6,7 @@ const cors = require("cors");
 const expressValidator = require("express-validator");
 const dbConnection = require("./helpers/dbConnection");
 const { errorHandler } = require("./helpers/dbErrorHandler");
+const {runEveryMidnight} = require("./helpers/misc")
 const app = express();
 require("dotenv").config();
 
@@ -38,6 +39,10 @@ app.use(function(err, req, res, next) {
     error: errorHandler(err) || "Something went wrong!"
   });
 });
+
+
+// Run every-midnight to check if bus deporting date is passed
+runEveryMidnight();
 
 const port = process.env.PORT || 8525;
 
