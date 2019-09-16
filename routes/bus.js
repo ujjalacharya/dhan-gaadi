@@ -16,7 +16,7 @@ const {
   getAllUnavailableBuses
 } = require("../controllers/bus");
 
-const { uploadBusImage } = require("../helpers/multer");
+const { uploadBusImage } = require("../helpers");
 
 router
   .route("/")

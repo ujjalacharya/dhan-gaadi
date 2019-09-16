@@ -2,7 +2,7 @@ const User = require("../models/User");
 const jwt = require("jsonwebtoken");
 const _ = require("lodash");
 
-const { sendEmail } = require("../helpers/mailer");
+const { sendEmail } = require("../helpers");
 
 exports.signup = async (req, res) => {
   const userExists = await User.findOne({ email: req.body.email });

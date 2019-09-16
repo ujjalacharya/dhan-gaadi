@@ -4,9 +4,7 @@ require("express-async-errors");
 const path = require("path");
 const cors = require("cors");
 const expressValidator = require("express-validator");
-const dbConnection = require("./helpers/dbConnection");
-const { errorHandler } = require("./helpers/dbErrorHandler");
-const {runEveryMidnight} = require("./helpers/misc")
+const {runEveryMidnight, dbConnection, errorHandler} = require("./helpers")
 const app = express();
 require("dotenv").config();
 
