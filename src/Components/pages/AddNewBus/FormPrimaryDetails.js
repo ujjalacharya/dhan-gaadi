@@ -11,8 +11,7 @@ export default class FormPrimaryDetails extends Component {
 				type: 'error',
 				title: 'Fill all the required fields',
 			});
-    }
-    console.log(this.props.values)
+		}
 		this.props.nextStep();
 	};
 

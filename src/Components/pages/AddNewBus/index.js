@@ -22,7 +22,7 @@ class AddNewBus extends Component {
 		journeyDate: '',
 		boardingPoints: '',
 		droppingPoints: '',
-		image: {},
+		image: "",
 		buttonStyle: 'block',
 	};
 
@@ -49,14 +49,23 @@ class AddNewBus extends Component {
 
 	//Handle image upload
 	onDrop = picture => {
-		console.log(picture);
 		if (picture.length === 0) {
 			return this.setState({ buttonStyle: 'block' });
 		}
+		
+		const fd = new FormData();
+		fd.append("file", picture[0], picture[0].name)
+
+		console.log(fd);
+
+		console.log(picture[0])
+
 		this.setState({
 			image: picture[0],
 			buttonStyle: 'none',
 		});
+
+		console.log(this.state)
 	};
 
 	// Handle checkbox change
@@ -132,7 +141,7 @@ class AddNewBus extends Component {
 					<Confirm nextStep={this.nextStep} prevStep={this.prevStep} values={values} onDrop={this.onDrop} />
 				);
 			case 4:
-				return <Success />;
+				return <Success values={values}/>;
 			default:
 				return <h3>Error</h3>;
 		}
