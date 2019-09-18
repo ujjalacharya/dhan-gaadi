@@ -11,16 +11,16 @@ class Success extends Component {
   };
 
   async componentDidMount() {
-      for (var value of this.props.formData.values()) {
-        console.log(value); 
-     }
-
-    // Submit the form
-    const resp = await addNewBus(this.props.formData).catch(err => {
-      this.setState({ loading: false, error: err.response.data.error });
-    });
-    if (resp && resp.status === 200) {
-      this.setState({ loading: false });
+    if (this.props.isUpdate) {
+      console.log("this is update")
+    } else {
+      // Add the bus
+      const resp = await addNewBus(this.props.formData).catch(err => {
+        this.setState({ loading: false, error: err.response.data.error });
+      });
+      if (resp && resp.status === 200) {
+        this.setState({ loading: false });
+      }
     }
   }
 

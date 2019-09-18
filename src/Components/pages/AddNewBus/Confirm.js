@@ -4,7 +4,7 @@ import Layout from '../../core/Layout';
 
 export default class Confirm extends React.Component {
 	render() {
-		const { nextStep, values, handleChange } = this.props;
+		const { nextStep, values, handleChange} = this.props;
 		return (
 			<Layout title="Image uploader">
 				<button
@@ -22,7 +22,7 @@ export default class Confirm extends React.Component {
 					maxFileSize={5242880}
 					singleImage={true}
 					withPreview={true}
-					buttonStyles={{ display: values.buttonStyle }}
+					buttonStyles={{ display: values.buttonStyle}}
 				/>
 			</Layout>
 		);
