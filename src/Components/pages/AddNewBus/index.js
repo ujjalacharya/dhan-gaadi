@@ -70,9 +70,9 @@ class AddNewBus extends Component {
     this.setState({ [input]: value });
   };
 
-  componentWillUnmount() {
-		this.setState({ buttonStyle: 'block' });
-	}
+  // componentWillUnmount() {
+	// 	this.setState({ buttonStyle: 'block' });
+	// }
 
   render() {
 	const { step } = this.state;

@@ -45,7 +45,26 @@ class EditBus extends Component {
 			this.setState({ error: err.response.data.error });
 		});
 		if (resp && resp.status === 200) {
-			this.setState({ step: 1, bus: resp.data });
+			this.setState({
+         step: 1, 
+         bus: resp.data,
+         name: resp.data.name,
+         type: resp.data.type,
+         busNumber: resp.data.busNumber,
+         fare: resp.data.fare,
+         features: resp.data.features,
+         description: resp.data.description,
+         seatsAvailable: resp.data.seatsAvailable,
+         numberOfSeats: resp.data.numberOfSeats,
+         image: resp.data.image,
+         departure_time: resp.data.departure_time,
+         isAvailable: resp.data.isAvailable,
+         startLocation: resp.data.startLocation,
+         endLocation: resp.data.endLocation,
+         journeyDate: resp.data.journeyDate,
+         boardingPoints: resp.data.boardingPoints,
+         droppingPoints: resp.data.droppingPoints,
+        });
 		}
 	};
 
@@ -71,29 +90,29 @@ class EditBus extends Component {
 		this.setState({ [input]: value });
 	};
 
-	componentWillUnmount() {
-		this.setState({ buttonStyle: 'block' });
-	}
+	// componentWillUnmount() {
+	// 	this.setState({ buttonStyle: 'block' });
+	// }
 
 	render() {
-		const { bus, step, formData, buttonStyle } = this.state;
+		const { step, formData, buttonStyle } = this.state;
 
 		switch (step) {
 			case 0:
 				return (
 					<Layout title="Edit bus">
-						<h1>Loading...</h1>;
+						<h1>Loading...</h1>
 					</Layout>
 				);
 			case 1:
-				return <FormPrimaryDetails nextStep={this.nextStep} handleChange={this.handleChange} values={bus} />;
+				return <FormPrimaryDetails nextStep={this.nextStep} handleChange={this.handleChange} values={this.state} />;
 			case 2:
 				return (
 					<FormAdditionalDetails
 						nextStep={this.nextStep}
 						prevStep={this.prevStep}
 						handleChange={this.handleChange}
-						values={bus}
+						values={this.state}
 					/>
 				);
 			case 3:
@@ -101,13 +120,13 @@ class EditBus extends Component {
 					<Confirm
 						nextStep={this.nextStep}
 						prevStep={this.prevStep}
-						values={bus}
+						values={this.state}
 						handleChange={this.handleChange}
 						buttonStyle={buttonStyle}
 					/>
 				);
 			case 4:
-				return <Success values={bus} formData={formData} isUpdate={true} />;
+				return <Success values={this.state} formData={formData} isUpdate={true} />;
 			default:
 				return <h3>Error</h3>;
 		}
