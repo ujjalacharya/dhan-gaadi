@@ -43,7 +43,7 @@ const SideBar = memo(({ history }) => {
 			<section className="sidebar">
 				<div className="user-panel">
 					<div className="pull-left image">
-						<img src="img/user2-160x160.jpg" className="img-circle" alt="UserImage" />
+						<img src="/img/user2-160x160.jpg" className="img-circle" alt="UserImage" />
 					</div>
 					<div className="pull-left info">
 						<p>{user.name}</p>
