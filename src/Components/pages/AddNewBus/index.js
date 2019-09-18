@@ -59,7 +59,9 @@ class AddNewBus extends Component {
 
       value = e[0];
       this.setState({ buttonStyle: "none" });
-    } else {
+    }else if(input === "isAvailable"){
+		value = !this.state.isAvailable
+	} else {
       value = e.target.value;
     }
 
@@ -68,13 +70,8 @@ class AddNewBus extends Component {
     this.setState({ [input]: value });
   };
 
-  // Handle checkbox change
-  handleCheckbox = () => {
-    this.setState({ isAvailable: !this.state.isAvailable });
-  };
-
   render() {
-    const { step } = this.state;
+	const { step } = this.state;
 
     const {
       name,
@@ -134,7 +131,6 @@ class AddNewBus extends Component {
             nextStep={this.nextStep}
             prevStep={this.prevStep}
             handleChange={this.handleChange}
-            handleCheckbox={this.handleCheckbox}
             values={values}
           />
         );

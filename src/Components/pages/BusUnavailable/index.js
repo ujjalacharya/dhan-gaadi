@@ -14,7 +14,7 @@ class BusUnavailable extends Component {
 
     this.columns = [
       {
-        key: "sn",
+        key: "slug",
         text: "S.N",
         className: "id",
         align: "left",
@@ -35,8 +35,8 @@ class BusUnavailable extends Component {
         sortable: true
       },
       {
-        key: "date",
-        text: "Date",
+        key: "journeyDate",
+        text: "Journey Date",
         className: "date",
         align: "left",
         sortable: true
@@ -121,8 +121,8 @@ class BusUnavailable extends Component {
       this.setState({ error: err.response.data.error, isLoading: false });
     });
     if (buses && buses.status === 200) {
-      buses.data.map(bus => {
         let counter = 1;
+      buses.data.map(bus => {
         bus.date = moment(bus.createdAt).format("MMMM Do, YYYY");
         bus.sn = counter;
         counter++;

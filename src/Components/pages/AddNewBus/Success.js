@@ -11,6 +11,10 @@ class Success extends Component {
   };
 
   async componentDidMount() {
+      for (var value of this.props.formData.values()) {
+        console.log(value); 
+     }
+
     // Submit the form
     const resp = await addNewBus(this.props.formData).catch(err => {
       this.setState({ loading: false, error: err.response.data.error });

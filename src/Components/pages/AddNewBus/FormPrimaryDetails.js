@@ -16,7 +16,7 @@ export default class FormPrimaryDetails extends Component {
 	};
 
 	render() {
-		const { values, handleChange, handleCheckbox } = this.props;
+		const { values, handleChange } = this.props;
 
 		return (
 			<Layout title="Add new bus (Primary details)">
@@ -50,7 +50,7 @@ export default class FormPrimaryDetails extends Component {
 						type="checkbox"
 						id="isAvailable"
 						className="form-check-input"
-						onChange={handleCheckbox}
+						onChange={handleChange("isAvailable")}
 						checked={values.isAvailable}
 					/>
 					<label className="form-check-label" htmlFor="isAvailable">
