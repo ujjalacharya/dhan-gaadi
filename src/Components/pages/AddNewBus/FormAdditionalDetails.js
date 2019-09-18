@@ -39,6 +39,7 @@ export default class FormAdditionalDetails extends Component {
 						placeholder="Enter the bus number"
 						onChange={handleChange('departure_time')}
 						value={values.departure_time}
+						disabled={!values.isAvailable}
 					/>
 				</div>
 
@@ -49,6 +50,7 @@ export default class FormAdditionalDetails extends Component {
 						className="form-control"
 						onChange={handleChange('journeyDate')}
 						value={values.journeyDate}
+						disabled={!values.isAvailable}
 					/>
 				</div>
 

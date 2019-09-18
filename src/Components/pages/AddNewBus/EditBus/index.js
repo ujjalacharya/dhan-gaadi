@@ -46,31 +46,30 @@ class EditBus extends Component {
 		});
 		if (resp && resp.status === 200) {
 			this.setState({
-         step: 1, 
-         bus: resp.data,
-         name: resp.data.name,
-         type: resp.data.type,
-         busNumber: resp.data.busNumber,
-         fare: resp.data.fare,
-         features: resp.data.features,
-         description: resp.data.description,
-         seatsAvailable: resp.data.seatsAvailable,
-         numberOfSeats: resp.data.numberOfSeats,
-         image: resp.data.image,
-         departure_time: resp.data.departure_time,
-         isAvailable: resp.data.isAvailable,
-         startLocation: resp.data.startLocation,
-         endLocation: resp.data.endLocation,
-         journeyDate: resp.data.journeyDate,
-         boardingPoints: resp.data.boardingPoints,
-         droppingPoints: resp.data.droppingPoints,
-        });
+				step: 1,
+				bus: resp.data,
+				name: resp.data.name,
+				type: resp.data.type,
+				busNumber: resp.data.busNumber,
+				fare: resp.data.fare,
+				features: resp.data.features,
+				description: resp.data.description,
+				seatsAvailable: resp.data.seatsAvailable,
+				numberOfSeats: resp.data.numberOfSeats,
+				image: resp.data.image,
+				departure_time: resp.data.departure_time,
+				isAvailable: resp.data.isAvailable,
+				startLocation: resp.data.startLocation,
+				endLocation: resp.data.endLocation,
+				journeyDate: resp.data.journeyDate,
+				boardingPoints: resp.data.boardingPoints,
+				droppingPoints: resp.data.droppingPoints,
+			});
 		}
 	};
 
 	// Handle fields change
 	handleChange = input => e => {
-		console.log(this.state);
 		let value;
 		if (input === 'image') {
 			if (e.length === 0) {
@@ -95,7 +94,9 @@ class EditBus extends Component {
 	// }
 
 	render() {
-		const { step, formData, buttonStyle } = this.state;
+    const { step, formData, buttonStyle } = this.state;
+    
+    console.log(this.state)
 
 		switch (step) {
 			case 0:
@@ -105,7 +106,9 @@ class EditBus extends Component {
 					</Layout>
 				);
 			case 1:
-				return <FormPrimaryDetails nextStep={this.nextStep} handleChange={this.handleChange} values={this.state} />;
+				return (
+					<FormPrimaryDetails nextStep={this.nextStep} handleChange={this.handleChange} values={this.state} />
+				);
 			case 2:
 				return (
 					<FormAdditionalDetails
@@ -123,6 +126,7 @@ class EditBus extends Component {
 						values={this.state}
 						handleChange={this.handleChange}
 						buttonStyle={buttonStyle}
+						isUpdate={true}
 					/>
 				);
 			case 4:
