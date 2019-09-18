@@ -16,7 +16,7 @@ const Layout = ({ children, className = 'content-wrapper', title = 'Dashboard' }
 									<h3 className="box-title">{title}</h3>
 								</div>
 								<div className="box-body">{children}</div>
-                <div className="box-footer">
+                {/* <div className="box-footer">
                   <div className="row">
                     <div className="col-sm-3 col-xs-6">
                       <div className="description-block border-right">
@@ -25,7 +25,7 @@ const Layout = ({ children, className = 'content-wrapper', title = 'Dashboard' }
                       </div>
                     </div>
                   </div>
-                </div>
+                </div> */}
 							</div>
 						</div>
 					</div>

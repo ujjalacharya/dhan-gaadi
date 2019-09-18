@@ -38,7 +38,6 @@ const SideBar = memo(({ history }) => {
 			history.push('/');
 		}
 	};
-	console.log(user);
 	return (
 		<aside className="main-sidebar">
 			<section className="sidebar">

@@ -5,11 +5,8 @@ export const getAvailableBusesOfOwner = () =>
 export const getUnavailableBusesOfOwner = () =>
   axios.get("/bus/owner-bus-unavailable");
 
-export const addNewBus = body => {
-  console.log(typeof body.image);
-  return axios.post("/bus", body, {
-    headers: { "Content-Type": "text/plain" }
-  });
-};
+export const addNewBus = body => axios.post("/bus", body);
+
+export const removeBus = slug => axios.delete("/bus/"+ slug);
 
 // axios.post('/bus', body, { onUploadProgress: progressEvent => console.log(progressEvent.loaded) });
