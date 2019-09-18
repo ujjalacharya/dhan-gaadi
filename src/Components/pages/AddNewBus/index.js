@@ -76,8 +76,6 @@ class AddNewBus extends Component {
   render() {
     const { step } = this.state;
 
-    console.log(this.state);
-
     const {
       name,
       type,

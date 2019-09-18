@@ -2,10 +2,9 @@ import React from 'react';
 import ImageUploader from 'react-images-upload';
 import Layout from '../../core/Layout';
 
-export default class Comfirm extends React.Component {
+export default class Confirm extends React.Component {
 	render() {
 		const { nextStep, values, handleChange } = this.props;
-		console.log(values.buttonStyle);
 		return (
 			<Layout title="Image uploader">
 				<button

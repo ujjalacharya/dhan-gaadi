@@ -37,8 +37,8 @@ export default class FormAdditionalDetails extends Component {
 						className="form-control"
 						required
 						placeholder="Enter the bus number"
-						onChange={handleChange('busNumber')}
-						value={values.busNumber}
+						onChange={handleChange('departure_time')}
+						value={values.departure_time}
 					/>
 				</div>
 

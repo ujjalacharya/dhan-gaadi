@@ -1,9 +1,10 @@
 import React, { Component } from "react";
 import Layout from "../../core/Layout";
 import Swal from "sweetalert2";
+import { Redirect } from "react-router-dom";
 import { addNewBus } from "../../../Utils/Requests/Bus";
 
-export class Success extends Component {
+class Success extends Component {
   state = {
     loading: true,
     error: ""
@@ -11,32 +12,41 @@ export class Success extends Component {
 
   async componentDidMount() {
     // Submit the form
-    console.log(this.props.formData);
-    const resp = await addNewBus(this.props.formData);
-    console.log(resp);
-    if (resp.status === 200) {
+    const resp = await addNewBus(this.props.formData).catch(err => {
+      this.setState({ loading: false, error: err.response.data.error });
+    });
+    if (resp && resp.status === 200) {
       this.setState({ loading: false });
-    } else {
-      this.setState({ loading: false, error: resp.data.message });
     }
   }
 
   renderMessage = () => {
     const { error } = this.state;
     if (error) {
-      return Swal.fire({
+      Swal.fire({
         type: "error",
         title: error
       });
+      return <Redirect to="/" />;
+    } else {
+      Swal.fire({
+        type: "success",
+        title: "Successfully added the bus!"
+      });
+      return <Redirect to="/" />;
     }
-    Swal.fire({
-      type: "success",
-      title: "Successfully added the bus!"
-    });
+  };
+
+  loadingShow = () => {
+    return <h1>Loading...</h1>;
   };
 
   render() {
-    return <Layout>{!this.state.loading && this.renderMessage}</Layout>;
+    return (
+      <Layout>
+        {this.state.loading ? this.loadingShow() : this.renderMessage()}
+      </Layout>
+    );
   }
 }
 
