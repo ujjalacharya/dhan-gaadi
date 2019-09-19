@@ -2,6 +2,13 @@ const Booking = require("../models/Booking");
 const Bus = require("../models/Bus");
 const Guest = require("../models/Guest");
 
+exports.getOwnerBookings = async (req, res) => {
+  const bookings = await Booking.find({owner: req.ownerauth}).populate("bus owner guest user");
+
+  res.json(bookings)
+
+}
+
 exports.postBooking = async (req, res) => {
   const booking = new Booking(req.body);
   if (req.userauth) {
@@ -24,6 +31,7 @@ exports.postBooking = async (req, res) => {
   await bus.save();
 
   booking.bus = bus;
+  booking.owner = bus.owner;
 
   await booking.save();
 
