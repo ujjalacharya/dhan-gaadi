@@ -14,6 +14,7 @@ import BusUnavailable from "../Components/pages/BusUnavailable";
 import AllBusUnavailable from "../Components/pages/BusUnavailable/all";
 import Owners from "../Components/pages/People/Owners";
 import Users from "../Components/pages/People/Users";
+import Guests from "../Components/pages/People/Guests";
 
 const MainRouter = () => (
  <Switch>
@@ -29,7 +30,7 @@ const MainRouter = () => (
    <SuperAdminRoute path="/all-bus-unavailable" exact component={AllBusUnavailable} />
    <SuperAdminRoute path="/people-owners" exact component={Owners} />
    <SuperAdminRoute path="/people-users" exact component={Users} />
-   {/* <SuperAdminRoute path="/people-guests" exact component={} /> */}
+   <SuperAdminRoute path="/people-guests" exact component={Guests} />
  </Switch>
 );
 
