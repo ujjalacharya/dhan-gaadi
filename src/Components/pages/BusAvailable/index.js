@@ -196,7 +196,7 @@ class BusAvailable extends Component {
                 {" "}
                 Add Bus
               </button>
-              <h1 className="mt-2 text-primary">Available Buses</h1>
+              <h1 className="mt-2 text-primary">My Available Buses</h1>
               {this.state.isLoading ? (
                 <img src="/img/spinner.gif" alt="" className="spinner" />
               ) : (

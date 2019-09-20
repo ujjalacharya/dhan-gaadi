@@ -198,7 +198,7 @@ class BusUnavailable extends Component {
 
   render() {
     return (
-      <Layout title="My Buses > Unavailable buses">
+      <Layout title="All Buses > Unavailable buses">
         <div className="d-flex" id="wrapper">
           <div id="page-content-wrapper">
             <div className="container-fluid">
@@ -212,7 +212,7 @@ class BusUnavailable extends Component {
                 {" "}
                 Add Bus
               </button>
-              <h1 className="mt-2 text-primary">Unavailable Buses</h1>
+              <h1 className="mt-2 text-primary">All Unavailable Buses</h1>
               {this.state.isLoading ? (
                 <img src="/img/spinner.gif" alt="" className="spinner" />
               ) : (

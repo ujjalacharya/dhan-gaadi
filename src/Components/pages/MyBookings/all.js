@@ -278,13 +278,13 @@ class MyBookings extends Component {
   render() {
     console.log(this.state);
     return (
-      <Layout title="My Bookings">
+      <Layout title="All Bookings">
         <div className="d-flex" id="wrapper">
           <div id="page-content-wrapper">
             <div className="container-fluid">
               <button className="btn btn-link mt-3" id="menu-toggle"></button>
 
-              <h1 className="mt-2 text-primary">My Bookings</h1>
+              <h1 className="mt-2 text-primary">All Bookings</h1>
               {this.state.isLoading ? (
                 <img src="/img/spinner.gif" alt="" className="spinner" />
               ) : (
