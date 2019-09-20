@@ -24,7 +24,7 @@ export default class Confirm extends React.Component {
 					withIcon={true}
 					buttonText="Choose photo"
 					onChange={handleChange("image")}
-					imgExtension={['.jpg', '.gif', '.png', '.gif']}
+					imgExtension={['.jpg', '.jpeg', '.gif', '.png', '.gif']}
 					maxFileSize={5242880}
 					singleImage={true}
 					withPreview={true}

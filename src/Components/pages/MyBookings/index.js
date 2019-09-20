@@ -2,7 +2,8 @@ import React, { Component } from "react";
 import Layout from "../../core/Layout";
 import {
   getOwnerBookings,
-  changeVerificationStatus
+  changeVerificationStatus,
+  removeBooking
 } from "../../../Utils/Requests/Booking";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
@@ -47,6 +48,13 @@ class MyBookings extends Component {
         sortable: true
       },
       {
+        key: "busName",
+        text: "Bus Name",
+        className: "name",
+        align: "left",
+        sortable: true
+      },
+      {
         key: "departure_time",
         text: "Departure time",
         className: "name",
@@ -64,6 +72,20 @@ class MyBookings extends Component {
         key: "clientName",
         text: "Client Name",
         className: "clientName",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "clientPhone",
+        text: "Client Phone",
+        className: "clientPhone",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "clientAddress",
+        text: "Client Address",
+        className: "clientAddress",
         align: "left",
         sortable: true
       },
@@ -94,15 +116,15 @@ class MyBookings extends Component {
               <button
                 data-toggle="modal"
                 data-target="#update-user-modal"
-                className="btn btn-primary btn-sm"
+                className={`btn btn-${record.verification === "verified" ? "warning" : "success"} btn-sm`}
                 onClick={this.toggleVerify(record._id, record.verification)}
                 style={{ marginRight: "5px" }}
               >
-                <i className="fa fa-book"></i>
+                <i className={`fa fa-${record.verification === "verified" ? "times" : "check"}`}></i>
               </button>
               <button
                 className="btn btn-danger btn-sm"
-                onClick={() => this.deleteRecord(record.slug)}
+                onClick={() => this.deleteRecord(record._id)}
               >
                 <i className="fa fa-trash"></i>
               </button>
@@ -190,26 +212,26 @@ class MyBookings extends Component {
     });
   };
 
-  deleteRecord = slug => {
-    // Swal.fire({
-    //   title: "Are you sure?",
-    //   text: "You won't be able to revert this!",
-    //   type: "warning",
-    //   showCancelButton: true,
-    //   confirmButtonColor: "#3085d6",
-    //   cancelButtonColor: "#d33",
-    //   confirmButtonText: "Yes, delete it!"
-    // }).then(async result => {
-    //   if (result.value) {
-    //     const resp = await removeBus(slug).catch(err => {
-    //       this.setState({ error: err.response.data.error });
-    //     });
-    //     if (resp && resp.status === 200) {
-    //       Swal.fire("Deleted!", "Your file has been deleted.", "success");
-    //       this.setState({});
-    //     }
-    //   }
-    // });
+  deleteRecord = id => {
+    Swal.fire({
+      title: "Are you sure?",
+      text: "You won't be able to revert this!",
+      type: "warning",
+      showCancelButton: true,
+      confirmButtonColor: "#3085d6",
+      cancelButtonColor: "#d33",
+      confirmButtonText: "Yes, delete it!"
+    }).then(async result => {
+      if (result.value) {
+        const resp = await removeBooking(id).catch(err => {
+          this.setState({ error: err.response.data.error });
+        });
+        if (resp && resp.status === 200) {
+          Swal.fire("Deleted!", "Your file has been deleted.", "success");
+          this.setState({});
+        }
+      }
+    });
   };
 
   fetchBookings = async () => {
@@ -222,18 +244,20 @@ class MyBookings extends Component {
     if (resp && resp.status === 200) {
       let counter = 1;
       resp.data.map(booking => {
+        const client = booking.guest ? booking.guest : booking.user;
         booking.bookedDate = moment(booking.createdAt).format("MMMM Do, YYYY");
         booking.journeyDate = moment(booking.bus.journeyDate).format(
           "MMMM Do, YYYY"
         );
         booking.sn = counter;
         counter++;
-        booking.clientName = booking.guest
-          ? booking.guest.name
-          : booking.user.name;
+        booking.clientName = client.name;
+        booking.clientPhone = client.phone;
+        booking.clientAddress = client.address;
         booking.busNumber = booking.bus.busNumber;
         booking.departure_time = booking.bus.departure_time;
         booking.image = booking.bus.image;
+        booking.busName = booking.bus.name;
         return booking;
       });
       this.setState({ bookings: resp.data, isLoading: false });
