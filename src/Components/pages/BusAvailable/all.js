@@ -1,8 +1,8 @@
 import React, { Component } from "react";
 import Layout from "../../core/Layout";
 import {
-  getAvailableBusesOfOwner,
-  removeBus
+  removeBus,
+  getAllAvailableBuses
 } from "../../../Utils/Requests/Bus";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
@@ -55,8 +55,22 @@ class BusAvailable extends Component {
         sortable: true
       },
       {
-        key: "journeyDate",        
-        text: "Date",
+        key: "ownerName",
+        text: "Owner Name",
+        className: "ownerName",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "ownerPhone",
+        text: "Owner Phone",
+        className: "ownerPhone",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "journeyDate",
+        text: "Journey Date",
         className: "date",
         align: "left",
         sortable: true
@@ -161,7 +175,7 @@ class BusAvailable extends Component {
   };
 
   fetchAvailableBuses = async () => {
-    const buses = await getAvailableBusesOfOwner().catch(err => {
+    const buses = await getAllAvailableBuses().catch(err => {
       this.setState({ error: err.response.data.error, isLoading: false });
     });
     if (buses && buses.status === 200) {
@@ -170,6 +184,8 @@ class BusAvailable extends Component {
         bus.journeyDate = moment(bus.journeyDate).format("MMMM Do, YYYY");
         bus.sn = counter;
         counter++;
+        bus.ownerName = bus.owner.name;
+        bus.ownerPhone = bus.owner.phone;
         return bus;
       });
       this.setState({ buses: buses.data, isLoading: false });

@@ -1,15 +1,15 @@
-import React, { Component } from "react";
+import React, { Component, memo } from "react";
 import Layout from "../../core/Layout";
 import {
-  getAvailableBusesOfOwner,
-  removeBus
+  removeBus,
+  getAllUnavailableBuses
 } from "../../../Utils/Requests/Bus";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { SERVER_ROUTE } from "../../../Utils/config";
 
-class BusAvailable extends Component {
+class BusUnavailable extends Component {
   constructor(props) {
     super(props);
 
@@ -55,8 +55,22 @@ class BusAvailable extends Component {
         sortable: true
       },
       {
-        key: "journeyDate",        
-        text: "Date",
+        key: "ownerName",
+        text: "Owner Name",
+        className: "ownerName",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "ownerPhone",
+        text: "Owner Phone",
+        className: "ownerPhone",
+        align: "left",
+        sortable: true
+      },
+      {
+        key: "journeyDate",
+        text: "Journey Date",
         className: "date",
         align: "left",
         sortable: true
@@ -97,7 +111,7 @@ class BusAvailable extends Component {
     this.config = {
       page_size: 10,
       length_menu: [10, 20, 50],
-      filename: "Buses",
+      filename: "Users",
       no_data_text: "No bus found!",
       button: {
         excel: true,
@@ -129,14 +143,32 @@ class BusAvailable extends Component {
   }
 
   componentDidMount() {
-    this.fetchAvailableBuses();
+    this.fetchUnavailableBuses();
   }
 
   componentDidUpdate(nextProps, nextState) {
     if (nextState.buses === this.state.buses) {
-      this.fetchAvailableBuses();
+      this.fetchUnavailableBuses();
     }
   }
+
+  fetchUnavailableBuses = async () => {
+    const buses = await getAllUnavailableBuses().catch(err => {
+      this.setState({ error: err.response.data.error, isLoading: false });
+    });
+    if (buses && buses.status === 200) {
+      let counter = 1;
+      buses.data.map(bus => {
+        bus.journeyDate = moment(bus.journeyDate).format("MMMM Do, YYYY");
+        bus.sn = counter;
+        counter++;
+        bus.ownerName = bus.owner.name;
+        bus.ownerPhone = bus.owner.phone;
+        return bus;
+      });
+      this.setState({ buses: buses.data, isLoading: false });
+    }
+  };
 
   deleteRecord = slug => {
     Swal.fire({
@@ -160,29 +192,13 @@ class BusAvailable extends Component {
     });
   };
 
-  fetchAvailableBuses = async () => {
-    const buses = await getAvailableBusesOfOwner().catch(err => {
-      this.setState({ error: err.response.data.error, isLoading: false });
-    });
-    if (buses && buses.status === 200) {
-      let counter = 1;
-      buses.data.map(bus => {
-        bus.journeyDate = moment(bus.journeyDate).format("MMMM Do, YYYY");
-        bus.sn = counter;
-        counter++;
-        return bus;
-      });
-      this.setState({ buses: buses.data, isLoading: false });
-    }
-  };
-
   pageChange = pageData => {
     console.log("OnPageChange", pageData);
   };
 
   render() {
     return (
-      <Layout title="My Buses > Available buses">
+      <Layout title="My Buses > Unavailable buses">
         <div className="d-flex" id="wrapper">
           <div id="page-content-wrapper">
             <div className="container-fluid">
@@ -196,7 +212,7 @@ class BusAvailable extends Component {
                 {" "}
                 Add Bus
               </button>
-              <h1 className="mt-2 text-primary">Available Buses</h1>
+              <h1 className="mt-2 text-primary">Unavailable Buses</h1>
               {this.state.isLoading ? (
                 <img src="/img/spinner.gif" alt="" className="spinner" />
               ) : (
@@ -215,4 +231,4 @@ class BusAvailable extends Component {
   }
 }
 
-export default BusAvailable;
+export default memo(BusUnavailable);

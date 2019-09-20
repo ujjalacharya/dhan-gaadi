@@ -1,8 +1,10 @@
 import axios from 'axios';
 
 export const getAvailableBusesOfOwner = () => axios.get('/bus/owner-bus-available');
+export const getAllAvailableBuses = () => axios.get('/bus/all-bus-available');
 
 export const getUnavailableBusesOfOwner = () => axios.get('/bus/owner-bus-unavailable');
+export const getAllUnavailableBuses = () => axios.get('/bus/all-bus-unavailable');
 
 export const addNewBus = body => axios.post('/bus', body);
 
