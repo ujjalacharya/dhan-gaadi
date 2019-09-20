@@ -35,7 +35,7 @@ class BusUnavailable extends Component {
         sortable: true
       },
       {
-        key: "journeyDate",
+        key: "date",
         text: "Journey Date",
         className: "date",
         align: "left",
@@ -123,7 +123,7 @@ class BusUnavailable extends Component {
     if (buses && buses.status === 200) {
       let counter = 1;
       buses.data.map(bus => {
-        bus.date = moment(bus.createdAt).format("MMMM Do, YYYY");
+        bus.date = moment(bus.journeyDate).format("MMMM Do, YYYY");
         bus.sn = counter;
         counter++;
         return bus;

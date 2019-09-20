@@ -55,7 +55,9 @@ class BusAvailable extends Component {
                 data-toggle="modal"
                 data-target="#update-user-modal"
                 className="btn btn-primary btn-sm"
-                onClick={() => this.props.history.push(`/edit-bus/${record.slug}`)}
+                onClick={() =>
+                  this.props.history.push(`/edit-bus/${record.slug}`)
+                }
                 style={{ marginRight: "5px" }}
               >
                 <i className="fa fa-edit"></i>
@@ -143,9 +145,9 @@ class BusAvailable extends Component {
       this.setState({ error: err.response.data.error, isLoading: false });
     });
     if (buses && buses.status === 200) {
+      let counter = 1;
       buses.data.map(bus => {
-        let counter = 1;
-        bus.date = moment(bus.createdAt).format("MMMM Do, YYYY");
+        bus.date = moment(bus.journeyDate).format("MMMM Do, YYYY");
         bus.sn = counter;
         counter++;
         return bus;
