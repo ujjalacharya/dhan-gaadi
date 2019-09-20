@@ -128,6 +128,37 @@ const SideBar = memo(({ history }) => {
             </Link>
           </li>
 
+          {user.role === "superadmin" && (
+            <li className={isActive(history, "people")}>
+              <a href="false" onClick={toogleMenu}>
+                <i className="fa fa-users"></i> <span>People</span>
+                <span className="pull-right-container">
+                  <i className="fa fa-angle-left pull-right"></i>
+                </span>
+              </a>
+              <ul className="treeview-menu" style={menu}>
+                <li className={isActive(history, "/people-owners")}>
+                  <Link to="/people-owners">
+                    <i className="fa fa-circle-o"></i>Owners
+                    {/* <small className="label pull-right bg-blue">17</small> */}
+                  </Link>
+                </li>
+                <li className={isActive(history, "/people-users")}>
+                  <Link to="/people-users">
+                    <i className="fa fa-circle-o"></i>Users
+                    {/* <small className="label pull-right bg-blue">17</small> */}
+                  </Link>
+                </li>
+                <li className={isActive(history, "/people-guests")}>
+                  <Link to="/people-guests">
+                    <i className="fa fa-circle-o"></i>Guests
+                    {/* <small className="label pull-right bg-blue">17</small> */}
+                  </Link>
+                </li>
+              </ul>
+            </li>
+          )}
+
           <li>
             <a href="false" onClick={handleSignOut}>
               <i className="fa fa-sign-out"></i> <span>Logout</span>
