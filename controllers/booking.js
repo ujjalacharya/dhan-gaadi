@@ -2,6 +2,18 @@ const Booking = require("../models/Booking");
 const Bus = require("../models/Bus");
 const Guest = require("../models/Guest");
 
+exports.bookingById = async (req, res, next, id) => {
+  const booking = await Booking.findById(id).populate("bus owner guest user");
+
+  if (!booking) {
+    return res.status(400).json({
+      error: "booking not found"
+    });
+  }
+  req.booking = booking; // adds booking object in req with booking info
+  next();
+};
+
 exports.getOwnerBookings = async (req, res) => {
   const bookings = await Booking.find({ owner: req.ownerauth }).populate(
     "bus owner guest user"
@@ -40,13 +52,19 @@ exports.postBooking = async (req, res) => {
 };
 
 exports.changeVerificationStatus = async (req, res) => {
-  const booking = await Booking.findById(req.params.bookingId);
-
-  console.log(req.body)
+  const booking = req.booking;
 
   booking.verification = req.body.verification;
 
   await booking.save();
+
+  res.json(booking);
+};
+
+exports.deleteBooking = async (req, res) => {
+  const booking = req.booking;
+
+  await booking.remove();
 
   res.json(booking);
 };

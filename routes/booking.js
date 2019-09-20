@@ -1,15 +1,25 @@
 const router = require("express").Router();
-const booking = require("../controllers/booking");
+
+const {
+  bookingById,
+  getOwnerBookings,
+  changeVerificationStatus,
+  postBooking,
+  deleteBooking
+} = require("../controllers/booking");
+
 const { checkUserSignin } = require("../controllers/auth-user");
-const { requireOwnerSignin } = require("../controllers/auth-owner");
+const { requireOwnerSignin, isBookingOwner } = require("../controllers/auth-owner");
 const { busBySlug } = require("../controllers/bus");
 
-router.get("/", requireOwnerSignin, booking.getOwnerBookings);
+router.get("/", requireOwnerSignin, getOwnerBookings);
 
-router.patch("/:bookingId", requireOwnerSignin, booking.changeVerificationStatus);
+router.post("/:busSlug", checkUserSignin, postBooking);
 
-router.post("/:busSlug", checkUserSignin, booking.postBooking);
+router.patch("/:bookingId", requireOwnerSignin, changeVerificationStatus);
+router.delete("/:bookingId", requireOwnerSignin, isBookingOwner, deleteBooking);
 
 router.param("busSlug", busBySlug);
+router.param("bookingId", bookingById);
 
 module.exports = router;

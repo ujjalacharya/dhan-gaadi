@@ -128,3 +128,23 @@ exports.isPoster = (req, res, next) => {
   }
   next();
 };
+
+exports.isBookingOwner = (req, res, next) => {
+  let sameUser =
+    req.booking &&
+    req.ownerauth &&
+    req.booking.owner._id.toString() === req.ownerauth._id.toString();
+
+    console.log(sameUser)
+  let adminUser =
+    req.booking && req.ownerauth && req.ownerauth.role === "superadmin";
+
+  let isPoster = sameUser || adminUser;
+
+  if (!isPoster) {
+    return res.status(403).json({
+      error: "User is not authorized to perform this action"
+    });
+  }
+  next();
+};
