@@ -1,7 +1,7 @@
 const Owner = require("../models/Owner");
 
 exports.getAllOwners = async (req, res) => {
-  const owners = await Owner.find().sort({ created: -1 }).select("name email createdAt updatedAt role");
+  const owners = await Owner.find().sort({ created: -1 }).select("name email phone createdAt updatedAt role");
   res.json(owners);
 };
 
