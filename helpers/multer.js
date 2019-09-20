@@ -5,7 +5,7 @@ const multer= require("multer");
 //that will be uploaded
 const busImage = multer.diskStorage({
     destination: function (req, file, cb) {
-      cb(null, './uploads/busimage')
+      cb(null, './public/uploads/busimage')
     },
     filename: function (req, file, cb) {
       cb(null, file.fieldname + '-' + Date.now()  + path.extname(file.originalname))

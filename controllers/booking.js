@@ -3,11 +3,12 @@ const Bus = require("../models/Bus");
 const Guest = require("../models/Guest");
 
 exports.getOwnerBookings = async (req, res) => {
-  const bookings = await Booking.find({owner: req.ownerauth}).populate("bus owner guest user");
+  const bookings = await Booking.find({ owner: req.ownerauth }).populate(
+    "bus owner guest user"
+  );
 
-  res.json(bookings)
-
-}
+  res.json(bookings);
+};
 
 exports.postBooking = async (req, res) => {
   const booking = new Booking(req.body);
@@ -32,6 +33,18 @@ exports.postBooking = async (req, res) => {
 
   booking.bus = bus;
   booking.owner = bus.owner;
+
+  await booking.save();
+
+  res.json(booking);
+};
+
+exports.changeVerificationStatus = async (req, res) => {
+  const booking = await Booking.findById(req.params.bookingId);
+
+  console.log(req.body)
+
+  booking.verification = req.body.verification;
 
   await booking.save();
 

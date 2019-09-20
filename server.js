@@ -11,6 +11,8 @@ require("dotenv").config();
 // Database Connection
 dbConnection();
 
+app.use(express.static('public'))
+
 // Middlewares
 app.use(cors());
 app.use(morgan("dev"));

@@ -21,7 +21,7 @@ const bookingSchema = new mongoose.Schema(
 
     verification: {
       type: String,
-      enum: ['verfied', 'notverified', 'payed'],
+      enum: ['verified', 'notverified', 'payed'],
       default: 'notverified'
     }
   },

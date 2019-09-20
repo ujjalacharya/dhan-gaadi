@@ -6,6 +6,8 @@ const { busBySlug } = require("../controllers/bus");
 
 router.get("/", requireOwnerSignin, booking.getOwnerBookings);
 
+router.patch("/:bookingId", requireOwnerSignin, booking.changeVerificationStatus);
+
 router.post("/:busSlug", checkUserSignin, booking.postBooking);
 
 router.param("busSlug", busBySlug);
