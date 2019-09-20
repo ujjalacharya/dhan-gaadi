@@ -7,6 +7,7 @@ import {
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { SERVER_ROUTE } from "../../../Utils/config";
 
 class MyBookings extends Component {
   constructor(props) {
@@ -19,6 +20,24 @@ class MyBookings extends Component {
         className: "id",
         align: "left",
         sortable: true
+      },
+      {
+        key: "image",
+        text: "Image",
+        className: "image",
+        width: 100,
+        align: "left",
+        sortable: false,
+        cell: record => {
+          return (
+            <>
+              <img
+                className="busImage"
+                src={`${SERVER_ROUTE}/uploads/` + record.image}
+              />
+            </>
+          );
+        }
       },
       {
         key: "busNumber",
@@ -160,7 +179,11 @@ class MyBookings extends Component {
           this.setState({ error: err.response.data.error });
         });
         if (resp && resp.status === 200) {
-          Swal.fire(`${toggledVerification}!`, "Your file has been updated.", "success");
+          Swal.fire(
+            `${toggledVerification}!`,
+            "Your file has been updated.",
+            "success"
+          );
           this.setState({});
         }
       }
@@ -200,14 +223,17 @@ class MyBookings extends Component {
       let counter = 1;
       resp.data.map(booking => {
         booking.bookedDate = moment(booking.createdAt).format("MMMM Do, YYYY");
-        booking.journeyDate = moment(booking.bus.journeyDate).format("MMMM Do, YYYY");
+        booking.journeyDate = moment(booking.bus.journeyDate).format(
+          "MMMM Do, YYYY"
+        );
         booking.sn = counter;
         counter++;
         booking.clientName = booking.guest
           ? booking.guest.name
           : booking.user.name;
         booking.busNumber = booking.bus.busNumber;
-        booking.departure_time = booking.bus.departure_time
+        booking.departure_time = booking.bus.departure_time;
+        booking.image = booking.bus.image;
         return booking;
       });
       this.setState({ bookings: resp.data, isLoading: false });

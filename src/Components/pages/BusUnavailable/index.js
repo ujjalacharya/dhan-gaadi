@@ -7,6 +7,7 @@ import {
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { SERVER_ROUTE } from "../../../Utils/config";
 
 class BusUnavailable extends Component {
   constructor(props) {
@@ -19,6 +20,25 @@ class BusUnavailable extends Component {
         className: "id",
         align: "left",
         sortable: true
+      },
+      {
+        key: "image",
+        text: "Image",
+        className: "image",
+        width: 100,
+        align: "left",
+        sortable: false,
+        cell: record => {
+          console.log(record);
+          return (
+            <>
+              <img
+                className="busImage"
+                src={`${SERVER_ROUTE}/uploads/` + record.image}
+              />
+            </>
+          );
+        }
       },
       {
         key: "name",
@@ -55,7 +75,9 @@ class BusUnavailable extends Component {
                 data-toggle="modal"
                 data-target="#update-user-modal"
                 className="btn btn-primary btn-sm"
-                onClick={() => this.props.history.push(`/edit-bus/${record.slug}`)}
+                onClick={() =>
+                  this.props.history.push(`/edit-bus/${record.slug}`)
+                }
                 style={{ marginRight: "5px" }}
               >
                 <i className="fa fa-edit"></i>

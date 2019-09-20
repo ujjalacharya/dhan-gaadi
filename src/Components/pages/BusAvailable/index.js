@@ -7,6 +7,7 @@ import {
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
+import { SERVER_ROUTE } from "../../../Utils/config";
 
 class BusAvailable extends Component {
   constructor(props) {
@@ -19,6 +20,25 @@ class BusAvailable extends Component {
         className: "id",
         align: "left",
         sortable: true
+      },
+      {
+        key: "image",
+        text: "Image",
+        className: "image",
+        width: 100,
+        align: "left",
+        sortable: false,
+        cell: record => {
+          console.log(record);
+          return (
+            <>
+              <img
+                className="busImage"
+                src={`${SERVER_ROUTE}/uploads/` + record.image}
+              />
+            </>
+          );
+        }
       },
       {
         key: "name",
