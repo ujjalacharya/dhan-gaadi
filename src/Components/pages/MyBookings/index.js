@@ -55,15 +55,15 @@ class MyBookings extends Component {
         sortable: true
       },
       {
-        key: "departure_time",
-        text: "Departure time",
+        key: "journeyDate",
+        text: "Journey Date",
         className: "name",
         align: "left",
         sortable: true
       },
       {
-        key: "journeyDate",
-        text: "Journey Date",
+        key: "departure_time",
+        text: "Departure time",
         className: "name",
         align: "left",
         sortable: true

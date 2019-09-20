@@ -62,6 +62,13 @@ class BusUnavailable extends Component {
         sortable: true
       },
       {
+        key: "departure_time",
+        text: "Departure Time",
+        className: "date",
+        align: "left",
+        sortable: true
+      },
+      {
         key: "action",
         text: "Action",
         className: "action",
