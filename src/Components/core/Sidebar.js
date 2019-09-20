@@ -110,6 +110,14 @@ const SideBar = memo(({ history }) => {
             </ul>
           </li>
 
+		  <li className={isActive(history, "/all-bookings")}>
+            <Link to="all-bookings">
+              <i className="fa fa-globe"></i> <span>All Bookings</span>
+              <span className="pull-right-container">
+              </span>
+            </Link>
+          </li>
+
           <li className={isActive(history, "/my-bookings")}>
             <Link to="my-bookings">
               <i className="fa fa-calendar"></i> <span>My Bookings</span>

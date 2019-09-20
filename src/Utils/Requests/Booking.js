@@ -1,6 +1,7 @@
 import axios from "axios";
 
-export const getOwnerBookings = () => axios.get("/bookings");
+export const getOwnerBookings = () => axios.get("/bookings/my");
+export const getAllBookings = () => axios.get("/bookings/all");
 
 export const removeBooking = id => axios.delete(`/bookings/${id}`);
 

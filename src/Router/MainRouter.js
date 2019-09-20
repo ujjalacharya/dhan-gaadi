@@ -5,6 +5,7 @@ import SuperAdminRoute from "./SuperAdminRoute";
 import Home from "../Components/pages/Home";
 import Signin from "../Components/pages/Signin";
 import MyBookings from "../Components/pages/MyBookings";
+import AllBookings from "../Components/pages/MyBookings/all";
 import AddNewBus from "../Components/pages/AddNewBus";
 import EditBus from "../Components/pages/AddNewBus/EditBus";
 import BusAvailable from "../Components/pages/BusAvailable";
@@ -17,6 +18,7 @@ const MainRouter = () => (
    <Route path="/signin" exact component={Signin} />
    <PrivateRoute path="/" exact component={Home} />
    <PrivateRoute path="/my-bookings" exact component={MyBookings} />
+   <SuperAdminRoute path="/all-bookings" exact component={AllBookings} />
    <PrivateRoute path="/add-bus" exact component={AddNewBus} />
    <PrivateRoute path="/edit-bus/:slug" exact component={EditBus} />
    <PrivateRoute path="/bus-available" exact component={BusAvailable} />
