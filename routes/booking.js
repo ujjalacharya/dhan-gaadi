@@ -5,14 +5,20 @@ const {
   getOwnerBookings,
   changeVerificationStatus,
   postBooking,
-  deleteBooking
+  deleteBooking,
+  getAllBookings
 } = require("../controllers/booking");
 
 const { checkUserSignin } = require("../controllers/auth-user");
-const { requireOwnerSignin, isBookingOwner } = require("../controllers/auth-owner");
+const {
+  requireOwnerSignin,
+  isBookingOwner,
+  requireSuperadminSignin
+} = require("../controllers/auth-owner");
 const { busBySlug } = require("../controllers/bus");
 
-router.get("/", requireOwnerSignin, getOwnerBookings);
+router.get("/my", requireOwnerSignin, getOwnerBookings);
+router.get("/all", requireSuperadminSignin, getAllBookings);
 
 router.post("/:busSlug", checkUserSignin, postBooking);
 

@@ -14,6 +14,14 @@ exports.bookingById = async (req, res, next, id) => {
   next();
 };
 
+exports.getAllBookings = async (req, res) => {
+  const bookings = await Booking.find({}).populate(
+    "bus owner guest user"
+  );
+
+  res.json(bookings);
+};
+
 exports.getOwnerBookings = async (req, res) => {
   const bookings = await Booking.find({ owner: req.ownerauth }).populate(
     "bus owner guest user"

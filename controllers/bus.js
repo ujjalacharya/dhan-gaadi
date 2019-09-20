@@ -30,7 +30,7 @@ exports.getBuses = async (req, res) => {
 
 exports.getAllAvailableBuses = async (req, res) => {
   const buses = await Bus.find({ isAvailable: true })
-    .populate("owner", "name")
+    .populate("owner", "name phone")
     .sort({ created: -1 });
 
   res.json(buses);
@@ -38,7 +38,7 @@ exports.getAllAvailableBuses = async (req, res) => {
 
 exports.getAllUnavailableBuses = async (req, res) => {
   const buses = await Bus.find({ isAvailable: false })
-    .populate("owner", "name")
+    .populate("owner", "name phone")
     .sort({ created: -1 });
 
   res.json(buses);
