@@ -49,31 +49,29 @@ const SideBar = memo(({ history }) => {
 		}
 	};
 
-	const toggleMenu = e => {
+	const toggleMenu = value => e => {
 		e.preventDefault();
 
-		if (sidebarBuses) {
-			removeItemFromLocalStorage(busKey);
-			setSidebarBuses(false);
-			setMenu({ display: 'none' });
+		if (value === 'people') {
+			if (sidebarPeople) {
+				removeItemFromLocalStorage(peopleKey);
+				setSidebarPeople(false);
+				setPeople({ display: 'none' });
+			} else {
+				setItemToLocalStorage(peopleKey, true);
+				setSidebarPeople(true);
+				setPeople({ display: 'block' });
+			}
 		} else {
-			setItemToLocalStorage(busKey, true);
-			setSidebarBuses(true);
-			setMenu({ display: 'block' });
-		}
-	};
-
-	const togglePeople = e => {
-		e.preventDefault();
-
-		if (sidebarPeople) {
-			removeItemFromLocalStorage(peopleKey);
-			setSidebarPeople(false);
-			setPeople({ display: 'none' });
-		} else {
-			setItemToLocalStorage(peopleKey, true);
-			setSidebarPeople(true);
-			setPeople({ display: 'block' });
+			if (sidebarBuses) {
+				removeItemFromLocalStorage(busKey);
+				setSidebarBuses(false);
+				setMenu({ display: 'none' });
+			} else {
+				setItemToLocalStorage(busKey, true);
+				setSidebarBuses(true);
+				setMenu({ display: 'block' });
+			}
 		}
 	};
 
@@ -109,7 +107,7 @@ const SideBar = memo(({ history }) => {
 					</li>
 
 					<li className={isActive(history, 'bus')}>
-						<a href="false" onClick={toggleMenu}>
+						<a href="false" onClick={toggleMenu("buses")}>
 							<i className="fa fa-bus"></i> <span>My Buses</span>
 							<span className="pull-right-container">
 								<i className="fa fa-angle-left pull-right"></i>
@@ -171,7 +169,7 @@ const SideBar = memo(({ history }) => {
 
 					{user.role === 'superadmin' && (
 						<li className={isActive(history, 'people')}>
-							<a href="false" onClick={togglePeople}>
+							<a href="false" onClick={toggleMenu("people")}>
 								<i className="fa fa-users"></i> <span>People</span>
 								<span className="pull-right-container">
 									<i className="fa fa-angle-left pull-right"></i>
