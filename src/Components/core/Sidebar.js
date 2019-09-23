@@ -95,6 +95,11 @@ const SideBar = memo(({ history }) => {
 							{user.role}
 						</a>
 					</div>
+					<div className="pull-right">
+						<Link to={`/profile/edit/id`}>
+							<i class="fa fa-pencil" aria-hidden="true" style={{ color: '#fff', padding: "1.5rem" }}></i>
+						</Link>
+					</div>
 				</div>
 
 				<ul className="sidebar-menu" data-widget="tree">
@@ -107,7 +112,7 @@ const SideBar = memo(({ history }) => {
 					</li>
 
 					<li className={isActive(history, 'bus')}>
-						<a href="false" onClick={toggleMenu("buses")}>
+						<a href="false" onClick={toggleMenu('buses')}>
 							<i className="fa fa-bus"></i> <span>My Buses</span>
 							<span className="pull-right-container">
 								<i className="fa fa-angle-left pull-right"></i>
@@ -169,7 +174,7 @@ const SideBar = memo(({ history }) => {
 
 					{user.role === 'superadmin' && (
 						<li className={isActive(history, 'people')}>
-							<a href="false" onClick={toggleMenu("people")}>
+							<a href="false" onClick={toggleMenu('people')}>
 								<i className="fa fa-users"></i> <span>People</span>
 								<span className="pull-right-container">
 									<i className="fa fa-angle-left pull-right"></i>
