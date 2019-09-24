@@ -63,6 +63,7 @@ class EditProfile extends Component {
         type: "error",
         title: "Can not submit empty form!"
       });
+      this.setState({loading: false})
     }
   };
 
