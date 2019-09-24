@@ -147,3 +147,16 @@ exports.isBookingOwner = (req, res, next) => {
   }
   next();
 };
+
+exports.isAuth = (req, res, next) => {
+  let user =
+    req.ownerprofile &&
+    req.ownerauth &&
+    req.ownerprofile._id.toString() === req.ownerauth._id.toString();
+  if (!user) {
+    return res.status(403).json({
+      error: "Access denied"
+    });
+  }
+  next();
+};
