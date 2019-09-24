@@ -6,7 +6,7 @@ import {
 	removeItemFromLocalStorage,
 	setItemToLocalStorage,
 } from '../../Utils/Requests/LocalStorage';
-import { busKey, peopleKey } from '../../Utils/config';
+import { busKey, peopleKey, SERVER_ROUTE } from '../../Utils/config';
 
 const SideBar = memo(({ history }) => {
 	const [sidebarPeople, setSidebarPeople] = useState(getItemFromLocalStorage(peopleKey));
@@ -86,7 +86,8 @@ const SideBar = memo(({ history }) => {
 			<section className="sidebar">
 				<div className="user-panel">
 					<div className="pull-left image">
-						<img src="/img/user2-160x160.jpg" className="img-circle" alt="UserImage" />
+						<img src={`${SERVER_ROUTE}/uploads/${user.avatar}`} className="img-circle" alt="UserImage" />
+						{/* <img src="/img/user2-160x160.jpg" className="img-circle" alt="UserImage" /> */}
 					</div>
 					<div className="pull-left info">
 						<p>{user.name}</p>
@@ -97,7 +98,7 @@ const SideBar = memo(({ history }) => {
 					</div>
 					<div className="pull-right">
 						<Link to={`/profile/edit/${user._id}`}>
-							<i class="fa fa-pencil" aria-hidden="true" style={{ color: '#fff', padding: "1.5rem" }}></i>
+							<i className="fa fa-pencil" aria-hidden="true" style={{ color: '#fff', padding: "1.5rem" }}></i>
 						</Link>
 					</div>
 				</div>

@@ -5,6 +5,12 @@ import Swal from "sweetalert2";
 import ImageUploader from "react-images-upload";
 import { updateOwner } from "../../../Utils/Requests/People";
 import showError from "../../core/Error";
+import showLoading from "../../core/Loading";
+import {
+  isAuthenticated,
+  refreshToken,
+  authenticate
+} from "../../../Utils/Requests/Auth";
 
 class EditProfile extends Component {
   state = {
@@ -13,7 +19,8 @@ class EditProfile extends Component {
     oldPassword: "",
     newPassword: "",
     photo: "",
-    error: ""
+    error: "",
+    loading: ""
   };
 
   componentDidMount() {
@@ -24,6 +31,7 @@ class EditProfile extends Component {
 
   submit = async e => {
     e.preventDefault();
+    this.setState({ loading: true });
     const { oldPassword, newPassword, photo, formData } = this.state;
     if ((oldPassword && newPassword) || photo) {
       const resp = await updateOwner(
@@ -33,12 +41,20 @@ class EditProfile extends Component {
         this.setState({ loading: false, error: err.response.data.error });
       });
       if (resp && resp.status === 200) {
+        let data = await refreshToken(isAuthenticated().user.refresh_hash);
+        if (data && data.status === 200) {
+          authenticate(data, () => {
+            if (isAuthenticated()) {
+              this.setState({ loading: false });
+            }
+          });
+        }
         this.setState({ loading: false });
         Swal.fire({
           type: "success",
           title: "Successfully updated the profile!",
           onRender: () => {
-              this.props.history.push("/")
+            this.props.history.push("/");
           }
         });
       }
@@ -70,51 +86,59 @@ class EditProfile extends Component {
 
   render() {
     const handleChange = this.handleChange;
-    const { oldPassword, newPassword, error } = this.state;
+    const { oldPassword, newPassword, error, loading } = this.state;
     return (
       <Layout title="Update Profile">
         {showError(error)}
-        <div className="form-group">
-          <label>Old Password</label>
-          <input
-            type="password"
-            className="form-control"
-            required
-            placeholder="Enter the old password"
-            onChange={handleChange("oldPassword")}
-            value={oldPassword}
-          />
-        </div>
+        {showLoading(loading)}
+        {!loading && (
+          <>
+            <div className="form-group">
+              <label>Old Password</label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                placeholder="Enter the old password"
+                onChange={handleChange("oldPassword")}
+                value={oldPassword}
+              />
+            </div>
 
-        <div className="form-group">
-          <label>New Password</label>
-          <input
-            type="password"
-            className="form-control"
-            required
-            placeholder="Enter the new password"
-            onChange={handleChange("newPassword")}
-            value={newPassword}
-          />
-        </div>
+            <div className="form-group">
+              <label>New Password</label>
+              <input
+                type="password"
+                className="form-control"
+                required
+                placeholder="Enter the new password"
+                onChange={handleChange("newPassword")}
+                value={newPassword}
+              />
+            </div>
 
-        <div className="form-group">
-          <ImageUploader
-            withIcon={true}
-            buttonText="Upload photo"
-            onChange={handleChange("photo")}
-            imgExtension={[".jpg", ".jpeg", ".gif", ".png", ".gif"]}
-            maxFileSize={5242880}
-            singleImage={true}
-            withPreview={true}
-            buttonStyles={{ display: this.state.buttonStyle }}
-            //   defaultImage={values.image}
-          />
-        </div>
+            <div className="form-group">
+              <ImageUploader
+                withIcon={true}
+                buttonText="Upload photo"
+                onChange={handleChange("photo")}
+                imgExtension={[".jpg", ".jpeg", ".gif", ".png", ".gif"]}
+                maxFileSize={5242880}
+                singleImage={true}
+                withPreview={true}
+                buttonStyles={{ display: this.state.buttonStyle }}
+                //   defaultImage={values.image}
+              />
+            </div>
 
-        <button className="btn btn-success submit-form" onClick={this.submit}>
-          Update Profile
-        </button>
+            <button
+              className="btn btn-success submit-form"
+              onClick={this.submit}
+            >
+              Update Profile
+            </button>
+          </>
+        )}
       </Layout>
     );
   }
