@@ -23,7 +23,7 @@ const Header = ({history}) => {
         </Link>
         <nav className="navbar navbar-static-top">
           <a
-            href="false"
+            href={`!#`}
             className="sidebar-toggle"
             data-toggle="push-menu"
             role="button"
@@ -34,7 +34,7 @@ const Header = ({history}) => {
             <ul className="nav navbar-nav">
               <li className="dropdown messages-menu">
                 <a
-                  href="false"
+                  href="#"
                   className="dropdown-toggle"
                   data-toggle="dropdown"
                 >
@@ -44,10 +44,10 @@ const Header = ({history}) => {
                   <li>
                     <ul className="menu">
                       <li onClick={handleSignOut}>
-                        <a href="false">
+                        <a href={`!#`}>
                           <div className="pull-left">
                             <img
-                              src="img/user2-160x160.jpg"
+                              src="/img/user2-160x160.jpg"
                               className="img-circle"
                               alt="UserImage"
                             />
