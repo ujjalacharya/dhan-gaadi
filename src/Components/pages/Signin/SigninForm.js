@@ -1,6 +1,12 @@
-import React from "react";
+import React, { useState } from "react";
 
-function SigninForm({handleChange, handleSubmit, state}) {
+function SigninForm({ handleChange, handleSubmit, state }) {
+  const [value, setValue] = useState({ hidden: true });
+
+  const toggleShow = () => {
+    setValue({ hidden: !value.hidden });
+  };
+
   return (
     <form className="login-form" onSubmit={handleSubmit}>
       <div className="illustration">
@@ -20,7 +26,7 @@ function SigninForm({handleChange, handleSubmit, state}) {
 
       <div className="form-group">
         <input
-          type="password"
+          type={value.hidden ? "password" : "text"}
           className="form-control"
           placeholder="password"
           name="password"
@@ -28,6 +34,18 @@ function SigninForm({handleChange, handleSubmit, state}) {
           value={state.password}
           required
         />
+      </div>
+
+      <div className="form-group" style={{ display: "flex" }}>
+        <input
+          type="checkbox"
+          id="checkbox"
+          onClick={toggleShow}
+          style={{ marginRight: "2rem" }}
+        />
+        <label htmlFor="checkbox" style={{ cursor: "pointer" }}>
+          Show password
+        </label>
       </div>
       <div className="form-group">
         <button className="btn btn-primary btn-block" type="submit">
