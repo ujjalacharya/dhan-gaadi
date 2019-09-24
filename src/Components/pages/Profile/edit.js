@@ -41,7 +41,7 @@ class EditProfile extends Component {
         this.setState({ loading: false, error: err.response.data.error });
       });
       if (resp && resp.status === 200) {
-        let data = await refreshToken(isAuthenticated().user.refresh_hash);
+        let data = await refreshToken(isAuthenticated().user._id);
         if (data && data.status === 200) {
           authenticate(data, () => {
             if (isAuthenticated()) {

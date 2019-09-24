@@ -9,7 +9,7 @@ export const signUp = user => axios.post('/auth-owner/signup', user);
 
 export const signIn = user => axios.post('/auth-owner/signin', user);
 
-export const refreshToken = hash => axios.post('/auth-owner/refreshToken', {refresh_hash: hash});
+export const refreshToken = id => axios.post('/auth-owner/refreshToken', {_id: id});
 
 export const authenticate = (data, next) => {
 	if (typeof window !== 'undefined') {

@@ -1,6 +1,7 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import {signout} from "../../Utils/Requests/Auth";
+import {signout, isAuthenticated} from "../../Utils/Requests/Auth";
+import { SERVER_ROUTE } from "../../Utils/config";
 
 const Header = ({history}) => {
 
@@ -10,6 +11,8 @@ const Header = ({history}) => {
       history.push("/");
     }
   }
+
+  const {user} = isAuthenticated();
 
     return (
       <header className="main-header">
@@ -46,11 +49,7 @@ const Header = ({history}) => {
                       <li onClick={handleSignOut}>
                         <a href={`!#`}>
                           <div className="pull-left">
-                            <img
-                              src="/img/user2-160x160.jpg"
-                              className="img-circle"
-                              alt="UserImage"
-                            />
+                              <img src={`${SERVER_ROUTE}/uploads/${user.avatar}`} className="img-circle" alt="UserImage" />
                           </div>
                           <h4 style={{ top: "1rem" }}>Logout</h4>
                         </a>
