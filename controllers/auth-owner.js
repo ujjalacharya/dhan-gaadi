@@ -37,7 +37,8 @@ exports.signin = async (req, res) => {
     name: owner.name,
     email: owner.email,
     role: owner.role,
-    refresh_hash: owner.salt
+    refresh_hash: owner.salt,
+    avatar: owner.photo || null
   };
 
   const token = jwt.sign(payload, process.env.JWT_SECRET /*{ expiresIn: 5 }*/);
@@ -46,17 +47,16 @@ exports.signin = async (req, res) => {
 };
 
 exports.refreshToken = async (req, res) => {
-  console.log("naya token aayo", req.body && req.body.refresh_hash);
-
-  if (req.body && req.body.refresh_hash) {
-    const owner = await Owner.findOne({ salt: req.body.refresh_hash });
+  if (req.body && req.body._id) {
+    const owner = await Owner.findOne({ _id: req.body._id });
 
     const payload = {
       _id: owner.id,
       name: owner.name,
       email: owner.email,
       role: owner.role,
-      refresh_hash: owner.salt
+      refresh_hash: owner.salt,
+      avatar: owner.photo || null
     };
 
     const token = jwt.sign(
@@ -135,7 +135,6 @@ exports.isBookingOwner = (req, res, next) => {
     req.ownerauth &&
     req.booking.owner._id.toString() === req.ownerauth._id.toString();
 
-    console.log(sameUser)
   let adminUser =
     req.booking && req.ownerauth && req.ownerauth.role === "superadmin";
 
