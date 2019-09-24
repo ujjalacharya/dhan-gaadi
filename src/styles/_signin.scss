@@ -80,3 +80,13 @@
 .info-btn {
   margin-right: 5px;
 }
+
+.check-group{
+   display: flex;
+   #checkbox{
+     margin-right: 1rem;
+   }
+   .checkbox-label{
+    cursor: pointer;
+   }
+}

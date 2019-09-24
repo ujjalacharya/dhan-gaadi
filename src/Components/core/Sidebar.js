@@ -97,8 +97,12 @@ const SideBar = memo(({ history }) => {
 						</a>
 					</div>
 					<div className="pull-right">
-						<Link to={`/profile/edit/${user._id}`}>
-							<i className="fa fa-pencil" aria-hidden="true" style={{ color: '#fff', padding: "1.5rem" }}></i>
+						<Link to="/profile/edit">
+							<i
+								className="fa fa-pencil"
+								aria-hidden="true"
+								style={{ color: '#fff', padding: '1.5rem' }}
+							></i>
 						</Link>
 					</div>
 				</div>

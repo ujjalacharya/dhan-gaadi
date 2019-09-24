@@ -45,15 +45,15 @@ export default class FormPrimaryDetails extends Component {
 					<small className="form-text text-muted">Enter in the format of ba-2-pa</small>
 				</div>
 
-				<div className="form-check">
+				<div className="form-check check-group">
 					<input
 						type="checkbox"
-						id="isAvailable"
+						id="checkbox"
 						className="form-check-input"
 						onChange={handleChange("isAvailable")}
 						checked={values.isAvailable}
 					/>
-					<label className="form-check-label" htmlFor="isAvailable">
+					<label className="checkbox-label" htmlFor="checkbox">
 						is Available
 					</label>
 				</div>

@@ -44,14 +44,13 @@ function SigninForm({ handleChange, handleSubmit, state }) {
         />
       </div>
 
-      <div className="form-group" style={{ display: "flex" }}>
+      <div className="form-group check-group">
         <input
           type="checkbox"
           id="checkbox"
           onClick={toggleShow}
-          style={{ marginRight: "2rem" }}
         />
-        <label htmlFor="checkbox" style={{ cursor: "pointer" }}>
+        <label htmlFor="checkbox" className="checkbox-label">
           Show password
         </label>
       </div>

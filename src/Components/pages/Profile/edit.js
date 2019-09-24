@@ -1,5 +1,4 @@
 import React, { Component } from "react";
-import { Redirect } from "react-router-dom";
 import Layout from "../../core/Layout";
 import Swal from "sweetalert2";
 import ImageUploader from "react-images-upload";
@@ -35,7 +34,7 @@ class EditProfile extends Component {
     const { oldPassword, newPassword, photo, formData } = this.state;
     if ((oldPassword && newPassword) || photo) {
       const resp = await updateOwner(
-        this.props.match.params.profileId,
+        isAuthenticated().user._id,
         formData
       ).catch(err => {
         this.setState({ loading: false, error: err.response.data.error });
