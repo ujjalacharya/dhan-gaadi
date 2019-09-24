@@ -157,7 +157,7 @@ const SideBar = memo(({ history }) => {
 
 					{user.role === 'superadmin' && (
 						<li className={isActive(history, '/all-bookings')}>
-							<Link to="all-bookings">
+							<Link to="/all-bookings">
 								<i className="fa fa-globe"></i> <span>All Bookings</span>
 								<span className="pull-right-container"></span>
 							</Link>
@@ -165,7 +165,7 @@ const SideBar = memo(({ history }) => {
 					)}
 
 					<li className={isActive(history, '/my-bookings')}>
-						<Link to="my-bookings">
+						<Link to="/my-bookings">
 							<i className="fa fa-calendar"></i> <span>My Bookings</span>
 							<span className="pull-right-container">
 								<small className="label pull-right bg-green">new</small>

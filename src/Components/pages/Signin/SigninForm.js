@@ -9,8 +9,16 @@ function SigninForm({ handleChange, handleSubmit, state }) {
 
   return (
     <form className="login-form" onSubmit={handleSubmit}>
-      <div className="illustration">
-        <i className="fa fa-lock" />
+      <div
+        className="illustration"
+        onClick={toggleShow}
+        style={{ cursor: "pointer", color: "#ffff" }}
+      >
+        {value.hidden ? (
+          <i className="fa fa-eye-slash" />
+        ) : (
+          <i className="fa fa-eye" />
+        )}
       </div>
       <div className="form-group">
         <input
