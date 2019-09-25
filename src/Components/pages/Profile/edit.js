@@ -117,6 +117,13 @@ class EditProfile extends Component {
               />
             </div>
 
+            <button
+              className="btn btn-success submit-form"
+              onClick={this.submit}
+            >
+              Update Profile
+            </button>
+
             <div className="form-group">
               <ImageUploader
                 withIcon={true}
@@ -131,12 +138,7 @@ class EditProfile extends Component {
               />
             </div>
 
-            <button
-              className="btn btn-success submit-form"
-              onClick={this.submit}
-            >
-              Update Profile
-            </button>
+            
           </>
         )}
       </Layout>

@@ -17,13 +17,6 @@ const SideBar = memo(({ history }) => {
 	const { user } = isAuthenticated();
 
 	useEffect(() => {
-		if (history.location.pathname.includes('bus')) {
-			setMenu({ display: 'block' });
-		}
-		if (history.location.pathname.includes('people')) {
-			setPeople({ display: 'block' });
-		}
-
 		if (sidebarBuses) {
 			setMenu({ display: 'block' });
 		} else {
@@ -87,7 +80,6 @@ const SideBar = memo(({ history }) => {
 				<div className="user-panel">
 					<div className="pull-left image">
 						<img src={`${SERVER_ROUTE}/uploads/${user.avatar}`} className="img-circle" alt="UserImage" />
-						{/* <img src="/img/user2-160x160.jpg" className="img-circle" alt="UserImage" /> */}
 					</div>
 					<div className="pull-left info">
 						<p>{user.name}</p>
