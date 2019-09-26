@@ -1,38 +1,39 @@
-const express = require("express");
-const morgan = require("morgan");
-require("express-async-errors");
-const path = require("path");
-const cors = require("cors");
+// Packages
 const expressValidator = require("express-validator");
-const {runEveryMidnight, dbConnection, errorHandler} = require("./helpers")
-const app = express();
+const express = require("express");
+require("express-async-errors");
+const cors = require("cors");
 require("dotenv").config();
+const app = express();
+
+// Import methods
+const { runEveryMidnight, dbConnection, errorHandler } = require("./helpers");
+const logger = require("./helpers/logger");
 
 // Database Connection
 dbConnection();
 
-app.use(express.static('public'))
-
 // Middlewares
+logger(app);
 app.use(cors());
-app.use(morgan("dev"));
 app.use(express.json());
-app.use(express.urlencoded({ extended: true }));
 app.use(expressValidator());
+app.use(express.static("public"));
+app.use(express.urlencoded({ extended: true }));
 
 // Routes
 app.get("/", (req, res) => {
   res.redirect("/api/users");
 });
 
-app.use("/api/users", require("./routes/user"));
-app.use("/api/owners", require("./routes/owner"));
-app.use("/api/guests", require("./routes/guest"));
-app.use("/api/auth-user", require("./routes/auth-user"));
-app.use("/api/auth-owner", require("./routes/auth-owner"));
 app.use("/api/bus", require("./routes/bus"));
+app.use("/api/users", require("./routes/user"));
+app.use("/api/guests", require("./routes/guest"));
+app.use("/api/owners", require("./routes/owner"));
 app.use("/api/bookings", require("./routes/booking"));
 app.use("/api/locations", require("./routes/location"));
+app.use("/api/auth-user", require("./routes/auth-user"));
+app.use("/api/auth-owner", require("./routes/auth-owner"));
 
 // Error handling middleware
 app.use(function(err, req, res, next) {
@@ -40,7 +41,6 @@ app.use(function(err, req, res, next) {
     error: errorHandler(err) || "Something went wrong!"
   });
 });
-
 
 // Run every-midnight to check if bus deporting date is passed
 runEveryMidnight();
