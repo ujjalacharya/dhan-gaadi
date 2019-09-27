@@ -67,13 +67,12 @@ exports.postBooking = async (req, res) => {
   bus.seatsAvailable -= req.body.passengers || booking.passengers;
 
   bus.bookedSeat.push(booking.seatNumber);
-
-  await bus.save();
-
+  
   booking.bus = bus;
   booking.owner = bus.owner;
-
+  
   await booking.save();
+  await bus.save();
 
   res.json(booking);
 };
