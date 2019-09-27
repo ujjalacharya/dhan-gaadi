@@ -67,10 +67,10 @@ exports.postBooking = async (req, res) => {
   bus.seatsAvailable -= req.body.passengers || booking.passengers;
 
   bus.bookedSeat.push(booking.seatNumber);
-  
+
   booking.bus = bus;
   booking.owner = bus.owner;
-  
+
   await booking.save();
   await bus.save();
 
@@ -90,7 +90,19 @@ exports.changeVerificationStatus = async (req, res) => {
 exports.deleteBooking = async (req, res) => {
   const booking = req.booking;
 
+  const bus = await Bus.findById(booking.bus.id);
+
+  console.log(bus)
+
+  const removeIndex = bus.bookedSeat
+    .map(seat => seat.toString())
+    .indexOf(booking.seatNumber);
+
+  bus.bookedSeat.splice(removeIndex, 1);
+
   await booking.remove();
+
+  await bus.save();
 
   res.json(booking);
 };
