@@ -97,6 +97,13 @@ class MyBookings extends Component {
         sortable: true
       },
       {
+        key: "seatNumber",
+        text: "Seat Number",
+        className: "date",
+        align: "left",
+        sortable: true
+      },
+      {
         key: "verification",
         text: "Status",
         className: "date",
