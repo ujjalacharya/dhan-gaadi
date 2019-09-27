@@ -1,6 +1,7 @@
 const Booking = require("../models/Booking");
 const Bus = require("../models/Bus");
 const Guest = require("../models/Guest");
+const _ = require("lodash");
 
 exports.bookingById = async (req, res, next, id) => {
   const booking = await Booking.findById(id).populate("bus owner guest user");
@@ -15,9 +16,7 @@ exports.bookingById = async (req, res, next, id) => {
 };
 
 exports.getAllBookings = async (req, res) => {
-  const bookings = await Booking.find({}).populate(
-    "bus owner guest user"
-  );
+  const bookings = await Booking.find({}).populate("bus owner guest user");
 
   res.json(bookings);
 };
@@ -40,14 +39,34 @@ exports.postBooking = async (req, res) => {
     const phone = req.body.phone;
     const address = req.body.address;
 
-    const guest = new Guest({ name, email, phone, address });
-    await guest.save();
-    booking.guest = guest;
+    let user = await Guest.findOne({ phone });
+
+    if (user) {
+      user = _.extend(user, req.body);
+      await user.save();
+      booking.guest = user;
+    } else {
+      const guest = new Guest({ name, email, phone, address });
+      await guest.save();
+      booking.guest = guest;
+    }
   }
 
   const bus = await Bus.findOne({ slug: req.bus.slug });
 
+  if (
+    bus.seatsAvailable < (req.body.passengers || booking.passengers) ||
+    bus.isAvailable !== true ||
+    bus.bookedSeat.includes(booking.seatNumber)
+  ) {
+    return res.status(400).json({
+      error: "Not available"
+    });
+  }
+
   bus.seatsAvailable -= req.body.passengers || booking.passengers;
+
+  bus.bookedSeat.push(booking.seatNumber);
 
   await bus.save();
 
