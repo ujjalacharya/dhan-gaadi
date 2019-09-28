@@ -257,7 +257,7 @@ class MyBookings extends Component {
     if (resp && resp.status === 200) {
       let counter = 1;
       resp.data.map(booking => {
-        const client = booking.guest ? booking.guest : booking.user;
+        const client = booking.guest ? booking.guest : (booking.user ? booking.user : booking.self);
         booking.bookedDate = moment(booking.createdAt).format("MMMM Do, YYYY");
         booking.journeyDate = moment(booking.bus.journeyDate).format(
           "MMMM Do, YYYY"
