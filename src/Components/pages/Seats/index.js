@@ -33,7 +33,7 @@ function BusCaller(props) {
 			{loading ? (
 				<Loading />
 			) : (
-				<SeatDetails sold={sold} setSold={setSold} booked={booked} setBooked={setBooked} />
+				<SeatDetails sold={sold} setSold={setSold} booked={booked} setBooked={setBooked} slug={props.match.params.slug}/>
 			)}
 		</Layout>
 	);
