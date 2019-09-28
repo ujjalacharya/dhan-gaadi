@@ -1,5 +1,5 @@
 import React, { useState, useEffect } from 'react';
-import { withRouter } from 'react-router-dom';
+import { withRouter, Redirect } from 'react-router-dom';
 import SeatDetails from './SeatDetails';
 import Layout from '../../core/Layout';
 import { getBusBySlug } from '../../../Utils/Requests/Bus';
@@ -9,6 +9,7 @@ function BusCaller(props) {
 	const [sold, setSold] = useState([]);
 	const [booked, setBooked] = useState([]);
 	const [error, setError] = useState('');
+	const [details, setDetails] = useState({ name: 'Bus' });
 	const [loading, setLoading] = useState(true);
 
 	useEffect(() => {
@@ -21,6 +22,7 @@ function BusCaller(props) {
 			setLoading(false);
 		});
 		if (resp && resp.status === 200) {
+			setDetails(resp.data);
 			setBooked(resp.data.bookedSeat);
 			setSold(resp.data.soldSeat);
 			setLoading(false);
@@ -29,11 +31,24 @@ function BusCaller(props) {
 
 	return (
 		<Layout title="Seat Details">
-			<h1 className="mt-2 text-primary">Seat Details</h1>
+			{console.log(details)}
+			<h1 className="mt-2 text-primary">{`Seat Details of ${details.name}`}</h1>
 			{loading ? (
 				<Loading />
 			) : (
-				<SeatDetails sold={sold} setSold={setSold} booked={booked} setBooked={setBooked} slug={props.match.params.slug}/>
+				<>
+					{details.isAvailable !== true ? (
+						<Redirect to="/" />
+					) : (
+						<SeatDetails
+							sold={sold}
+							setSold={setSold}
+							booked={booked}
+							setBooked={setBooked}
+							slug={props.match.params.slug}
+						/>
+					)}
+				</>
 			)}
 		</Layout>
 	);
