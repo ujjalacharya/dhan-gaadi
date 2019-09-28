@@ -75,7 +75,7 @@ exports.requireOwnerSignin = async (req, res, next) => {
   if (token) {
     const owner = parseToken(token);
 
-    const foundowner = await Owner.findById(owner._id);
+    const foundowner = await Owner.findById(owner._id).select("name");
 
     if (foundowner) {
       req.ownerauth = foundowner;
