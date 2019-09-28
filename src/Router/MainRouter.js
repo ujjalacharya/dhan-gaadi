@@ -16,6 +16,7 @@ import AllBusUnavailable from "../Components/pages/BusUnavailable/all";
 import Owners from "../Components/pages/People/Owners";
 import Users from "../Components/pages/People/Users";
 import Guests from "../Components/pages/People/Guests";
+import Seats from "../Components/pages/Seats";
 
 const MainRouter = () => (
   <Switch>
@@ -26,6 +27,7 @@ const MainRouter = () => (
     <PrivateRoute path="/edit-bus/:slug" exact component={EditBus} />
     <PrivateRoute path="/bus-available" exact component={BusAvailable} />
     <PrivateRoute path="/bus-unavailable" exact component={BusUnavailable} />
+    <PrivateRoute path="/seats-details" exact component={Seats} />
     <PrivateRoute
       path="/profile/edit"
       exact

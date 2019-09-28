@@ -92,8 +92,16 @@ class BusAvailable extends Component {
               <button
                 className="btn btn-danger btn-sm"
                 onClick={() => this.deleteRecord(record.slug)}
+                style={{ marginRight: "5px" }}
               >
                 <i className="fa fa-trash"></i>
+              </button>
+              <button
+                className="btn btn-default btn-sm"
+                onClick={() => this.props.history.push("/seats-details")}
+              >
+          <i className="fa fa-eye" />
+
               </button>
             </>
           );
