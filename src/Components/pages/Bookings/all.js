@@ -132,7 +132,8 @@ class MyBookings extends Component {
                 data-target="#update-user-modal"
                 className={`btn btn-${record.verification === "verified" ? "warning" : "success"} btn-sm`}
                 onClick={this.toggleVerify(record._id, record.verification)}
-                style={{ marginRight: "5px" }}
+                style={{ marginRight: "5px", display:  record.verification === "payed" ? "none" : "block"}}
+
               >
                 <i className={`fa fa-${record.verification === "verified" ? "times" : "check"}`}></i>
               </button>
