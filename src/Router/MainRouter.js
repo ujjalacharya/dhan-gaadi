@@ -27,7 +27,7 @@ const MainRouter = () => (
     <PrivateRoute path="/edit-bus/:slug" exact component={EditBus} />
     <PrivateRoute path="/bus-available" exact component={BusAvailable} />
     <PrivateRoute path="/bus-unavailable" exact component={BusUnavailable} />
-    <PrivateRoute path="/seats-details" exact component={Seats} />
+    <PrivateRoute path="/seats-details/:slug" exact component={Seats} />
     <PrivateRoute
       path="/profile/edit"
       exact

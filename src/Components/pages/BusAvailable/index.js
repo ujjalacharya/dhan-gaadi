@@ -98,7 +98,7 @@ class BusAvailable extends Component {
               </button>
               <button
                 className="btn btn-default btn-sm"
-                onClick={() => this.props.history.push("/seats-details")}
+                onClick={() => this.props.history.push(`/seats-details/${record.slug}`)}
               >
           <i className="fa fa-eye" />
 
