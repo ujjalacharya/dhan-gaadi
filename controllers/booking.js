@@ -118,9 +118,22 @@ exports.changeVerificationStatus = async (req, res) => {
 };
 
 exports.deleteBooking = async (req, res) => {
-  const booking = req.booking;
-  
+	const booking = req.booking;
+
+	const bus = await Bus.findOne({ slug: booking.bus.slug });
+
+	if (booking.verification === 'payed') {
+		const removeIndexSold = bus.soldSeat.map(seat => seat.toString()).indexOf(booking.seatNumber);
+
+		bus.soldSeat.splice(removeIndexSold, 1);
+	} else {
+		const removeIndexBook = bus.bookedSeat.map(seat => seat.toString()).indexOf(booking.seatNumber);
+
+		bus.bookedSeat.splice(removeIndexBook, 1);
+	}
+
 	await booking.remove();
+	await bus.save();
 
 	res.json(booking);
 };
