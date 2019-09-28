@@ -19,6 +19,7 @@ const bookingSchema = new mongoose.Schema(
     user: { type: Schema.Types.ObjectId, ref: "User" },
     owner: { type: Schema.Types.ObjectId, ref: "Owner" },
     bus: { type: Schema.Types.ObjectId, ref: "Bus" },
+    self: {type: Schema.Types.ObjectId, ref: "Owner"},
 
     verification: {
       type: String,

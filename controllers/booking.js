@@ -16,13 +16,13 @@ exports.bookingById = async (req, res, next, id) => {
 };
 
 exports.getAllBookings = async (req, res) => {
-	const bookings = await Booking.find({}).populate('bus owner guest user');
+	const bookings = await Booking.find({}).populate('bus owner guest user self');
 
 	res.json(bookings);
 };
 
 exports.getOwnerBookings = async (req, res) => {
-	const bookings = await Booking.find({ owner: req.ownerauth }).populate('bus owner guest user');
+	const bookings = await Booking.find({ owner: req.ownerauth }).populate('bus owner guest user self');
 
 	res.json(bookings);
 };
@@ -54,8 +54,8 @@ exports.postBooking = async (req, res) => {
 
 	if (
 		bus.seatsAvailable < (req.body.passengers || booking.passengers) ||
-    bus.isAvailable !== true ||
-    bus.soldSeat.includes(booking.seatNumber) ||    
+		bus.isAvailable !== true ||
+		bus.soldSeat.includes(booking.seatNumber) ||
 		bus.bookedSeat.includes(booking.seatNumber)
 	) {
 		return res.status(400).json({
@@ -78,15 +78,15 @@ exports.postBooking = async (req, res) => {
 
 exports.postSold = async (req, res) => {
 	const booking = new Booking(req.body);
-	booking.user = req.ownerauth;
+	booking.self = req.ownerauth;
 
 	const bus = await Bus.findOne({ slug: req.bus.slug });
 
 	if (
 		bus.seatsAvailable < booking.passengers ||
 		bus.isAvailable !== true ||
-    bus.soldSeat.includes(booking.seatNumber) ||
-    bus.bookedSeat.includes(booking.seatNumber)
+		bus.soldSeat.includes(booking.seatNumber) ||
+		bus.bookedSeat.includes(booking.seatNumber)
 	) {
 		return res.status(400).json({
 			error: 'Not available',
@@ -99,6 +99,7 @@ exports.postSold = async (req, res) => {
 
 	booking.bus = bus;
 	booking.owner = bus.owner;
+	booking.verification = 'payed';
 
 	await booking.save();
 	await bus.save();
@@ -117,8 +118,8 @@ exports.changeVerificationStatus = async (req, res) => {
 };
 
 exports.deleteBooking = async (req, res) => {
-	const booking = req.booking;
-
+  const booking = req.booking;
+  
 	await booking.remove();
 
 	res.json(booking);
