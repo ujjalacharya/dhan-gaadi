@@ -1,0 +1,17 @@
+{
+  "name": "client",
+  "version": "0.1.0",
+  "private": true,
+  "scripts": {
+    "dev": "next dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "dependencies": {
+    "@zeit/next-sass": "^1.0.1",
+    "next": "9.0.7",
+    "node-sass": "^4.12.0",
+    "react": "16.10.1",
+    "react-dom": "16.10.1"
+  }
+}
