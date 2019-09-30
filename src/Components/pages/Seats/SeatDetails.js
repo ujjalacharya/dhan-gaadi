@@ -34,7 +34,9 @@ class SeatDetails extends Component {
 		const { sold, booked } = this.props;
 		return (
 			<div style={styles.wrapper}>
-				<div style={styles.busDiv}>
+				<div className="steer" style={styles.steer}>
+					<img style={styles.img} src="/img/steer.png" />
+				</div><div style={styles.busDiv}>
 					{arr.map((le, i) => {
 						return (
 							<div key={i}>
@@ -113,14 +115,23 @@ class SeatDetails extends Component {
 
 const styles = {
 	wrapper: {
-		height: '100vh',
+		height: '60vh',
+		display: 'flex',
+		position: 'relative',
+		top: '6rem',
+		left: '29%'
+	},
+	steer: {
+		margin: '4rem'
+	},
+	img: {
+		height: '3rem',
+		transform: 'rotate(90deg)'
 	},
 	busDiv: {
 		background: '#434343',
 		height: '29rem',
 		position: 'relative',
-		left: '36%',
-		top: '10%',
 		width: '23rem',
 		color: '#ffff',
 		transform: 'rotate(270deg)',
