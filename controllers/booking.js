@@ -16,14 +16,14 @@ exports.bookingById = async (req, res, next, id) => {
 };
 
 exports.getAllBookings = async (req, res) => {
-  const bookings = await Booking.find({}).populate("bus owner guest user");
+  const bookings = await Booking.find({}).populate("bus owner guest user self");
 
   res.json(bookings);
 };
 
 exports.getOwnerBookings = async (req, res) => {
   const bookings = await Booking.find({ owner: req.ownerauth }).populate(
-    "bus owner guest user"
+    "bus owner guest user self"
   );
 
   res.json(bookings);
@@ -57,6 +57,7 @@ exports.postBooking = async (req, res) => {
   if (
     bus.seatsAvailable < (req.body.passengers || booking.passengers) ||
     bus.isAvailable !== true ||
+    bus.soldSeat.includes(booking.seatNumber) ||
     bus.bookedSeat.includes(booking.seatNumber)
   ) {
     return res.status(400).json({
@@ -77,6 +78,37 @@ exports.postBooking = async (req, res) => {
   res.json(booking);
 };
 
+exports.postSold = async (req, res) => {
+  const booking = new Booking(req.body);
+  booking.self = req.ownerauth;
+
+  const bus = await Bus.findOne({ slug: req.bus.slug });
+
+  if (
+    bus.seatsAvailable < booking.passengers ||
+    bus.isAvailable !== true ||
+    bus.soldSeat.includes(booking.seatNumber) ||
+    bus.bookedSeat.includes(booking.seatNumber)
+  ) {
+    return res.status(400).json({
+      error: "Not available"
+    });
+  }
+
+  bus.seatsAvailable -= booking.passengers;
+
+  bus.soldSeat.push(booking.seatNumber);
+
+  booking.bus = bus;
+  booking.owner = bus.owner;
+  booking.verification = "payed";
+
+  await booking.save();
+  await bus.save();
+
+  res.json(booking);
+};
+
 exports.changeVerificationStatus = async (req, res) => {
   const booking = req.booking;
 
@@ -90,18 +122,23 @@ exports.changeVerificationStatus = async (req, res) => {
 exports.deleteBooking = async (req, res) => {
   const booking = req.booking;
 
-  const bus = await Bus.findById(booking.bus.id);
+  const bus = await Bus.findOne({ slug: booking.bus.slug });
 
-  console.log(bus)
+  if (booking.verification === "payed") {
+    const removeIndexSold = bus.soldSeat
+      .map(seat => seat.toString())
+      .indexOf(booking.seatNumber);
 
-  const removeIndex = bus.bookedSeat
-    .map(seat => seat.toString())
-    .indexOf(booking.seatNumber);
+    bus.soldSeat.splice(removeIndexSold, 1);
+  } else {
+    const removeIndexBook = bus.bookedSeat
+      .map(seat => seat.toString())
+      .indexOf(booking.seatNumber);
 
-  bus.bookedSeat.splice(removeIndex, 1);
+    bus.bookedSeat.splice(removeIndexBook, 1);
+  }
 
   await booking.remove();
-
   await bus.save();
 
   res.json(booking);
