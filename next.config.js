@@ -1,4 +1,4 @@
-const withCSS = require('@zeit/next-sass');
+const withCSS = require('@zeit/next-css');
 
 function HACK_removeMinimizeOptionFromCssLoaders(config) {
   console.warn(
