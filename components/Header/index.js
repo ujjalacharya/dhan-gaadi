@@ -4,13 +4,10 @@ import Router from "next/router";
 import NProgress from "nprogress";
 import "./nprogress.css";
 
-const links = [
-  { href: "https://zeit.co/now", label: "ZEIT" },
-  { href: "https://github.com/zeit/next.js", label: "GitHub" }
-].map(link => {
-  link.key = `nav-link-${link.href}-${link.label}`;
-  return link;
-});
+import { Layout, Menu } from "antd";
+
+const { Header } = Layout;
+
 
 Router.onRouteChangeStart = url => NProgress.start();
 Router.onRouteChangeComplete = url => NProgress.done();
@@ -18,45 +15,26 @@ Router.onRouteChangeError = url => NProgress.done();
 
 const Nav = () => (
   <nav>
-    <ul>
-      <li>
-        <Link href="/">
-          <a>Home</a>
-        </Link>
-      </li>
-      {links.map(({ key, href, label }) => (
-        <li key={key}>
-          <a href={href}>{label}</a>
-        </li>
-      ))}
-    </ul>
-
-    <style jsx>{`
-      :global(body) {
-        margin: 0;
-        font-family: -apple-system, BlinkMacSystemFont, Avenir Next, Avenir,
-          Helvetica, sans-serif;
-      }
-      nav {
-        text-align: center;
-      }
-      ul {
-        display: flex;
-        justify-content: space-between;
-      }
-      nav > ul {
-        padding: 4px 16px;
-      }
-      li {
-        display: flex;
-        padding: 6px 8px;
-      }
-      a {
-        color: #067df7;
-        text-decoration: none;
-        font-size: 13px;
-      }
-    `}</style>
+    <Header className="header">
+      <div className="logo" />
+      <Menu
+        theme="dark"
+        mode="horizontal"
+        // defaultSelectedKeys={["1"]}
+        style={{ lineHeight: "64px" }}
+      >
+        <Menu.Item key="1">
+          <Link href="/">
+            <a>Home</a>
+          </Link>
+        </Menu.Item>
+        <Menu.Item key="2">
+          <Link href="/test">
+            <a>Test</a>
+          </Link>
+        </Menu.Item>
+      </Menu>
+    </Header>
   </nav>
 );
 
