@@ -7,10 +7,10 @@
 .input-background {
 	background: rgba(0, 0, 0, 0.7);
 	height: 10rem;
-	width: 54%;
+	width: 60%;
 	position: absolute;
 	top: 33%;
-	left: 23%;
+	left: 21%;
 	z-index: 13;
 	border-radius: 1rem;
 }
@@ -32,5 +32,6 @@
 label {
 	display: flex;
 	align-items: center;
-	margin-right: 1rem;
+    margin-right: 1rem;
+    margin-top: .2rem;
 }
