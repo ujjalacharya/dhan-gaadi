@@ -26,7 +26,7 @@ function disabledDate(current) {
 
 const SearchMenu = () => {
   return (
-    <div className="route-form bus-search-menu">
+    <div className="route-form bus-search-menu m-1">
 							<label htmlFor="">
 								<h4 className="color-white">From: </h4>
 							</label>

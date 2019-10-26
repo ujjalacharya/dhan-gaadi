@@ -1,8 +1,20 @@
+* {
+	margin: 0;
+	padding: 0;
+	box-sizing: border-box;
+}
+
 /* utility */
 
 .color-white {
 	color: #fff;
 }
+
+.m-1 {
+	margin: 0.5rem !important;
+}
+
+/* index page */
 
 .input-background {
 	background: rgba(0, 0, 0, 0.7);
@@ -45,4 +57,14 @@ label {
 	margin-bottom: 20px;
 	border: 0 1px solid #dfdfdf;
 	box-shadow: 0 2px 4px 0 hsla(0, 0%, 71%, 0.5);
+	z-index: 1;
+}
+
+.card-header {
+	display: flex;
+	justify-content: center;
+}
+
+.single-card {
+	cursor: pointer;
 }

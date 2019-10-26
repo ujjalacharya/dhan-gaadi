@@ -1,66 +1,32 @@
-const Test = ({ user }) => {
+const Bunch = ({ user }) => {
 	return (
 		<>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
-			<h1>Hello {user}</h1>
+			<h1>Filters: </h1>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
+			<h3>Hello {user}</h3>
 		</>
 	);
 };
 
-Test.getInitialProps = () => {
+Bunch.getInitialProps = () => {
 	let user = 'Ujjal';
 	return { user };
 };
 
-export default Test;
+export default Bunch;
