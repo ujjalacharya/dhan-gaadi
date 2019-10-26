@@ -1,8 +1,3 @@
-import React from 'react';
-import Head from 'next/head';
-import Router from 'next/router';
-import Layout from '../components/Layout';
-import Hero from '../components/Hero';
 import { Select, Button, Input, DatePicker } from 'antd';
 import moment from 'moment';
 
@@ -29,27 +24,9 @@ function disabledDate(current) {
 	return current && current < moment().endOf('day');
 }
 
-function dummytransition() {
-	Router.push({
-		pathname: '/buses',
-	});
-}
-
-const Home = () => (
-	<div>
-		<Head>
-			<title>Home</title>
-			<link rel="icon" href="/static/favicon.ico" importance="low" />
-		</Head>
-
-		<Layout>
-			<div className="hero">
-				<Hero />
-
-				<div className="row">
-					<div className="input-background">
-						<h1 className="tag-line">Get Seat Go</h1>
-						<div className="route-form">
+const SearchMenu = () => {
+  return (
+    <div className="route-form bus-search-menu">
 							<label htmlFor="">
 								<h4 className="color-white">From: </h4>
 							</label>
@@ -98,16 +75,11 @@ const Home = () => (
 								type="primary"
 								icon="search"
 								style={{ marginLeft: '1rem' }}
-								onClick={dummytransition}
 							>
 								Search
 							</Button>
 						</div>
-					</div>
-				</div>
-			</div>
-		</Layout>
-	</div>
-);
+  );
+};
 
-export default Home;
+export default SearchMenu;

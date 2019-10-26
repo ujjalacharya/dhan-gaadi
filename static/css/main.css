@@ -32,6 +32,17 @@
 label {
 	display: flex;
 	align-items: center;
-    margin-right: 1rem;
-    margin-top: .2rem;
+	margin-right: 1rem;
+	margin-top: 0.2rem;
+}
+
+/* Bus search page */
+.bus-search-menu {
+	background: #434343;
+	position: sticky;
+	top: 0;
+	padding: 15px 10px 15px 25px;
+	margin-bottom: 20px;
+	border: 0 1px solid #dfdfdf;
+	box-shadow: 0 2px 4px 0 hsla(0, 0%, 71%, 0.5);
 }
