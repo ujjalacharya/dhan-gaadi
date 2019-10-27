@@ -8,8 +8,8 @@ const Buses = ({ bus }) => {
 	return (
 		<Layout>
 			<SearchMenu />
-			<Row>
-				<Col span={6}>
+			<Row className="row-container">
+				<Col span={6} className="main-filter">
 					<Bunch />
 				</Col>
 				<Col span={18}>

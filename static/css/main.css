@@ -14,6 +14,10 @@
 	margin: 0.5rem !important;
 }
 
+.mb-2{
+	margin-bottom: 2rem !important;
+}
+
 /* index page */
 
 .input-background {
@@ -67,4 +71,17 @@ label {
 
 .single-card {
 	cursor: pointer;
+}
+
+.row-container {
+	margin: 2rem !important;
+}
+
+.checkbox-wrappper {
+	margin: 1rem;
+}
+
+.main-filter{
+	position: sticky !important;
+	top: 14% !important;
 }
