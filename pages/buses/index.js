@@ -1,6 +1,6 @@
 import Layout from '../../components/Layout';
 import SearchMenu from './searchMenu';
-import Bunch from './bunch';
+import Filters from './filters';
 import Cards from './cards';
 import { Row, Col } from 'antd';
 
@@ -10,7 +10,7 @@ const Buses = ({ bus }) => {
 			<SearchMenu />
 			<Row className="row-container">
 				<Col span={6} className="main-filter">
-					<Bunch />
+					<Filters />
 				</Col>
 				<Col span={18}>
 					<Cards />

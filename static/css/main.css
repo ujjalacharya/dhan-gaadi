@@ -14,7 +14,7 @@
 	margin: 0.5rem !important;
 }
 
-.mb-2{
+.mb-2 {
 	margin-bottom: 2rem !important;
 }
 
@@ -81,7 +81,17 @@ label {
 	margin: 1rem;
 }
 
-.main-filter{
+.main-filter {
 	position: sticky !important;
 	top: 14% !important;
+}
+
+.buses-header {
+	padding: 1rem;
+}
+
+.bus-thumbnail {
+	height: 4rem;
+	border: 2px solid #434343;
+	border-radius: 10%;
 }
