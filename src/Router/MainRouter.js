@@ -17,6 +17,7 @@ import Owners from "../Components/pages/People/Owners";
 import Users from "../Components/pages/People/Users";
 import Guests from "../Components/pages/People/Guests";
 import Seats from "../Components/pages/Seats";
+import Locations from "../Components/pages/Locations";
 
 const MainRouter = () => (
   <Switch>
@@ -47,6 +48,7 @@ const MainRouter = () => (
     <SuperAdminRoute path="/people-owners" exact component={Owners} />
     <SuperAdminRoute path="/people-users" exact component={Users} />
     <SuperAdminRoute path="/people-guests" exact component={Guests} />
+    <SuperAdminRoute path="/locations" exact component={Locations} />
   </Switch>
 );
 
