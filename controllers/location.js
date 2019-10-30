@@ -1,7 +1,7 @@
 const Location = require("../models/Location");
 
-exports.locationByZip = async (req, res, next, zip) => {
-  const location = await Location.find({ zip });
+exports.locationById = async (req, res, next, id) => {
+  const location = await Location.findById(id);
 
   if (!location) {
     return res.status(400).json({
@@ -45,5 +45,5 @@ exports.remove = async (req, res) => {
 
   await location.remove();
 
-  res.json({ message: "Locatioin removed successfully" });
+  res.json({ message: "Location removed successfully" });
 };

@@ -9,7 +9,7 @@ const {
   read,
   remove,
   getLocations,
-  locationByZip
+  locationById
 } = require("../controllers/location");
 
 router
@@ -18,11 +18,11 @@ router
   .post(requireSuperadminSignin, add);
 
 router
-  .route("/:zip")
+  .route("/:id")
   .get(requireSuperadminSignin, read)
   .put(requireSuperadminSignin, update)
   .delete(requireSuperadminSignin, remove);
 
-router.param("zip", locationByZip);
+router.param("id", locationById);
 
 module.exports = router;
