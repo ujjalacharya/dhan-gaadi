@@ -3,7 +3,7 @@ import Layout from "../../core/Layout";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { getAllLocations } from "../../../Utils/Requests/Location";
+import { getAllLocations, removeLocation } from "../../../Utils/Requests/Location";
 
 class Locations extends Component {
   constructor(props) {
@@ -47,7 +47,7 @@ class Locations extends Component {
               </button>
               <button
                 className="btn btn-danger btn-sm"
-                onClick={() => this.deleteRecord()}
+                onClick={() => this.deleteRecord(record._id)}
               >
                 <i className="fa fa-trash"></i>
               </button>
@@ -101,7 +101,7 @@ class Locations extends Component {
     }
   }
 
-  deleteRecord = slug => {
+  deleteRecord = id => {
     Swal.fire({
       title: "Are you sure?",
       text: "You won't be able to revert this!",
@@ -110,11 +110,16 @@ class Locations extends Component {
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, do it!"
-    }).then(result => {
-      if (result.value) {
-        Swal.fire("Cant do this right now!");
-        this.setState({});
-      }
+    }).then(async result => {
+        if (result.value) {
+            const resp = await removeLocation(id).catch(err => {
+                this.setState({ error: err.response.data.error });
+            });
+            if (resp && resp.status === 200) {
+                Swal.fire('Deleted!', 'Location has been deleted.', 'success');
+                this.setState({});
+            }
+        }
     });
   };
 
