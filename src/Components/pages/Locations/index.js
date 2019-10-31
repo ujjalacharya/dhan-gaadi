@@ -3,7 +3,7 @@ import Layout from "../../core/Layout";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { getGuests } from "../../../Utils/Requests/People";
+import { getAllLocations } from "../../../Utils/Requests/Location";
 
 class Locations extends Component {
   constructor(props) {
@@ -25,14 +25,6 @@ class Locations extends Component {
         sortable: true
       },
       {
-        key: "zip",
-        text: "Zip Code",
-        className: "zip",
-        align: "left",
-        sortable: true
-      },
-
-      {
         key: "action",
         text: "Action",
         className: "action",
@@ -47,7 +39,7 @@ class Locations extends Component {
                 data-target="#update-user-modal"
                 className="btn btn-primary btn-sm"
                 onClick={() =>
-                  this.props.history.push(`/edit-location/${record.slug}`)
+                  this.props.history.push(`/edit-location/${record._id}`)
                 }
                 style={{ marginRight: "5px" }}
               >
@@ -93,19 +85,19 @@ class Locations extends Component {
     };
 
     this.state = {
-      people: [],
+      locations: [],
       isLoading: true,
       error: ""
     };
   }
 
   componentDidMount() {
-    this.fetchGuests();
+    this.fetchLocations();
   }
 
   componentDidUpdate(nextProps, nextState) {
-    if (nextState.people === this.state.people) {
-      this.fetchGuests();
+    if (nextState.locations === this.state.locations) {
+      this.fetchLocations();
     }
   }
 
@@ -126,19 +118,19 @@ class Locations extends Component {
     });
   };
 
-  fetchGuests = async () => {
-    const resp = await getGuests().catch(err => {
+  fetchLocations = async () => {
+    const resp = await getAllLocations().catch(err => {
       this.setState({ error: err.response.data.error, isLoading: false });
     });
     if (resp && resp.status === 200) {
       let counter = 1;
-      resp.data.map(person => {
-        person.createdAt = moment(person.createdAt).format("MMMM Do, YYYY");
-        person.sn = counter;
+      resp.data.map(location => {
+        location.createdAt = moment(location.createdAt).format("MMMM Do, YYYY");
+        location.sn = counter;
         counter++;
-        return person;
+        return location;
       });
-      this.setState({ people: resp.data, isLoading: false });
+      this.setState({ locations: resp.data, isLoading: false });
     }
   };
 
@@ -170,7 +162,7 @@ class Locations extends Component {
               ) : (
                 <ReactDatatable
                   config={this.config}
-                  records={this.state.people}
+                  records={this.state.locations}
                   columns={this.columns}
                   onPageChange={this.pageChange}
                 />
