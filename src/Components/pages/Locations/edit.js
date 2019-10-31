@@ -1,12 +1,8 @@
 import React, { Component } from "react";
 import Layout from "../../core/Layout";
 import Swal from "sweetalert2";
-import { updateOwner } from "../../../Utils/Requests/People";
 import showError from "../../core/Error";
 import showLoading from "../../core/Loading";
-import {
-  isAuthenticated,
-} from "../../../Utils/Requests/Auth";
 import { getALocation, updateLocation } from "../../../Utils/Requests/Location";
 
 class EditLocation extends Component {
