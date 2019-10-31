@@ -1,4 +1,5 @@
 const Location = require("../models/Location");
+const _ = require("lodash");
 
 exports.locationById = async (req, res, next, id) => {
   const location = await Location.findById(id);
@@ -33,7 +34,7 @@ exports.read = async (req, res) => {
 exports.update = async (req, res) => {
   let location = req.location;
 
-  location = _.extend(bus, req.body);
+  location = _.extend(location, req.body);
 
   await location.save();
 
