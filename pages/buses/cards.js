@@ -33,7 +33,7 @@ const Cards = () => {
 					</Col>
 				</Row>
 				{[0, 1, 2, 3, 4, 5, 6].map(num => (
-					<SingleCard />
+					<SingleCard key={num}/>
 				))}
 			</div>
 		</div>
