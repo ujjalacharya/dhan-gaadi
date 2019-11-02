@@ -16,7 +16,7 @@ const Layout = ({ children, className = 'content-wrapper', title = 'Dashboard' }
 								<div className="box-header with-border">
 									<h3 className="box-title">{title}</h3>
 								</div>
-								<div className="box-body">{children}</div>
+								<div className="box-body" style={{marginBottom: '8rem'}}>{children}</div>
 								<Footer />
 							</div>
 						</div>
