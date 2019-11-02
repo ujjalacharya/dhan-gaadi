@@ -61,19 +61,31 @@ class Details extends React.Component {
 							</Button>
 						</Card>
 					</Col>
-					<Col span={4}></Col>
-					<Col span={4}>
+					<Col span={2}></Col>
+					<Col span={6}>
 						<Card title="Travel Details" style={{ width: '100%' }}>
-							<p>Card content</p>
-							<p>Card content</p>
-							<p>Card content</p>
+							<p>
+								<b>Route: </b>Dhangadhi - Kathmandu
+							</p>
+							<p>
+								<b>Date: </b>2076-07-17
+							</p>
+							<p>
+								<b>Seats: </b>B16
+							</p>
+							<p>
+								<b>Travel: </b>Karnali Yatayat
+							</p>
 						</Card>
 
 						<br />
 						<Card title="Payment Details" style={{ width: '100%' }}>
-							<p>Card content</p>
-							<p>Card content</p>
-							<p>Card content</p>
+							<p>
+								<b>Per Ticket Cost: </b>Rs. 1600
+							</p>
+							<p>
+								<b>Total Cost: </b>Rs. 1600
+							</p>
 						</Card>
 					</Col>
 					<Col span={4}></Col>
