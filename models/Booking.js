@@ -14,7 +14,11 @@ const bookingSchema = new mongoose.Schema(
       type: String,
       required: true
     },
-
+    boardingPoints: {
+      type: String,
+      required: true
+    },
+    
     guest: { type: Schema.Types.ObjectId, ref: "Guest" },
     user: { type: Schema.Types.ObjectId, ref: "User" },
     owner: { type: Schema.Types.ObjectId, ref: "Owner" },
