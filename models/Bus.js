@@ -65,12 +65,10 @@ const busSchema = new mongoose.Schema(
       type: Boolean,
       default: false
     },
-    startLocation: {
-      type: String
-    },
-    endLocation: {
-      type: String
-    },
+
+    startLocation: { type: ObjectId, ref: "Location" },
+    endLocation: { type: ObjectId, ref: "Location" },
+
     journeyDate: {
       type: String
     },
