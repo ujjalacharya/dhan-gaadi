@@ -1,0 +1,101 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+/* utility */
+
+.color-white {
+  color: #fff;
+}
+
+.m-1 {
+  margin: 0.5rem !important;
+}
+
+.mb-2 {
+  margin-bottom: 2rem !important;
+}
+
+/* index page */
+
+.input-background {
+  background: rgba(0, 0, 0, 0.7);
+  height: 10rem;
+  width: 60%;
+  position: absolute;
+  top: 33%;
+  left: 21%;
+  z-index: 13;
+  border-radius: 1rem;
+}
+
+.tag-line {
+  display: flex;
+  justify-content: center;
+  margin: 1rem;
+  color: #ffff;
+}
+
+.route-form {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  margin: 1.5rem;
+}
+
+label {
+  display: flex;
+  align-items: center;
+  margin-right: 1rem;
+  margin-top: 0.2rem;
+}
+
+/* Bus search page */
+.bus-search-menu {
+  background: #434343;
+  position: sticky;
+  top: 0;
+  padding: 15px 10px 15px 25px;
+  margin-bottom: 20px;
+  border: 0 1px solid #dfdfdf;
+  box-shadow: 0 2px 4px 0 hsla(0, 0%, 71%, 0.5);
+  z-index: 1;
+}
+
+.card-header {
+  display: flex;
+  justify-content: center;
+}
+
+.single-card {
+  cursor: pointer;
+}
+
+.single-card:hover {	
+  background: rgb(207, 204, 204);
+}
+
+.row-container {
+  margin: 2rem !important;
+}
+
+.checkbox-wrappper {
+  margin: 1rem;
+}
+
+.main-filter {
+  position: sticky !important;
+  top: 14% !important;
+}
+
+.buses-header {
+  padding: 1rem;
+}
+
+.bus-thumbnail {
+  height: 4rem;
+  border: 2px solid #434343;
+  border-radius: 10%;
+}
