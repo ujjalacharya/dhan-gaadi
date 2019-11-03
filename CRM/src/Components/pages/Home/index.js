@@ -12,9 +12,12 @@ class Home extends React.Component {
 		myBus: {},
 		myBookings: {},
 		allBookings: {},
+		user: { role: 'owner' },
 	};
 
 	componentDidMount() {
+		const { user } = isAuthenticated();
+		this.setState({ user });
 		this.fetchAllBusData();
 		this.fetchAllPeopleData();
 	}
@@ -80,29 +83,30 @@ class Home extends React.Component {
 
 	render() {
 		const { totalBus, totalPeople, myBus, myBookings, allBookings } = this.state;
+		const { role } = this.state.user;
 		return (
 			<Layout>
 				<div className="container">
-					{/* {user && user.role === 'superadmin' && ( */}
+					{role === 'superadmin' && (
 						<div className="row">
 							<div className="col-md-6">
 								<h3>Total Buses</h3>
-								<Doughnut data={totalBus} height={'20%'} width={'50%'} />
+								<Doughnut data={totalBus} height={20} width={50} />
 							</div>
 							<div className="col-md-6">
 								<h3>Total People</h3>
-								<Doughnut data={totalPeople} height={'20%'} width={'50%'} />
+								<Doughnut data={totalPeople} height={20} width={50} />
 							</div>
 						</div>
-					{/* )} */}
+					)}
 					<div className="row">
 						<div className="col-md-6">
 							<h3>My Bus</h3>
-							<Doughnut data={myBus} height={'20%'} width={'50%'} />
+							<Doughnut data={myBus} height={20} width={50} />
 						</div>
 						<div className="col-md-6">
 							<h3>My Bookings</h3>
-							<Doughnut data={myBookings} height={'20%'} width={'50%'} />
+							<Doughnut data={myBookings} height={20} width={50} />
 						</div>
 					</div>
 				</div>

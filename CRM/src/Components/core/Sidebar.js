@@ -76,7 +76,6 @@ const SideBar = memo(({ history }) => {
 		e.preventDefault();
 		if (signout()) {
 			history.push('/');
-			window.location.reload();
 		}
 	};
 	return (
