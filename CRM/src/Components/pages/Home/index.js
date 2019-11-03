@@ -1,9 +1,15 @@
 import React from 'react';
 import { Doughnut } from 'react-chartjs-2';
 import Layout from '../../core/Layout';
-import { getAllAvailableBuses, getAllUnavailableBuses } from '../../../Utils/Requests/Bus';
+import {
+	getAllAvailableBuses,
+	getAllUnavailableBuses,
+	getAvailableBusesOfOwner,
+	getUnavailableBusesOfOwner,
+} from '../../../Utils/Requests/Bus';
 import { getOwners, getGuests, getUsers } from '../../../Utils/Requests/People';
 import { isAuthenticated } from '../../../Utils/Requests/Auth';
+import { getOwnerBookings } from '../../../Utils/Requests/Booking';
 
 class Home extends React.Component {
 	state = {
@@ -20,6 +26,8 @@ class Home extends React.Component {
 		this.setState({ user });
 		this.fetchAllBusData();
 		this.fetchAllPeopleData();
+		this.fetchMyBusData();
+		this.fetchBookingData();
 	}
 
 	fetchAllBusData = async () => {
@@ -81,6 +89,63 @@ class Home extends React.Component {
 		});
 	};
 
+	fetchMyBusData = async () => {
+		let availablecount = 0;
+		let unavailablecount = 0;
+		const avialable = await getAvailableBusesOfOwner();
+		if (avialable && avialable.status === 200) {
+			availablecount = avialable.data.length;
+		}
+		const unavailable = await getUnavailableBusesOfOwner();
+		if (unavailable && unavailable.status === 200) {
+			unavailablecount = unavailable.data.length;
+		}
+		this.setState({
+			myBus: {
+				labels: ['Available', 'Unavailable'],
+				datasets: [
+					{
+						data: [availablecount, unavailablecount],
+						backgroundColor: ['#36A2EB', '#FFCE56'],
+						hoverBackgroundColor: ['#36A2EB', '#FFCE56'],
+					},
+				],
+			},
+		});
+	};
+
+	fetchBookingData = async () => {
+		let verifiedcount = 0;
+		let unverifiedcount = 0;
+		let payedcount = 0;
+		const resp = await getOwnerBookings();
+
+		if (resp && resp.status === 200) {
+			resp.data.map(booking => {
+				if (booking.verification === 'verified') {
+					verifiedcount++;
+				} else if (booking.verification === 'notverified') {
+					unverifiedcount++;
+				} else if (booking.verification === 'payed') {
+					payedcount++;
+				}
+			});
+		}
+
+		this.setState({
+			myBookings: {
+				labels: ['Verfied', 'UnVerified', 'Payed'],
+				datasets: [
+					{
+						data: [verifiedcount, unverifiedcount, payedcount],
+						backgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+						hoverBackgroundColor: ['#36A2EB', '#FF6384', '#FFCE56'],
+					},
+				],
+			},
+		});
+	};
+
 	render() {
 		const { totalBus, totalPeople, myBus, myBookings, allBookings } = this.state;
 		const { role } = this.state.user;
@@ -105,7 +170,7 @@ class Home extends React.Component {
 							<Doughnut data={myBus} height={20} width={50} />
 						</div>
 						<div className="col-md-6">
-							<h3>My Bookings</h3>
+							<h3>Booking Status</h3>
 							<Doughnut data={myBookings} height={20} width={50} />
 						</div>
 					</div>

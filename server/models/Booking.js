@@ -16,7 +16,7 @@ const bookingSchema = new mongoose.Schema(
     },
     boardingPoints: {
       type: String,
-      required: true
+      required: false
     },
     
     guest: { type: Schema.Types.ObjectId, ref: "Guest" },
