@@ -25,6 +25,13 @@ class Locations extends Component {
         sortable: true
       },
       {
+        key: "district",
+        text: "District",
+        className: "name",
+        align: "left",
+        sortable: true
+      },
+      {
         key: "action",
         text: "Action",
         className: "action",
