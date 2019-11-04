@@ -49,6 +49,7 @@ function SigninForm({ handleChange, handleSubmit, state }) {
           type="checkbox"
           id="checkbox"
           onClick={toggleShow}
+          checked={!value.hidden}
         />
         <label htmlFor="checkbox" className="checkbox-label">
           Show password
