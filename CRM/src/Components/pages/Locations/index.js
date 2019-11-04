@@ -3,7 +3,11 @@ import Layout from "../../core/Layout";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
-import { getAllLocations, removeLocation } from "../../../Utils/Requests/Location";
+import {
+  getAllLocations,
+  removeLocation
+} from "../../../Utils/Requests/Location";
+import Loading from "../../core/Loading";
 
 class Locations extends Component {
   constructor(props) {
@@ -118,15 +122,15 @@ class Locations extends Component {
       cancelButtonColor: "#d33",
       confirmButtonText: "Yes, do it!"
     }).then(async result => {
-        if (result.value) {
-            const resp = await removeLocation(id).catch(err => {
-                this.setState({ error: err.response.data.error });
-            });
-            if (resp && resp.status === 200) {
-                Swal.fire('Deleted!', 'Location has been deleted.', 'success');
-                this.setState({});
-            }
+      if (result.value) {
+        const resp = await removeLocation(id).catch(err => {
+          this.setState({ error: err.response.data.error });
+        });
+        if (resp && resp.status === 200) {
+          Swal.fire("Deleted!", "Location has been deleted.", "success");
+          this.setState({});
         }
+      }
     });
   };
 
@@ -170,7 +174,7 @@ class Locations extends Component {
 
               <h1 className="mt-2 text-primary">Locations</h1>
               {this.state.isLoading ? (
-                <img src="/img/spinner.gif" alt="" className="spinner" />
+                <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}

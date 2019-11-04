@@ -1,13 +1,11 @@
 import React, { Component, memo } from "react";
 import Layout from "../../core/Layout";
-import {
-  removeBus,
-  getAllUnavailableBuses
-} from "../../../Utils/Requests/Bus";
+import { removeBus, getAllUnavailableBuses } from "../../../Utils/Requests/Bus";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { SERVER_ROUTE } from "../../../Utils/config";
+import Loading from "../../core/Loading";
 
 class BusUnavailable extends Component {
   constructor(props) {
@@ -221,7 +219,7 @@ class BusUnavailable extends Component {
               </button>
               <h1 className="mt-2 text-primary">All Unavailable Buses</h1>
               {this.state.isLoading ? (
-                <img src="/img/spinner.gif" alt="" className="spinner" />
+                <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}

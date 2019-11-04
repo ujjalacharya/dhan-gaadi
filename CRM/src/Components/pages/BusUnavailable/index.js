@@ -8,6 +8,7 @@ import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { SERVER_ROUTE } from "../../../Utils/config";
+import Loading from "../../core/Loading";
 
 class BusUnavailable extends Component {
   constructor(props) {
@@ -206,7 +207,7 @@ class BusUnavailable extends Component {
               </button>
               <h1 className="mt-2 text-primary">My Unavailable Buses</h1>
               {this.state.isLoading ? (
-                <img src="/img/spinner.gif" alt="" className="spinner" />
+                <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}

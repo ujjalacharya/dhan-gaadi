@@ -4,6 +4,7 @@ import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { getOwners } from "../../../Utils/Requests/People";
+import Loading from "../../core/Loading";
 
 class Owners extends Component {
   constructor(props) {
@@ -163,7 +164,7 @@ class Owners extends Component {
 
               <h1 className="mt-2 text-primary">Owners</h1>
               {this.state.isLoading ? (
-                <img src="/img/spinner.gif" alt="" className="spinner" />
+                <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}

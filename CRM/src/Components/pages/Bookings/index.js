@@ -9,6 +9,7 @@ import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
 import { SERVER_ROUTE } from "../../../Utils/config";
+import Loading from "../../core/Loading";
 
 class MyBookings extends Component {
   constructor(props) {
@@ -123,11 +124,20 @@ class MyBookings extends Component {
               <button
                 data-toggle="modal"
                 data-target="#update-user-modal"
-                className={`btn btn-${record.verification === "verified" ? "warning" : "success"} btn-sm`}
+                className={`btn btn-${
+                  record.verification === "verified" ? "warning" : "success"
+                } btn-sm`}
                 onClick={this.toggleVerify(record._id, record.verification)}
-                style={{ marginRight: "5px", display:  record.verification === "payed" ? "none" : "block"}}
+                style={{
+                  marginRight: "5px",
+                  display: record.verification === "payed" ? "none" : "block"
+                }}
               >
-                <i className={`fa fa-${record.verification === "verified" ? "times" : "check"}`}></i>
+                <i
+                  className={`fa fa-${
+                    record.verification === "verified" ? "times" : "check"
+                  }`}
+                ></i>
               </button>
               <button
                 className="btn btn-danger btn-sm"
@@ -249,7 +259,11 @@ class MyBookings extends Component {
     if (resp && resp.status === 200) {
       let counter = 1;
       resp.data.map(booking => {
-        const client = booking.guest ? booking.guest : (booking.user ? booking.user : booking.self);
+        const client = booking.guest
+          ? booking.guest
+          : booking.user
+          ? booking.user
+          : booking.self;
         booking.bookedDate = moment(booking.createdAt).format("MMMM Do, YYYY");
         booking.journeyDate = moment(booking.bus.journeyDate).format(
           "MMMM Do, YYYY"
@@ -284,7 +298,7 @@ class MyBookings extends Component {
 
               <h1 className="mt-2 text-primary">My Bookings</h1>
               {this.state.isLoading ? (
-                <img src="/img/spinner.gif" alt="" className="spinner" />
+                <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}
