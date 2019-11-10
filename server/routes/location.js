@@ -14,7 +14,7 @@ const {
 
 router
   .route("/")
-  .get(requireOwnerSignin, getLocations)
+  .get(getLocations)
   .post(requireSuperadminSignin, add);
 
 router
