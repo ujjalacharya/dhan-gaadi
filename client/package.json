@@ -10,6 +10,7 @@
   "dependencies": {
     "@zeit/next-sass": "^1.0.1",
     "antd": "^3.23.5",
+    "isomorphic-unfetch": "^3.0.0",
     "next": "9.0.7",
     "node-sass": "^4.12.0",
     "nprogress": "^0.2.0",
