@@ -9,10 +9,6 @@ import { getAllLocations } from "../actions/location";
 
 const { Option } = Select;
 
-function onChange(value) {
-  console.log(`selected ${value}`);
-}
-
 function onBlur() {
   console.log("blur");
 }
@@ -30,14 +26,29 @@ function disabledDate(current) {
   return current && current < moment().endOf("day");
 }
 
-function dummytransition() {
-  Router.push({
-    pathname: "/buses"
-  });
-}
-
 const Home = () => {
   const [locations, setLocations] = useState([]);
+  const [formData, setFormData] = useState({});
+
+  const onChangeFrom = val => {
+    setFormData({ ...formData, ...{ startLocation: val } });
+  };
+
+  const onChangeTo = val => {
+    setFormData({ ...formData, ...{ endLocation: val } });
+  };
+
+  const onChangeDate = val => {
+    const journeyDate = moment(val._d).format("YYYY-MM-DD");
+    setFormData({ ...formData, ...{ journeyDate } });
+  };
+
+  const dummytransition = () => {
+    Router.push({
+      pathname: "/buses",
+      query: formData
+    });
+  };
 
   useEffect(() => {
     fetchAllLocations();
@@ -50,6 +61,7 @@ const Home = () => {
 
   return (
     <div>
+      {console.log(formData)}
       <Head>
         <title>Home</title>
         <link rel="icon" href="/static/favicon.ico" importance="low" />
@@ -67,12 +79,13 @@ const Home = () => {
                   <h4 className="color-white">From: </h4>
                 </label>
                 <Select
-				  showSearch
-				  placeholder="eg- Dhangadhi"
+                  showSearch
+                  placeholder="eg- Dhangadhi"
                   style={{ width: 200, marginRight: "1rem" }}
                   optionFilterProp="children"
-                  onChange={onChange}
+                  onChange={onChangeFrom}
                   onFocus={onFocus}
+                  name="startLocation"
                   onBlur={onBlur}
                   onSearch={onSearch}
                   filterOption={(input, option) =>
@@ -93,7 +106,8 @@ const Home = () => {
                   style={{ width: 200, marginRight: "1rem" }}
                   placeholder="eg- Kathmandu"
                   optionFilterProp="children"
-                  onChange={onChange}
+                  onChange={onChangeTo}
+                  name="endLocation"
                   onFocus={onFocus}
                   onBlur={onBlur}
                   onSearch={onSearch}
@@ -103,10 +117,9 @@ const Home = () => {
                       .indexOf(input.toLowerCase()) >= 0
                   }
                 >
-					{locations.map(location => (
+                  {locations.map(location => (
                     <Option value={location._id}>{location.name}</Option>
                   ))}
-                  
                 </Select>
                 <label htmlFor="">
                   <h4 className="color-white">Date: </h4>
@@ -115,6 +128,7 @@ const Home = () => {
                   style={{ width: "20%" }}
                   format="YYYY-MM-DD"
                   disabledDate={disabledDate}
+                  onChange={onChangeDate}
                 />
                 <Button
                   type="primary"
