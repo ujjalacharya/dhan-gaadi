@@ -95,7 +95,7 @@ const Home = () => {
                   }
                 >
                   {locations.map(location => (
-                    <Option value={location._id}>{location.name}</Option>
+                    <Option value={location._id} key={location._id}>{location.name}</Option>
                   ))}
                 </Select>
                 <label htmlFor="">
@@ -118,7 +118,7 @@ const Home = () => {
                   }
                 >
                   {locations.map(location => (
-                    <Option value={location._id}>{location.name}</Option>
+                    <Option value={location._id} key={location._id}>{location.name}</Option>
                   ))}
                 </Select>
                 <label htmlFor="">

@@ -1,7 +1,7 @@
 import SingleCard from './singleCard';
 import { Row, Col } from 'antd';
 
-const Cards = () => {
+const Cards = ({buses}) => {
 	return (
 		<div className="cards">
 			<div className="card-header">
@@ -32,8 +32,8 @@ const Cards = () => {
 						<h3>Fare</h3>
 					</Col>
 				</Row>
-				{[0, 1, 2, 3, 4, 5, 6].map(num => (
-					<SingleCard key={num}/>
+				{buses.map(bus => (
+					<SingleCard key={bus._id}/>
 				))}
 			</div>
 		</div>

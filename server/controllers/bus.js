@@ -64,8 +64,6 @@ exports.searchBus = async (req, res) => {
   if (_.size(req.query) < 1)
     return res.status(400).json({ error: "Invalid query" });
 
-  console.log(req.query)
-
   const { startLocation, endLocation, journeyDate } = req.query;
 
   const bus = await Bus.find({
