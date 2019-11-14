@@ -11,6 +11,7 @@ export default class Confirm extends React.Component {
       buttonStyle = undefined,
       isUpdate = false
     } = this.props;
+    
     const displayUpload = isUpdate
       ? "block"
       : (values.buttonStyle || buttonStyle) === "none"
