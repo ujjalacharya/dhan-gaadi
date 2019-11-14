@@ -57,6 +57,7 @@ class SingleCard extends React.Component {
   );
 
   render() {
+    const {bus} = this.props;
     return (
       <>
         <Card
