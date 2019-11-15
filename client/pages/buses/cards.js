@@ -2,11 +2,12 @@ import SingleCard from "./singleCard";
 import { Row, Col } from "antd";
 import NepaliDate from "ad-bs-converter";
 
-const Cards = ({ buses }) => {
+const Cards = ({ buses=[] }) => {
+
   const nepaliDate =
     buses[0] &&
     NepaliDate.ad2bs(buses[0].journeyDate.replace("-", "/").replace("-", "/"))
-      .en;
+      .en || Date.now();
 
   const markup =
     buses.length <= 0 ? (
@@ -41,7 +42,7 @@ const Cards = ({ buses }) => {
               <h3>Fare</h3>
             </Col>
           </Row>
-          {buses.map(bus => (
+          {buses.length > 0 && buses.map(bus => (
             <SingleCard key={bus._id} bus={bus} />
           ))}
         </div>
