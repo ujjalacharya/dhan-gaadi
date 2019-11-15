@@ -29,18 +29,26 @@ function disabledDate(current) {
 const Home = () => {
   const [locations, setLocations] = useState([]);
   const [formData, setFormData] = useState({});
+  const [disButton, setDisButton] = useState(false);
+
+  const checkButtonDisabled = () => {
+// Logic here
+  };
 
   const onChangeFrom = val => {
     setFormData({ ...formData, ...{ startLocation: val } });
+    checkButtonDisabled()
   };
 
   const onChangeTo = val => {
     setFormData({ ...formData, ...{ endLocation: val } });
+    checkButtonDisabled()
   };
 
   const onChangeDate = val => {
     const journeyDate = moment(val._d).format("YYYY-MM-DD");
     setFormData({ ...formData, ...{ journeyDate } });
+    checkButtonDisabled()
   };
 
   const dummytransition = () => {
@@ -61,7 +69,6 @@ const Home = () => {
 
   return (
     <div>
-      {console.log(formData)}
       <Head>
         <title>Home</title>
         <link rel="icon" href="/static/favicon.ico" importance="low" />
@@ -95,7 +102,9 @@ const Home = () => {
                   }
                 >
                   {locations.map(location => (
-                    <Option value={location._id} key={location._id}>{location.name}</Option>
+                    <Option value={location._id} key={location._id}>
+                      {location.name}
+                    </Option>
                   ))}
                 </Select>
                 <label htmlFor="">
@@ -118,7 +127,9 @@ const Home = () => {
                   }
                 >
                   {locations.map(location => (
-                    <Option value={location._id} key={location._id}>{location.name}</Option>
+                    <Option value={location._id} key={location._id}>
+                      {location.name}
+                    </Option>
                   ))}
                 </Select>
                 <label htmlFor="">
@@ -135,6 +146,7 @@ const Home = () => {
                   icon="search"
                   style={{ marginLeft: "1rem" }}
                   onClick={dummytransition}
+                  disabled={disButton}
                 >
                   Search
                 </Button>

@@ -1,6 +1,7 @@
 import { Card, Row, Col, Modal, Button } from "antd";
 import Router from "next/router";
 import SeatDetails from "./seatDetails";
+import { API_ROOT } from "../../utils/config";
 
 class SingleCard extends React.Component {
   state = { visible: false };
@@ -68,7 +69,7 @@ class SingleCard extends React.Component {
           <Row>
             <Col span={4}>
               <img
-                src="/static/img/suspense.jpg"
+                src={`${API_ROOT}/uploads/${bus.image}`}
                 alt="suspense"
                 className="bus-thumbnail"
               />
