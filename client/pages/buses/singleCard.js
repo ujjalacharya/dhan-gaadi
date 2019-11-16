@@ -67,13 +67,14 @@ class SingleCard extends React.Component {
           onClick={this.showModal}
         >
           <Row>
-            <Col span={4}>
+            <Col span={3}>
               <img
                 src={`${API_ROOT}/uploads/${bus.image}`}
                 alt="suspense"
                 className="bus-thumbnail"
               />
             </Col>
+            <Col span={1}></Col>
             <Col span={4}>
               <p>Sudur-paschim Yatayat</p>
             </Col>
