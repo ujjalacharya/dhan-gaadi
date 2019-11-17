@@ -7,13 +7,13 @@ const {
   update,
   read,
   remove,
-  getLocations,
-  locationById
-} = require("../controllers/location");
+  getTravels,
+  travelById
+} = require("../controllers/travel");
 
 router
   .route("/")
-  .get(getLocations)
+  .get(getTravels)
   .post(requireSuperadminSignin, add);
 
 router
@@ -22,6 +22,6 @@ router
   .put(requireSuperadminSignin, update)
   .delete(requireSuperadminSignin, remove);
 
-router.param("id", locationById);
+router.param("id", travelById);
 
 module.exports = router;
