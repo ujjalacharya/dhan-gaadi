@@ -3,13 +3,10 @@ import Layout from "../../core/Layout";
 import ReactDatatable from "@ashvin27/react-datatable";
 import moment from "moment";
 import Swal from "sweetalert2";
-import {
-  getAllLocations,
-  removeLocation
-} from "../../../Utils/Requests/Location";
 import Loading from "../../core/Loading";
+import { getAllTravels, removeTravel } from "../../../Utils/Requests/Travel";
 
-class Locations extends Component {
+class Travels extends Component {
   constructor(props) {
     super(props);
 
@@ -29,13 +26,6 @@ class Locations extends Component {
         sortable: true
       },
       {
-        key: "district",
-        text: "District",
-        className: "name",
-        align: "left",
-        sortable: true
-      },
-      {
         key: "action",
         text: "Action",
         className: "action",
@@ -50,7 +40,7 @@ class Locations extends Component {
                 data-target="#update-user-modal"
                 className="btn btn-primary btn-sm"
                 onClick={() =>
-                  this.props.history.push(`/edit-location/${record._id}`)
+                  this.props.history.push(`/edit-travel/${record._id}`)
                 }
                 style={{ marginRight: "5px" }}
               >
@@ -72,7 +62,7 @@ class Locations extends Component {
       page_size: 10,
       length_menu: [10, 20, 50],
       filename: "Buses",
-      no_data_text: "No location found!",
+      no_data_text: "No travel found!",
       button: {
         excel: true,
         print: true,
@@ -96,19 +86,19 @@ class Locations extends Component {
     };
 
     this.state = {
-      locations: [],
+      travels: [],
       isLoading: true,
       error: ""
     };
   }
 
   componentDidMount() {
-    this.fetchLocations();
+    this.fetchTravels();
   }
 
   componentDidUpdate(nextProps, nextState) {
-    if (nextState.locations === this.state.locations) {
-      this.fetchLocations();
+    if (nextState.travels === this.state.travels) {
+      this.fetchTravels();
     }
   }
 
@@ -123,30 +113,30 @@ class Locations extends Component {
       confirmButtonText: "Yes, do it!"
     }).then(async result => {
       if (result.value) {
-        const resp = await removeLocation(id).catch(err => {
+        const resp = await removeTravel(id).catch(err => {
           this.setState({ error: err.response.data.error });
         });
         if (resp && resp.status === 200) {
-          Swal.fire("Deleted!", "Location has been deleted.", "success");
+          Swal.fire("Deleted!", "Travel has been deleted.", "success");
           this.setState({});
         }
       }
     });
   };
 
-  fetchLocations = async () => {
-    const resp = await getAllLocations().catch(err => {
+  fetchTravels = async () => {
+    const resp = await getAllTravels().catch(err => {
       this.setState({ error: err.response.data.error, isLoading: false });
     });
     if (resp && resp.status === 200) {
       let counter = 1;
-      resp.data.map(location => {
-        location.createdAt = moment(location.createdAt).format("MMMM Do, YYYY");
-        location.sn = counter;
+      resp.data.map(travel => {
+        travel.createdAt = moment(travel.createdAt).format("MMMM Do, YYYY");
+        travel.sn = counter;
         counter++;
-        return location;
+        return travel;
       });
-      this.setState({ locations: resp.data, isLoading: false });
+      this.setState({ travels: resp.data, isLoading: false });
     }
   };
 
@@ -156,7 +146,7 @@ class Locations extends Component {
 
   render() {
     return (
-      <Layout title="Locations">
+      <Layout title="Travels">
         <div className="d-flex" id="wrapper">
           <div id="page-content-wrapper">
             <div className="container-fluid">
@@ -166,19 +156,19 @@ class Locations extends Component {
                 className="btn btn-outline-primary float-right mt-3 mr-2"
                 data-toggle="modal"
                 data-target="#add-user-modal"
-                onClick={() => this.props.history.push("/add-location")}
+                onClick={() => this.props.history.push("/add-travel")}
               >
                 {" "}
-                Add Location
+                Add Travel
               </button>
 
-              <h1 className="mt-2 text-primary">Locations</h1>
+              <h1 className="mt-2 text-primary">Travels</h1>
               {this.state.isLoading ? (
                 <Loading />
               ) : (
                 <ReactDatatable
                   config={this.config}
-                  records={this.state.locations}
+                  records={this.state.travels}
                   columns={this.columns}
                   onPageChange={this.pageChange}
                 />
@@ -191,4 +181,4 @@ class Locations extends Component {
   }
 }
 
-export default Locations;
+export default Travels;

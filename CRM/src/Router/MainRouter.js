@@ -20,6 +20,9 @@ import Seats from "../Components/pages/Seats";
 import Locations from "../Components/pages/Locations";
 import EditLocation from "../Components/pages/Locations/edit";
 import AddLocation from "../Components/pages/Locations/add";
+import Travels from "../Components/pages/Travels";
+import EditTravel from "../Components/pages/Travels/edit";
+import AddTravel from "../Components/pages/Travels/add";
 
 const MainRouter = () => (
   <Switch>
@@ -53,6 +56,9 @@ const MainRouter = () => (
     <SuperAdminRoute path="/locations" exact component={Locations} />
     <SuperAdminRoute path="/add-location" exact component={AddLocation} />
     <SuperAdminRoute path="/edit-location/:slug" exact component={EditLocation} />
+    <SuperAdminRoute path="/travels" exact component={Travels} />
+    <SuperAdminRoute path="/add-travel" exact component={AddTravel} />
+    <SuperAdminRoute path="/edit-travel/:slug" exact component={EditTravel} />
   </Switch>
 );
 

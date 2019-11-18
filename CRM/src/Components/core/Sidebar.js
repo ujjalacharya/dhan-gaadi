@@ -214,6 +214,12 @@ const SideBar = memo(({ history }) => {
 										<span className="pull-right-container"></span>
 									</Link>
 								</li>
+								<li className={isActive(history, '/travels')}>
+									<Link to="/travels">
+										<i className="fa fa-building"></i> <span>Travels</span>
+										<span className="pull-right-container"></span>
+									</Link>
+								</li>
 							</>
 						)}
 

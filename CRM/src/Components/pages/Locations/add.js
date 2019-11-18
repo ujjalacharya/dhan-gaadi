@@ -52,7 +52,7 @@ class AddLocation extends Component {
     const { error, name, districts, district, loading } = this.state;
 
     return (
-      <Layout title="Update Location">
+      <Layout title="Add Location">
         {showError(error)}
         {showLoading(loading)}
         {!loading && (
