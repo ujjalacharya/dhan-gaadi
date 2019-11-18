@@ -4,6 +4,7 @@ import FormPrimaryDetails from "./FormPrimaryDetails";
 import Confirm from "./Confirm";
 import Success from "./Success";
 import { getAllLocations } from "../../../Utils/Requests/Location";
+import { getAllTravels } from "../../../Utils/Requests/Travel";
 
 class AddNewBus extends Component {
   state = {
@@ -20,6 +21,8 @@ class AddNewBus extends Component {
     isAvailable: false,
     startLocation: "",
     locations: [],
+    travels: [],
+    travel: "",
     endLocation: "",
     journeyDate: "",
     boardingPoints: "",
@@ -35,6 +38,7 @@ class AddNewBus extends Component {
     });
 
     this.fetchLocations();
+    this.fetchTravels();
   }
 
   // Proceed to next step
@@ -63,6 +67,16 @@ class AddNewBus extends Component {
       });
     }
   };
+
+  fetchTravels = async () => {
+    const resp = await getAllTravels();
+    if (resp.status === 200) {
+      this.setState({
+        travels: resp.data,
+        travel: resp.data[0]._id
+      });
+    }
+  }
 
   // Handle fields change
   handleChange = input => e => {
@@ -111,7 +125,9 @@ class AddNewBus extends Component {
       droppingPoints,
       buttonStyle,
       formData,
-      locations
+      locations,
+      travels,
+      travel
     } = this.state;
 
     const values = {
@@ -133,7 +149,9 @@ class AddNewBus extends Component {
       droppingPoints,
       buttonStyle,
       formData,
-      locations
+      locations,
+      travels,
+      travel
     };
 
     switch (step) {

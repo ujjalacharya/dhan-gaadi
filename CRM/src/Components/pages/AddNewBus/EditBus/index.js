@@ -6,6 +6,7 @@ import FormPrimaryDetails from "../FormPrimaryDetails";
 import Confirm from "../Confirm";
 import Success from "../Success";
 import Layout from "../../../core/Layout";
+import { getAllTravels } from "../../../../Utils/Requests/Travel";
 
 class EditBus extends Component {
   state = {
@@ -14,10 +15,12 @@ class EditBus extends Component {
     loading: true,
     formData: "",
     buttonStyle: "block",
-    locations: []
+    locations: [],
+    travels: []
   };
 
   componentDidMount() {
+    this.fetchLocations();	
     this.fetchBusDetails();
     this.setState({
       formData: new FormData()
@@ -49,6 +52,16 @@ class EditBus extends Component {
         endLocation: this.state.bus.endLocation
       });
     }
+    this.fetchTravels();	
+  };
+
+  fetchTravels = async () => {
+    const resp = await getAllTravels();
+    if (resp.status === 200) {
+      this.setState({
+        travels: resp.data,
+      });
+    }
   };
 
   fetchBusDetails = async () => {
@@ -76,10 +89,10 @@ class EditBus extends Component {
         endLocation: resp.data.endLocation,
         journeyDate: resp.data.journeyDate,
         boardingPoints: resp.data.boardingPoints,
-        droppingPoints: resp.data.droppingPoints
+        droppingPoints: resp.data.droppingPoints,
+        travel: resp.data.travel,
       });
 	}
-    this.fetchLocations();	
   };
 
   // Handle fields change
