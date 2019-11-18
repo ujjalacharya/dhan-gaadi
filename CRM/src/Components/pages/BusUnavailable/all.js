@@ -60,9 +60,9 @@ class BusUnavailable extends Component {
         sortable: true
       },
       {
-        key: "ownerPhone",
-        text: "Owner Phone",
-        className: "ownerPhone",
+        key: "travel",
+        text: "Travel",
+        className: "travel",
         align: "left",
         sortable: true
       },
@@ -168,7 +168,7 @@ class BusUnavailable extends Component {
         bus.sn = counter;
         counter++;
         bus.ownerName = bus.owner.name;
-        bus.ownerPhone = bus.owner.phone;
+        bus.travel = bus.travel.name;
         return bus;
       });
       this.setState({ buses: buses.data, isLoading: false });
