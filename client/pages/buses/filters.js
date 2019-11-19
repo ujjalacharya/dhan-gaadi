@@ -17,7 +17,7 @@ const Filters = ({ info, setBuses, setLoading }) => {
     if (e.target.checked) {
       list.push(e.target.name);
     } else {
-      list.pop(e.target.name);
+        list = list.filter(event => event != e.target.name);
     }
     setCheckedTravels(list);
 

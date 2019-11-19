@@ -76,7 +76,7 @@ class SingleCard extends React.Component {
             </Col>
             <Col span={1}></Col>
             <Col span={4}>
-              <p>Sudur-paschim Yatayat</p>
+              <p>{bus.travel.name}</p>
             </Col>
             <Col span={4}>
               <p>Air Suspension</p>
