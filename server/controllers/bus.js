@@ -75,10 +75,22 @@ exports.searchBus = async (req, res) => {
     startLocation,
     endLocation,
     journeyDate,
-    isAvailable: true
+    isAvailable: true,
   });
 
   return res.json(bus);
+};
+
+exports.searchBusByFilter = async (req, res) => {
+  const { startLocation, endLocation, journeyDate, travel } = req.body;
+  const bus = await Bus.find({
+    startLocation,
+    endLocation,
+    journeyDate,
+    isAvailable: true,
+    travel: { $in: travel }
+  });
+  res.json(bus);
 };
 
 exports.create = async (req, res) => {

@@ -10,6 +10,7 @@ const {
   busBySlug,
   getBuses,
   searchBus,
+  searchBusByFilter,
   getAvailableBusesOfOwner,
   getUnavailableBusesOfOwner,
   getAllAvailableBuses,
@@ -23,13 +24,22 @@ router
   .get(getBuses)
   .post(requireOwnerSignin, uploadBusImage, create);
 
-router.get("/owner-bus-available", requireOwnerSignin, getAvailableBusesOfOwner);
-router.get("/owner-bus-unavailable", requireOwnerSignin, getUnavailableBusesOfOwner);
+router.get(
+  "/owner-bus-available",
+  requireOwnerSignin,
+  getAvailableBusesOfOwner
+);
+router.get(
+  "/owner-bus-unavailable",
+  requireOwnerSignin,
+  getUnavailableBusesOfOwner
+);
 
 router.get("/all-bus-available", getAllAvailableBuses);
 router.get("/all-bus-unavailable", getAllUnavailableBuses);
 
 router.get("/search", searchBus);
+router.post("/filter", searchBusByFilter);
 
 router
   .route("/:busSlug")
