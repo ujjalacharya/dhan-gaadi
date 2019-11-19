@@ -5,13 +5,20 @@ import Cards from "./cards";
 import { Row, Col } from "antd";
 import { searchBus } from "../../actions/location";
 import Param from "../../utils/checkQueryParam";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import Loading from "../../components/Loading";
 
 const Buses = ({ resp, info }) => {
-  const [buses, setBuses] = useState(resp);
+  const [buses, setBuses] = useState([]);
   const [loading, setLoading] = useState(false);
 
+  useEffect(() => {
+    fetchBuses();
+  }, [resp]);
+
+  const fetchBuses = () => {
+    setBuses(resp)
+  }
   return (
     <Layout>
       <Param info={info}>
