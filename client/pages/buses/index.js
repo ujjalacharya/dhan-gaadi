@@ -6,6 +6,7 @@ import { Row, Col } from "antd";
 import { searchBus } from "../../actions/location";
 import Param from "../../utils/checkQueryParam";
 import { useState } from "react";
+import Loading from "../../components/Loading";
 
 const Buses = ({ resp, info }) => {
   const [buses, setBuses] = useState(resp);
@@ -20,7 +21,7 @@ const Buses = ({ resp, info }) => {
             <Filters info={info} setBuses={setBuses} setLoading={setLoading} />
           </Col>
           <Col span={18}>
-            {loading ? <h1>Loading...</h1> : <Cards buses={buses} />}
+            {loading ? <Loading /> : <Cards buses={buses} />}
           </Col>
         </Row>
       </Param>

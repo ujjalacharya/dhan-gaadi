@@ -100,3 +100,9 @@ label {
   border-radius: 10%;
   width: 100%;
 }
+
+/* spinner */
+.spinner {
+  width: 80%;
+  height: 35rem;
+}
