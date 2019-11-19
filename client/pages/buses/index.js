@@ -5,18 +5,23 @@ import Cards from "./cards";
 import { Row, Col } from "antd";
 import { searchBus } from "../../actions/location";
 import Param from "../../utils/checkQueryParam";
+import { useState } from "react";
 
 const Buses = ({ resp, info }) => {
+  const [buses, setBuses] = useState(resp);
+  const [loading, setLoading] = useState(false);
 
   return (
     <Layout>
       <Param info={info}>
-        <SearchMenu buses={resp} info={info} />
+        <SearchMenu buses={buses} info={info} />
         <Row className="row-container">
           <Col span={6} className="main-filter">
-            <Filters />
+            <Filters info={info} setBuses={setBuses} setLoading={setLoading} />
           </Col>
-          <Col span={18}><Cards buses={resp} />  </Col>
+          <Col span={18}>
+            {loading ? <h1>Loading...</h1> : <Cards buses={buses} />}
+          </Col>
         </Row>
       </Param>
     </Layout>

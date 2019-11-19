@@ -14,3 +14,15 @@ export const searchBus = async query => {
   const response = await resp.json();
   return response;
 };
+
+export const searchBusByFilter = async body => {
+  const resp = await fetch(`${API}/bus/filter`, {
+    method: "POST",
+    headers: {
+      "Content-Type": "application/json"
+    },
+    body: JSON.stringify(body)
+  });
+  const response = await resp.json();
+  return response;
+};
