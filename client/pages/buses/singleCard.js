@@ -79,18 +79,18 @@ class SingleCard extends React.Component {
               <p>{bus.travel.name}</p>
             </Col>
             <Col span={4}>
-              <p>Air Suspension</p>
+              <p>{bus.type}</p>
             </Col>
             <Col span={4}>
               <strong>
-                <p>2:00 PM</p>
+                <p>{bus.departure_time}</p>
               </strong>
             </Col>
             <Col span={4}>
               <p>20 seats</p>
             </Col>
             <Col span={4}>
-              <p>Rs 1600</p>
+              <p>Rs {`${bus.fare}`}</p>
             </Col>
           </Row>
         </Card>
