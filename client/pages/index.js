@@ -26,29 +26,34 @@ function disabledDate(current) {
   return current && current < moment().endOf("day");
 }
 
+const threeLengthArray = [];
+
 const Home = () => {
   const [locations, setLocations] = useState([]);
   const [formData, setFormData] = useState({});
-  const [disButton, setDisButton] = useState(false);
+  const [disButton, setDisButton] = useState(true);
 
-  const checkButtonDisabled = () => {
-// Logic here
+  const checkButtonDisabled = val => {
+    threeLengthArray.push(val);
+    if(threeLengthArray.length >= 3){
+      setDisButton(false)
+    }
   };
 
   const onChangeFrom = val => {
     setFormData({ ...formData, ...{ startLocation: val } });
-    checkButtonDisabled()
+    checkButtonDisabled(val);
   };
 
   const onChangeTo = val => {
     setFormData({ ...formData, ...{ endLocation: val } });
-    checkButtonDisabled()
+    checkButtonDisabled(val);
   };
 
   const onChangeDate = val => {
     const journeyDate = moment(val._d).format("YYYY-MM-DD");
     setFormData({ ...formData, ...{ journeyDate } });
-    checkButtonDisabled()
+    checkButtonDisabled(val);
   };
 
   const dummytransition = () => {
