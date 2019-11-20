@@ -40,7 +40,7 @@ const SearchMenu = ({ buses, info }) => {
   };
 
   const onChangeDate = val => {
-    const journeyDate = moment(val._d).format("YYYY-MM-DD");
+    const journeyDate = val && moment(val._d).format("YYYY-MM-DD");
     setFormData({ ...formData, ...{ journeyDate } });
   };
 
