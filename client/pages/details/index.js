@@ -14,44 +14,77 @@ const { Option } = Select;
 
 class Details extends React.Component {
   state = {
-    dataSource: []
+    dataSource: [],
+    name: "",
+    email: "",
+    phone: "",
+    address: ""
   };
 
-  handleChange = value => {
+  handleAutoComplete = value => {
     this.setState({
       dataSource:
         !value || value.indexOf("@") >= 0
           ? []
-          : [`${value}@gmail.com`, `${value}@hotmail.com`, `${value}@yahoo.com`]
+          : [
+              `${value}@gmail.com`,
+              `${value}@hotmail.com`,
+              `${value}@yahoo.com`
+            ],
+      email: value
     });
+  };
+
+  handleChange = e => {
+    this.setState({ [e.target.name]: e.target.value });
+  };
+
+  handleNumber = value => {
+    this.setState({ phone: value });
+  };
+
+  handleSubmit = () => {
+    const { name, phone, address, email } = this.state;
+    const seatNumber = this.props.seat;
+    const info = { name, phone, address, email, seatNumber };
+    console.log(info);
   };
 
   render() {
     return (
       <Layout>
         <Row className="row-container">
+          {console.log(this.state)}
           <Col span={4}></Col>
           <Col span={8}>
             <Card title="Passengers Details" style={{ width: "100%" }}>
               <Input.Group>
                 <h4>Passenger Name:</h4>
-                <Input />
+                <Input onChange={this.handleChange} name="name" />
               </Input.Group>
               <br />
-              {/* <Input.Group> */}
               <Input.Group>
-                <h4>Email Address:</h4>
+                <h4>Email:</h4>
                 <AutoComplete
                   dataSource={this.state.dataSource}
                   style={{ width: "100%" }}
-                  onChange={this.handleChange}
+                  onChange={this.handleAutoComplete}
                 />
               </Input.Group>
+              <Input.Group>
+                <h4>Current Address:</h4>
+                <Input onChange={this.handleChange} name="address" />
+              </Input.Group>
+              <br />
               <Row>
                 <Col span={11}>
                   <Input.Group>
                     <h4>Mobile: </h4>
-                    <InputNumber style={{ width: "100%" }} />
+                    <InputNumber
+                      style={{ width: "100%" }}
+                      onChange={this.handleNumber}
+                      name="phone"
+                    />
                   </Input.Group>
                 </Col>
                 <Col span={2}></Col>
@@ -59,14 +92,22 @@ class Details extends React.Component {
                   <Input.Group>
                     <h4>Boarding Point: </h4>
                     <Select defaultValue="Buspark" style={{ width: "100%" }}>
-                      <Option value="Buspark">Buspark</Option>
-                      <Option value="Attariya">Attariya</Option>
+                      <Option disabled value="Buspark">
+                        Buspark
+                      </Option>
+                      <Option disabled value="Attariya">
+                        Attariya
+                      </Option>
                     </Select>
                   </Input.Group>
                 </Col>
               </Row>
               <br />
-              <Button type="primary" style={{ width: "100%" }}>
+              <Button
+                type="primary"
+                style={{ width: "100%" }}
+                onClick={this.handleSubmit}
+              >
                 Proceed to Confirmation
               </Button>
             </Card>

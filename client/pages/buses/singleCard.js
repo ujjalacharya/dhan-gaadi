@@ -60,6 +60,7 @@ class SingleCard extends React.Component {
           type="primary"
           loading={this.state.loading}
           onClick={this.handleOk}
+          disabled
           >
           Continue Booking
         </Button>
