@@ -2,6 +2,7 @@ import { Card, Row, Col, Modal, Button } from "antd";
 import Router from "next/router";
 import SeatDetails from "./seatDetails";
 import { API_ROOT } from "../../utils/config";
+import { enc, dec } from "../../utils/encdec";
 
 class SingleCard extends React.Component {
   state = { visible: false, userBooked: [] };
@@ -17,20 +18,30 @@ class SingleCard extends React.Component {
     // let arr = [...this.state.userBooked];
     // arr.push(seat);
     // this.setState({userBooked: arr});
-    // this.handleOk(seat)
-    console.log(this.props)
+    this.encryptInfo(seat);
+    // console.log(this.props)
   }
 
-  handleOk = (seat) => {
+  handleOk = (info) => {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false, visible: false });
       Router.push({
         pathname: "/details",
-        query: {seat}
+        query: {info}
       });
     }, 1000);
   };
+
+  encryptInfo = seat => {
+    const {startLocation, endLocation, fare, journeyDate, travel} = this.props.bus;
+    let start = startLocation.name;
+    let end = endLocation.name;
+    let travelName = travel.name;
+    const info = {start, end, fare, journeyDate, travelName, seat}
+    const resp = enc(info);
+    this.handleOk(resp)
+  }
 
   handleCancel = e => {
     this.setState({
