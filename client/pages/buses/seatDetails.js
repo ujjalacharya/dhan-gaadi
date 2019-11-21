@@ -8,7 +8,7 @@ class SeatDetails extends Component {
     super();
     this.state = {
       size: "small",
-      arr: [0, 4, 8, 12, 16, 20, 24],
+      arr: [0, 2.5, 5, 7.5, 10, 12.5, 15],
       oddA: ["A1", "A3", "A5", "A7", "A9", "A11", "A13", "A15"],
       evenA: ["A2", "A4", "A6", "A8", "A10", "A12", "A14"],
       oddB: ["B1", "B3", "B5", "B7", "B9", "B11", "B13", "B15"],
@@ -37,112 +37,114 @@ class SeatDetails extends Component {
     const { size, arr, oddA, oddB, evenA, evenB } = this.state;
     const { sold, booked } = this.props;
     return (
-      <div style={styles.wrapper}>
-        {/* <div className="steer" style={styles.steer}>
-          <img style={styles.img} src="/img/steer.png" />
-        </div> */}
-        <div style={styles.busDiv}>
-          {arr.map((le, i) => {
-            return (
-              <div key={i}>
+      <div style={{display: "flex", justifyContent: "center"}}>
+        <div style={styles.wrapper}>
+          <div className="steer" style={styles.steer}>
+            <img style={styles.img} src="/static/img/steer.png" />
+          </div>
+          <div style={styles.busDiv}>
+            {arr.map((le, i) => {
+              return (
+                <div key={i}>
+                  <Button
+                    className="btn btn-sm btn-primary"
+                    type="primary"
+                    size={size}
+                    disabled={
+                      sold.includes(oddA[i])
+                        ? true
+                        : booked.includes(oddA[i])
+                        ? true
+                        : false
+                    }
+                    style={
+                      sold.includes(oddA[i])
+                        ? styles.soldButton
+                        : booked.includes(oddA[i])
+                        ? styles.bookedButton
+                        : styles.button
+                    }
+                    onClick={() => this.handleClick(oddA[i])}
+                  >
+                    {oddA[i]}
+                  </Button>
+                  <Button
+                    className="btn btn-sm btn-primary"
+                    type="primary"
+                    size={size}
+                    disabled={
+                      sold.includes(evenA[i])
+                        ? true
+                        : booked.includes(evenA[i])
+                        ? true
+                        : false
+                    }
+                    style={
+                      sold.includes(evenA[i])
+                        ? styles.soldButton
+                        : booked.includes(evenA[i])
+                        ? styles.bookedButton
+                        : styles.button
+                    }
+                    onClick={() => this.handleClick(evenA[i])}
+                  >
+                    {evenA[i]}
+                  </Button>
+                </div>
+              );
+            })}
+            {arr.map((le, i) => (
+              <div
+                key={i}
+                style={{ ...styles.secondCol, ...{ top: `${le}rem` } }}
+              >
                 <Button
                   className="btn btn-sm btn-primary"
                   type="primary"
-                  size={size}
                   disabled={
-                    sold.includes(oddA[i])
+                    sold.includes(oddB[i])
                       ? true
-                      : booked.includes(oddA[i])
+                      : booked.includes(oddB[i])
                       ? true
                       : false
                   }
+                  size={size}
                   style={
-                    sold.includes(oddA[i])
+                    sold.includes(oddB[i])
                       ? styles.soldButton
-                      : booked.includes(oddA[i])
+                      : booked.includes(oddB[i])
                       ? styles.bookedButton
                       : styles.button
                   }
-                  onClick={() => this.handleClick(oddA[i])}
+                  onClick={() => this.handleClick(oddB[i])}
                 >
-                  {oddA[i]}
+                  {oddB[i]}
                 </Button>
                 <Button
                   className="btn btn-sm btn-primary"
                   type="primary"
-                  size={size}
                   disabled={
-                    sold.includes(evenA[i])
+                    sold.includes(evenB[i])
                       ? true
-                      : booked.includes(evenA[i])
+                      : booked.includes(evenB[i])
                       ? true
                       : false
                   }
+                  size={size}
                   style={
-                    sold.includes(evenA[i])
+                    sold.includes(evenB[i])
                       ? styles.soldButton
-                      : booked.includes(evenA[i])
+                      : booked.includes(evenB[i])
                       ? styles.bookedButton
                       : styles.button
                   }
-                  onClick={() => this.handleClick(evenA[i])}
+                  onClick={() => this.handleClick(evenB[i])}
                 >
-                  {evenA[i]}
+                  {evenB[i]}
                 </Button>
               </div>
-            );
-          })}
-          {arr.map((le, i) => (
-            <div
-              key={i}
-              style={{ ...styles.secondCol, ...{ top: `${le}rem` } }}
-            >
-              <Button
-                className="btn btn-sm btn-primary"
-                type="primary"
-                disabled={
-                  sold.includes(oddB[i])
-                    ? true
-                    : booked.includes(oddB[i])
-                    ? true
-                    : false
-                }
-                size={size}
-                style={
-                  sold.includes(oddB[i])
-                    ? styles.soldButton
-                    : booked.includes(oddB[i])
-                    ? styles.bookedButton
-                    : styles.button
-                }
-                onClick={() => this.handleClick(oddB[i])}
-              >
-                {oddB[i]}
-              </Button>
-              <Button
-                className="btn btn-sm btn-primary"
-                type="primary"
-                disabled={
-                  sold.includes(evenB[i])
-                    ? true
-                    : booked.includes(evenB[i])
-                    ? true
-                    : false
-                }
-                size={size}
-                style={
-                  sold.includes(evenB[i])
-                    ? styles.soldButton
-                    : booked.includes(evenB[i])
-                    ? styles.bookedButton
-                    : styles.button
-                }
-                onClick={() => this.handleClick(evenB[i])}
-              >
-                {evenB[i]}
-              </Button>
-            </div>
-          ))}
+            ))}
+          </div>
         </div>
       </div>
     );
@@ -153,11 +155,15 @@ const styles = {
   wrapper: {
     height: "60vh",
     display: "flex",
+    flexDirection: "column",
     position: "relative",
     justifyContent: "center"
   },
   steer: {
-    margin: "4rem"
+    margin: ".5rem",
+    position: "relative",
+    top: 0,
+    left: "12rem"
   },
   img: {
     height: "3rem",
@@ -165,9 +171,9 @@ const styles = {
   },
   busDiv: {
     background: "#434343",
-    height: "29rem",
+    height: "18rem",
     position: "relative",
-    width: "23rem",
+    width: "17rem",
     color: "#ffff"
   },
   secondCol: {
