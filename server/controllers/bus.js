@@ -75,8 +75,11 @@ exports.searchBus = async (req, res) => {
     startLocation,
     endLocation,
     journeyDate,
-    isAvailable: true,
-  }).populate("travel", "name");
+    isAvailable: true
+  })
+    .populate("travel", "name")
+    .populate("startLocation", "name")
+    .populate("endLocation", "name");
 
   return res.json(bus);
 };
@@ -90,7 +93,10 @@ exports.searchBusByFilter = async (req, res) => {
     isAvailable: true,
     travel: { $in: travel },
     type: { $in: type }
-  }).populate("travel", "name");
+  })
+    .populate("travel", "name")
+    .populate("startLocation", "name")
+    .populate("endLocation", "name");
   res.json(bus);
 };
 
