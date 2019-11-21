@@ -71,7 +71,7 @@ class Details extends React.Component {
 								<b>Date: </b>2076-07-17
 							</p>
 							<p>
-								<b>Seats: </b>B16
+								<b>Seat: </b>{this.props.seat}
 							</p>
 							<p>
 								<b>Travel: </b>Karnali Yatayat
@@ -93,6 +93,11 @@ class Details extends React.Component {
 			</Layout>
 		);
 	}
+}
+
+Details.getInitialProps = ({query}) => {
+	console.log(query);
+	return query;
 }
 
 export default Details;

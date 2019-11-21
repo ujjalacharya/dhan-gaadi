@@ -12,23 +12,22 @@ class SeatDetails extends Component {
       oddA: ["A1", "A3", "A5", "A7", "A9", "A11", "A13", "A15"],
       evenA: ["A2", "A4", "A6", "A8", "A10", "A12", "A14"],
       oddB: ["B1", "B3", "B5", "B7", "B9", "B11", "B13", "B15"],
-      evenB: ["B2", "B4", "B6", "B8", "B10", "B12", "B14"]
+      evenB: ["B2", "B4", "B6", "B8", "B10", "B12", "B14"],
     };
   }
 
   handleClick = async seat => {
     Swal.fire({
       title: "Are you sure?",
-      text: "Seats sold !",
+      text: "Book seat!",
       type: "warning",
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, update it!"
-    }).then(async result => {
+      confirmButtonText: "Yes, book it!"
+    }).then(result => {
       if (result.value) {
-        this.props.setSold([...this.props.sold, seat]);
-        // await postSoldSeat(this.props.slug, seat);
+        this.props.handleUserBooked(seat)
       }
     });
   };

@@ -4,7 +4,7 @@ import SeatDetails from "./seatDetails";
 import { API_ROOT } from "../../utils/config";
 
 class SingleCard extends React.Component {
-  state = { visible: false };
+  state = { visible: false, userBooked: [] };
 
   showModal = () => {
     this.setState({
@@ -13,18 +13,26 @@ class SingleCard extends React.Component {
     });
   };
 
-  handleOk = () => {
+  handleUserBooked = (seat) => {
+    // let arr = [...this.state.userBooked];
+    // arr.push(seat);
+    // this.setState({userBooked: arr});
+    // this.handleOk(seat)
+    console.log(this.props)
+  }
+
+  handleOk = (seat) => {
     this.setState({ loading: true });
     setTimeout(() => {
       this.setState({ loading: false, visible: false });
       Router.push({
-        pathname: "/details"
+        pathname: "/details",
+        query: {seat}
       });
     }, 1000);
   };
 
   handleCancel = e => {
-    console.log(e);
     this.setState({
       visible: false
     });
@@ -41,24 +49,24 @@ class SingleCard extends React.Component {
           type="primary"
           loading={this.state.loading}
           onClick={this.handleOk}
-        >
+          >
           Continue Booking
         </Button>
       ]}
-    >
+      >
       <SeatDetails
-        sold={[]}
+        sold={this.props.bus.soldSeat}
         setSold={() => {}}
-        booked={[]}
+        booked={this.props.bus.bookedSeat}
         setBooked={() => {}}
         slug={"ss"}
+        handleUserBooked={this.handleUserBooked}
       />
-    
     </Modal>
   );
 
   render() {
-    const {bus} = this.props;
+    const { bus } = this.props;
     return (
       <>
         <Card
@@ -94,7 +102,7 @@ class SingleCard extends React.Component {
             </Col>
           </Row>
         </Card>
-        {this.seatModal()}
+        {this.state.visible && this.seatModal()}
       </>
     );
   }
