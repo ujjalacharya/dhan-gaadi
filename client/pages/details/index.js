@@ -9,7 +9,10 @@ import {
   InputNumber,
   Button
 } from "antd";
+import Swal from "sweetalert2";
+import Router from "next/router";
 import { dec } from "../../utils/encdec";
+import { postBookSeat } from "../../actions/book";
 const { Option } = Select;
 
 class Details extends React.Component {
@@ -43,11 +46,32 @@ class Details extends React.Component {
     this.setState({ phone: value });
   };
 
-  handleSubmit = () => {
+  handleSubmit = async () => {
     const { name, phone, address, email } = this.state;
     const seatNumber = this.props.seat;
     const info = { name, phone, address, email, seatNumber };
-    console.log(info);
+    const resp = await postBookSeat(this.props.slug, info);
+    if (!resp.error) {
+      this.sweetAlert("success");
+    } else {
+      this.sweetAlert("error");
+    }
+  };
+
+  sweetAlert = status => {
+    setTimeout(() => {
+      Router.push("/");
+    }, 1000);
+
+    if (status === "error") {
+      return Swal.fire({
+        icon: "error",
+        title: "Oops...",
+        text: "Something went wrong!"
+      });
+    } else {
+      Swal.fire("Good job!", "You booked the seat", "success");
+    }
   };
 
   render() {

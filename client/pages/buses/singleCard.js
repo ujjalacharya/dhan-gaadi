@@ -34,11 +34,11 @@ class SingleCard extends React.Component {
   };
 
   encryptInfo = seat => {
-    const {startLocation, endLocation, fare, journeyDate, travel} = this.props.bus;
+    const {startLocation, endLocation, fare, journeyDate, travel, slug} = this.props.bus;
     let start = startLocation.name;
     let end = endLocation.name;
     let travelName = travel.name;
-    const info = {start, end, fare, journeyDate, travelName, seat}
+    const info = {start, end, fare, journeyDate, travelName, seat, slug}
     const resp = enc(info);
     this.handleOk(resp)
   }
