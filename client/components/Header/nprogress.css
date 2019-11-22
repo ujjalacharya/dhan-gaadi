@@ -31,15 +31,15 @@
 }
 
 /* Remove these to get rid of the spinner */
-#nprogress .spinner {
+/* #nprogress .spinner {
   display: block;
   position: fixed;
   z-index: 1031;
   top: 15px;
   right: 15px;
-}
+} */
 
-#nprogress .spinner-icon {
+/* #nprogress .spinner-icon {
   width: 18px;
   height: 18px;
   box-sizing: border-box;
@@ -51,7 +51,7 @@
 
   -webkit-animation: nprogress-spinner 400ms linear infinite;
           animation: nprogress-spinner 400ms linear infinite;
-}
+} */
 
 .nprogress-custom-parent {
   overflow: hidden;
