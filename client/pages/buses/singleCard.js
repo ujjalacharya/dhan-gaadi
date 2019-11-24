@@ -49,21 +49,28 @@ class SingleCard extends React.Component {
     });
   };
 
+  seatColorMeaning = () => {
+    return(
+      <>
+        <div style={{display: 'flex', alignItems: 'start', flexDirection: 'row-reverse'}}>
+          <p>Available</p>
+          <Button type="primary" style={{margin: '0 1rem'}}></Button>
+          <p>Booked</p>
+          <Button style={{backgroundColor: "rgb(67, 67, 67)", margin: '0 1rem'}}></Button>
+          <p>Sold</p>
+          <Button type="danger" style={{margin: '0 1rem'}}></Button>
+        </div>
+      </>
+    )
+  }
+
   seatModal = () => (
     <Modal
       title="Seat Details"
       visible={this.state.visible}
       onCancel={this.handleCancel}
       footer={[
-        <Button
-          key="submit"
-          type="primary"
-          loading={this.state.loading}
-          onClick={this.handleOk}
-          disabled
-          >
-          Continue Booking
-        </Button>
+        this.seatColorMeaning()
       ]}
       >
       <SeatDetails
