@@ -60,7 +60,9 @@ class Details extends React.Component {
 
   sweetAlert = status => {
     setTimeout(() => {
-      Router.push("/");
+      if(status !== "error"){
+        Router.push("/");
+      }
     }, 1000);
 
     if (status === "error") {
@@ -70,7 +72,7 @@ class Details extends React.Component {
         text: "Something went wrong!"
       });
     } else {
-      Swal.fire("Good job!", "You booked the seat", "success");
+      Swal.fire("Congrats!", "Your seat is booked", "success");
     }
   };
 
