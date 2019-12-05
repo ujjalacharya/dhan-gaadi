@@ -162,6 +162,16 @@ class Owners extends Component {
             <div className="container-fluid">
               <button className="btn btn-link mt-3" id="menu-toggle"></button>
 
+              <button
+                className="btn btn-outline-primary float-right mt-3 mr-2"
+                data-toggle="modal"
+                data-target="#add-user-modal"
+                onClick={() => this.props.history.push("/add-owner")}
+              >
+                {" "}
+                Add Owner
+              </button>
+
               <h1 className="mt-2 text-primary">Owners</h1>
               {this.state.isLoading ? (
                 <Loading />
