@@ -14,6 +14,7 @@ import AllBusAvailable from "../Components/pages/BusAvailable/all";
 import BusUnavailable from "../Components/pages/BusUnavailable";
 import AllBusUnavailable from "../Components/pages/BusUnavailable/all";
 import Owners from "../Components/pages/People/Owners";
+import AddOwner from "../Components/pages/People/addOwner";
 import Users from "../Components/pages/People/Users";
 import Guests from "../Components/pages/People/Guests";
 import Seats from "../Components/pages/Seats";
@@ -55,6 +56,7 @@ const MainRouter = () => (
     <SuperAdminRoute path="/people-guests" exact component={Guests} />
     <SuperAdminRoute path="/locations" exact component={Locations} />
     <SuperAdminRoute path="/add-location" exact component={AddLocation} />
+    <SuperAdminRoute path="/add-owner" exact component={AddOwner} />
     <SuperAdminRoute path="/edit-location/:slug" exact component={EditLocation} />
     <SuperAdminRoute path="/travels" exact component={Travels} />
     <SuperAdminRoute path="/add-travel" exact component={AddTravel} />
