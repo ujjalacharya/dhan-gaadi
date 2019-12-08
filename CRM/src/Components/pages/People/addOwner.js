@@ -2,14 +2,9 @@ import React, { Component } from "react";
 import Layout from "../../core/Layout";
 import Swal from "sweetalert2";
 import ImageUploader from "react-images-upload";
-import { updateOwner } from "../../../Utils/Requests/People";
+import { updateOwner, addOwner } from "../../../Utils/Requests/People";
 import showError from "../../core/Error";
 import showLoading from "../../core/Loading";
-import {
-  isAuthenticated,
-  refreshToken,
-  authenticate
-} from "../../../Utils/Requests/Auth";
 
 class AddOwner extends Component {
   state = {
@@ -40,7 +35,28 @@ class AddOwner extends Component {
         title: "Password did not match"
       });
     } else {
-      console.log(this.state);
+      this.setState({ loading: true });
+
+      const { formData } = this.state;
+
+      for (let value of formData.values()) {
+        console.log("value--", value);
+      }
+
+      const resp = await addOwner({...this.state}).catch(err => {
+        this.setState({ error: err.response.data.error, loading: false });
+      });
+
+      if (resp && resp.status === 200) {
+        this.setState({ loading: false });
+
+        Swal.fire({
+          type: "success",
+          title: "New Owner Added"
+        });
+
+        this.props.history.push("/people-owners");
+      }
     }
   };
 
@@ -50,18 +66,18 @@ class AddOwner extends Component {
 
   handleChange = input => e => {
     let value;
-    if (input === "photo") {
-      if (e.length === 0) {
-        return this.setState({ buttonStyle: "block", photo: "" });
-      }
+    // if (input === "photo") {
+    //   if (e.length === 0) {
+    //     return this.setState({ buttonStyle: "block", photo: "" });
+    //   }
 
-      value = e[0];
-      this.setState({ buttonStyle: "none" });
-    } else {
+    //   value = e[0];
+    //   this.setState({ buttonStyle: "none" });
+    // } else {
       value = e.target.value;
-    }
+    // }
 
-    this.state.formData.set(input, value);
+    // this.state.formData.set(input, value);
 
     this.setState({ [input]: value, error: "" });
   };
@@ -160,10 +176,10 @@ class AddOwner extends Component {
               className="btn btn-success submit-form"
               onClick={this.submit}
             >
-              Update Profile
+              Add Owner
             </button>
 
-            <div className="form-group">
+            {/* <div className="form-group">
               <ImageUploader
                 withIcon={true}
                 buttonText="Upload photo"
@@ -175,7 +191,7 @@ class AddOwner extends Component {
                 buttonStyles={{ display: this.state.buttonStyle }}
                 //   defaultImage={values.image}
               />
-            </div>
+            </div> */}
           </>
         )}
       </Layout>
