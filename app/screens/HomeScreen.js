@@ -71,7 +71,7 @@ export default function HomeScreen() {
 
 HomeScreen.navigationOptions = {
   // header: null,
-  title: "Home"
+  title: "Dhangaadi"
 };
 
 function DevelopmentModeNotice() {
