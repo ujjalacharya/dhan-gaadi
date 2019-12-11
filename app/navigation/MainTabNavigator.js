@@ -9,6 +9,8 @@ import LinksScreen from '../screens/LinksScreen';
 import InfoScreen from '../screens/InfoScreen';
 import HelpScreen from '../screens/HelpScreen';
 
+import Colors from "../constants/Colors";
+
 // const config = Platform.select({
 //   web: { headerMode: 'screen' },
 //   default: {},
@@ -20,9 +22,9 @@ import HelpScreen from '../screens/HelpScreen';
 const config = {
 	defaultNavigationOptions: {
 		headerStyle: {
-			backgroundColor: '#001529',
+			backgroundColor: Colors.backgroundColor,
 		},
-		headerTintColor: '#fff',
+		headerTintColor: Colors.headerTintColor,
 		headerTitleStyle: {
 			fontWeight: 'bold',
 		},
@@ -102,7 +104,7 @@ const tabNavigator = createBottomTabNavigator(
 	},
 	{
 		tabBarOptions: {
-      activeTintColor: '#001529',
+      activeTintColor: Colors.backgroundColor,
 			// labelStyle: {
 			// 	fontSize: 12,
 			// },
