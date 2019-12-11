@@ -75,7 +75,7 @@ const InfoStack = createStackNavigator(
 InfoStack.navigationOptions = {
 	tabBarLabel: 'Info',
 	tabBarIcon: ({ focused }) => (
-		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-information' : 'md-information'} />
+		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-information-circle' : 'md-information-circle'} />
 	),
 };
 
