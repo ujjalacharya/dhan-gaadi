@@ -9,7 +9,7 @@ import LinksScreen from '../screens/LinksScreen';
 import InfoScreen from '../screens/InfoScreen';
 import HelpScreen from '../screens/HelpScreen';
 
-import Colors from "../constants/Colors";
+import Colors from '../constants/Colors';
 
 // const config = Platform.select({
 //   web: { headerMode: 'screen' },
@@ -26,6 +26,8 @@ const config = {
 		},
 		headerTintColor: Colors.headerTintColor,
 		headerTitleStyle: {
+			textAlign: 'center',
+			flex: 1,
 			fontWeight: 'bold',
 		},
 	},
@@ -43,8 +45,8 @@ HomeStack.navigationOptions = {
 	tabBarIcon: ({ focused, tintColor }) => (
 		<TabBarIcon
 			focused={focused}
-      name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
-      tintColor={{tintColor}}
+			name={Platform.OS === 'ios' ? `ios-home${focused ? '' : '-outline'}` : 'md-home'}
+			tintColor={{ tintColor }}
 		/>
 	),
 };
@@ -75,7 +77,10 @@ const InfoStack = createStackNavigator(
 InfoStack.navigationOptions = {
 	tabBarLabel: 'Info',
 	tabBarIcon: ({ focused }) => (
-		<TabBarIcon focused={focused} name={Platform.OS === 'ios' ? 'ios-information-circle' : 'md-information-circle'} />
+		<TabBarIcon
+			focused={focused}
+			name={Platform.OS === 'ios' ? 'ios-information-circle' : 'md-information-circle'}
+		/>
 	),
 };
 
@@ -104,7 +109,7 @@ const tabNavigator = createBottomTabNavigator(
 	},
 	{
 		tabBarOptions: {
-      activeTintColor: Colors.backgroundColor,
+			activeTintColor: Colors.backgroundColor,
 			// labelStyle: {
 			// 	fontSize: 12,
 			// },
