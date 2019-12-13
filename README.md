@@ -1,11 +1,11 @@
-## API, CRM and client application of dhan-gaadi, an online bus booking system
+# API, CRM and client application of dhan-gaadi, an online bus booking system
 
-### Demo (Client): 
+## Demo (Client => NextJS): 
 
 ![](./demo/client.gif)
 
-### Demo (CRM):
+## Demo (CRM => React):
 ![](./demo/CRM.gif)
 
-## Demo (Mobile App)
-#### Coming soon
+## Demo (Mobile App => React-Native)
+### Coming soon
