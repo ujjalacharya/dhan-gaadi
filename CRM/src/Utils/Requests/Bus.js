@@ -1,6 +1,11 @@
 import axios from 'axios';
+import { checkIfTokenExpired } from '../helpers';
+import { isAuthenticated } from './Auth';
 
-export const getAvailableBusesOfOwner = () => axios.get('/bus/owner-bus-available');
+export const getAvailableBusesOfOwner = () =>{
+    // checkIfTokenExpired(isAuthenticated().token);
+    return axios.get('/bus/owner-bus-available');
+} 
 export const getAllAvailableBuses = () => axios.get('/bus/all-bus-available');
 
 export const getUnavailableBusesOfOwner = () => axios.get('/bus/owner-bus-unavailable');
