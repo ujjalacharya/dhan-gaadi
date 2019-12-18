@@ -14,7 +14,7 @@ export const checkIfTokenExpired = (token=null) => {
         refresh_hash: dec.salt,
         avatar: dec.avatar || null
       };
-      token = jwt.sign(payload, JWT_SECRET, { expiresIn: 60 });
+      token = jwt.sign(payload, JWT_SECRET, { expiresIn: '2h' });
     }
     setAuthToken(token);
     return token;
