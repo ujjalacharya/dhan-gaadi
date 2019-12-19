@@ -41,7 +41,7 @@ exports.signin = async (req, res) => {
     avatar: owner.photo || null
   };
 
-  const token = jwt.sign(payload, process.env.JWT_SECRET /*{ expiresIn: 5 }*/);
+  const token = jwt.sign(payload, process.env.JWT_SECRET, {expiresIn: '2h' });
 
   return res.json({ token });
 };
