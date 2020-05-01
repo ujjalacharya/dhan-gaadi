@@ -1,6 +1,9 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Button, AsyncStorage } from "react-native";
-// import { Button } from 'react-native-paper'
+import { connect } from 'react-redux';
+
+import { signIn} from '../store/actions/user_actions';
+import { bindActionCreators } from 'redux';
 
 export class LoginScreen extends Component {
   componentDidMount() {
@@ -8,7 +11,7 @@ export class LoginScreen extends Component {
   }
 
   handleLogin = async () => {
-    this.props.loginLogout("fdf");
+    this.props.signIn("fdf");
   };
 
   render() {
@@ -25,4 +28,15 @@ const styles = StyleSheet.create({
   container: {},
 });
 
-export default LoginScreen;
+
+function mapStateToProps(state){
+  return {
+      isAuth: state.User.auth.isAuth
+  }
+}
+
+function mapDispatchToProps(dispatch){
+  return bindActionCreators({signIn},dispatch);
+}
+
+export default connect(mapStateToProps,mapDispatchToProps)(LoginScreen);

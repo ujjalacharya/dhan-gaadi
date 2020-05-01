@@ -3,10 +3,12 @@ import { createStackNavigator } from "@react-navigation/stack";
 import FeedScreen from "../../screens/FeedScreen";
 import LoginScreen from "../../screens/LoginScreen";
 
+import { connect } from 'react-redux';
+
 const Stack = createStackNavigator();
 
-const FeedStack = () => {
-    const isAuth = false;
+const FeedStack = ({isAuth}) => {
+    
   return (
     <Stack.Navigator>
       {isAuth ? (
@@ -18,4 +20,11 @@ const FeedStack = () => {
   );
 };
 
-export default FeedStack;
+function mapStateToProps(state){
+    console.log(state)
+    return {
+        isAuth: state.User.auth.isAuth
+    }
+}
+
+export default connect(mapStateToProps)(FeedStack);
