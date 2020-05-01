@@ -1,10 +1,14 @@
 import React, { Component } from "react";
 import { Text, View, Button, AsyncStorage } from "react-native";
 
-export default class FeedScreen extends Component {
- 
+import { connect } from "react-redux";
+
+import { signOut } from "../store/actions/user_actions";
+import { bindActionCreators } from "redux";
+
+class FeedScreen extends Component {
   handleLogout = async () => {
-    this.props.loginLogout();
+    this.props.signOut();
   };
 
   render() {
@@ -16,3 +20,15 @@ export default class FeedScreen extends Component {
     );
   }
 }
+
+function mapStateToProps(state) {
+  return {
+    isAuth: state.User.auth.isAuth,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ signOut }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);

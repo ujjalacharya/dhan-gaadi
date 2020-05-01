@@ -21,7 +21,6 @@ const FeedStack = ({isAuth}) => {
 };
 
 function mapStateToProps(state){
-    console.log(state)
     return {
         isAuth: state.User.auth.isAuth
     }

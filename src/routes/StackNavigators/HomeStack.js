@@ -1,17 +1,48 @@
+// import React from "react";
+// import { createStackNavigator } from "@react-navigation/stack";
+// import HomeScreen from "../../screens/HomeScreen";
+// import SettingScreen from "../../screens/SettingScreen";
+
+// const Stack = createStackNavigator();
+
+// const HomeStack = () => {
+//     return (
+//       <Stack.Navigator>
+//         <Stack.Screen name="Home" component={HomeScreen} />
+//         <Stack.Screen name="Settings" component={SettingScreen} />
+//       </Stack.Navigator>
+//     );
+//   };
+
+// export default HomeStack;
+
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
 import HomeScreen from "../../screens/HomeScreen";
 import SettingScreen from "../../screens/SettingScreen";
+import LoginScreen from "../../screens/LoginScreen";
+
+import { connect } from "react-redux";
 
 const Stack = createStackNavigator();
 
-const HomeStack = () => {
-    return (
-      <Stack.Navigator>
-        <Stack.Screen name="Home" component={HomeScreen} />
+const HomeStack = ({ isAuth }) => {
+  return (
+    <Stack.Navigator>
+      <Stack.Screen name="Home" component={HomeScreen} />
+      {isAuth ? (
         <Stack.Screen name="Settings" component={SettingScreen} />
-      </Stack.Navigator>
-    );
-  };
+      ) : (
+        <Stack.Screen name="Login" component={LoginScreen} />
+      )}
+    </Stack.Navigator>
+  );
+};
 
-export default HomeStack;
+function mapStateToProps(state) {
+  return {
+    isAuth: state.User.auth.isAuth,
+  };
+}
+
+export default connect(mapStateToProps)(HomeStack);

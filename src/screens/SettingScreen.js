@@ -3,9 +3,9 @@ import { Text, View } from 'react-native'
 
 export class SettingScreen extends Component {
 
-    componentDidMount() {
-        this.props.navigation.setOptions({ title: "Setting" });
-      }
+    // componentDidMount() {
+    //     this.props.navigation.setOptions({ title: "Setting" });
+    //   }
 
     render() {
         return (

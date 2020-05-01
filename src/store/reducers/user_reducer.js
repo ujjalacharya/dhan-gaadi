@@ -1,4 +1,4 @@
-import { SIGN_IN } from "../types";
+import { SIGN_IN, SIGN_OUT } from "../types";
 
 export default function (state={auth: {isAuth: false}}, action) {
   switch (action.type) {
@@ -8,6 +8,14 @@ export default function (state={auth: {isAuth: false}}, action) {
         auth: {
           token: "dummy_token",
           isAuth: true,
+        },
+      };
+    case SIGN_OUT:
+      return {
+        ...state,
+        auth: {
+          token: "",
+          isAuth: false,
         },
       };
     default:
