@@ -3,23 +3,12 @@ import { Text, View, StyleSheet, Button, AsyncStorage } from "react-native";
 // import { Button } from 'react-native-paper'
 
 export class LoginScreen extends Component {
-
-  state = {
-
-  }
-
   componentDidMount() {
     this.props.navigation.setOptions({ title: "Login" });
   }
 
   handleLogin = async () => {
-    try {
-      await AsyncStorage.setItem("token", "xa hai");
-      this.setState({})
-    } catch (error) {
-      // Error saving data
-      console.log(error);
-    }
+    this.props.loginLogout("fdf");
   };
 
   render() {
