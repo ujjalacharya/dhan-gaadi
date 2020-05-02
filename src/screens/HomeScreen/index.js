@@ -1,12 +1,18 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet } from "react-native";
-import { Modal, Portal, TextInput, Colors } from "react-native-paper";
+import { Text, View, StyleSheet, Alert } from "react-native";
+import {
+  Modal,
+  Portal,
+  TextInput,
+  Colors,
+  TouchableRipple,
+} from "react-native-paper";
 import { connect } from "react-redux";
 import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
 import Ionicons from "@expo/vector-icons/Ionicons";
-
+import { TouchableNativeFeedback } from "react-native-gesture-handler";
 
 export class HomeScreen extends Component {
   state = {
@@ -23,27 +29,33 @@ export class HomeScreen extends Component {
             <View style={styles.searchbarContainer}>
               <Button
                 mode="contained"
-                color="white"
+                color="#fc7753"
                 style={styles.sloganButton}
                 onPress={() => console.log("Pressed")}
               >
-                <Text style={{ color: ConstantColors.tintColor, fontSize: 20 }}>
+                <Text style={{ color: "white", fontSize: 20 }}>
                   Get Seat Go!
                 </Text>
               </Button>
             </View>
             <View style={{ height: "50%", marginHorizontal: 20 }}>
-              <View style={styles.inputField}>
+              <TouchableRipple
+                style={styles.inputField}
+                onPress={() => Alert.alert("Show From modal")}
+              >
                 <Text style={{ padding: 15, color: "gray", fontSize: 15 }}>
                   FROM
                 </Text>
-              </View>
-              <View style={styles.inputField}>
+              </TouchableRipple>
+              <TouchableRipple
+                style={styles.inputField}
+                onPress={() => Alert.alert("Show To modal")}
+              >
                 <Text style={{ padding: 15, color: "gray", fontSize: 15 }}>
                   TO
                 </Text>
-              </View>
-            
+              </TouchableRipple>
+
               <View
                 style={{
                   marginTop: 20,
@@ -66,7 +78,6 @@ export class HomeScreen extends Component {
                     <Text style={{ color: "white" }}>Tomorrow</Text>
                   </View>
                   <View style={styles.circleButton}>
-                   
                     <Ionicons name="ios-attach" size={20} color="white" />
                   </View>
                 </View>
@@ -112,7 +123,7 @@ const styles = StyleSheet.create({
     margin: 5,
   },
   sloganButton: {
-    width: "90%",
+    width: "120%",
     // height: "40%",
     borderRadius: 40,
     borderWidth: 1,
