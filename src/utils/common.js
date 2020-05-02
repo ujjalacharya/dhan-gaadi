@@ -1,12 +1,16 @@
 import Colors from "../constants/Colors";
 
 export const headerOptions = (headerTitle = "DHAN-GAADI") => ( {
-    title: headerTitle,
+    title: null,
     headerStyle: {
-      backgroundColor: Colors.tintColor,
+      // backgroundColor: Colors.tintColor,
+      backgroundColor: "transparent",
+      elevation: 0,
     },
     headerTintColor: Colors.headerTintColor,
-    headerTitleStyle: {
-      fontWeight: "bold",
-    },
+    // headerTitleStyle: {
+    //   flex: 1,
+    //   fontWeight: "bold",
+    //   alignSelf: "center"
+    // },
   })
