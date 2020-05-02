@@ -4,17 +4,17 @@ import FeedScreen from "../../screens/FeedScreen";
 import LoginScreen from "../../screens/LoginScreen";
 
 import { connect } from 'react-redux';
+import { headerOptions } from "../../utils/common";
 
 const Stack = createStackNavigator();
 
 const FeedStack = ({isAuth}) => {
-    
   return (
     <Stack.Navigator>
       {isAuth ? (
-        <Stack.Screen name="Feeds" component={FeedScreen} />
+        <Stack.Screen name="Feeds" component={FeedScreen} options={headerOptions("Feeds")}/>
       ) : (
-        <Stack.Screen name="Login" component={LoginScreen} />
+        <Stack.Screen name="Login" component={LoginScreen} options={headerOptions("Login")}/>
       )}
     </Stack.Navigator>
   );
