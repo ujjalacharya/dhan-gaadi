@@ -2,7 +2,8 @@ const tintColor = '#001529';
 
 export default {
   tintColor,
-  backgroundColor: '#86909a', 
+  grayColor: "#66727e",
+  backgroundColor: '#86909a',
   cardColor: "#f1f7ff",
   tabIconDefault: '#ccc',
   headerTintColor: "#fff",
