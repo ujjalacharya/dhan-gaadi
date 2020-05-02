@@ -29,7 +29,7 @@ export class HomeScreen extends Component {
             <View style={styles.searchbarContainer}>
               <Button
                 mode="contained"
-                color="#fc7753"
+                color="#2978a0"
                 style={styles.sloganButton}
                 onPress={() => console.log("Pressed")}
               >
@@ -114,21 +114,21 @@ export class HomeScreen extends Component {
 const styles = StyleSheet.create({
   container: {
     flex: 1,
-    marginTop: 10,
+    marginTop: 30,
   },
   searchbarContainer: {
     height: "15%",
     justifyContent: "center",
     alignItems: "center",
-    margin: 5,
+    marginTop: -30,
   },
   sloganButton: {
-    width: "120%",
+    width: "105%",
     // height: "40%",
-    borderRadius: 40,
+    // borderRadius: 40,
     borderWidth: 1,
-    borderColor: ConstantColors.tintColor,
-    elevation: 8,
+    // borderColor: ConstantColors.tintColor,
+    elevation: 20,
   },
   inputField: {
     marginTop: 20,
