@@ -1,6 +1,6 @@
 import React from "react";
 import { createStackNavigator } from "@react-navigation/stack";
-import FeedScreen from "../../screens/FeedScreen";
+import ProfileScreen from "../../screens/ProfileScreen";
 import LoginScreen from "../../screens/LoginScreen";
 
 import { connect } from 'react-redux';
@@ -8,11 +8,11 @@ import { headerOptions } from "../../utils/common";
 
 const Stack = createStackNavigator();
 
-const FeedStack = ({isAuth}) => {
+const ProfileStack = ({isAuth}) => {
   return (
     <Stack.Navigator>
       {isAuth ? (
-        <Stack.Screen name="Feeds" component={FeedScreen} options={headerOptions("Feeds")}/>
+        <Stack.Screen name="Profile" component={ProfileScreen} options={headerOptions("Profile")}/>
       ) : (
         <Stack.Screen name="Login" component={LoginScreen} options={headerOptions("Login")}/>
       )}
@@ -26,4 +26,4 @@ function mapStateToProps(state){
     }
 }
 
-export default connect(mapStateToProps)(FeedStack);
+export default connect(mapStateToProps)(ProfileStack);

@@ -5,6 +5,8 @@ export default {
   cardColor: "#f1f7ff",
   tabIconDefault: '#ccc',
   headerTintColor: "#fff",
+  activeTintColor: "#fff",
+  inactiveTintColor: 'gray',
   tabIconSelected: tintColor,
   tabBar: '#fefefe',
   errorBackground: 'red',

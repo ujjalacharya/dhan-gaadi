@@ -6,7 +6,7 @@ import { connect } from "react-redux";
 import { signOut } from "../store/actions/user_actions";
 import { bindActionCreators } from "redux";
 
-class FeedScreen extends Component {
+class ProfileScreen extends Component {
   handleLogout = async () => {
     this.props.signOut();
   };
@@ -14,7 +14,7 @@ class FeedScreen extends Component {
   render() {
     return (
       <View>
-        <Text> Feed Screen </Text>
+        <Text> Profile Screen </Text>
         <Button title="Logout" onPress={this.handleLogout} />
       </View>
     );
@@ -31,4 +31,4 @@ function mapDispatchToProps(dispatch) {
   return bindActionCreators({ signOut }, dispatch);
 }
 
-export default connect(mapStateToProps, mapDispatchToProps)(FeedScreen);
+export default connect(mapStateToProps, mapDispatchToProps)(ProfileScreen);
