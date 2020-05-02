@@ -2,6 +2,7 @@ const tintColor = '#001529';
 
 export default {
   tintColor,
+  backgroundColor: '#86909a', 
   cardColor: "#f1f7ff",
   tabIconDefault: '#ccc',
   headerTintColor: "#fff",
@@ -15,5 +16,5 @@ export default {
   warningText: '#666804',
   noticeBackground: tintColor,
   noticeText: '#fff',
-  backgroundColor: "#001529"
+  // backgroundColor: "#001529"
 };

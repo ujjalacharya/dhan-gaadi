@@ -1,4 +1,4 @@
-import Colors from "../constants/Colors";
+import Colors from "../constants/ConstantColors";
 
 export const headerOptions = (headerTitle = "DHAN-GAADI") => ( {
     title: null,

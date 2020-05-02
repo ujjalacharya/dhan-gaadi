@@ -2,7 +2,7 @@ import React, { Component } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import { HomeStack, MessageStack, ProfileStack } from "./StackNavigators";
-import Colors from "../constants/Colors";
+import ConstantColors from "../constants/ConstantColors";
 
 const Tab = createBottomTabNavigator();
 
@@ -26,13 +26,13 @@ export default function TabNavigators() {
         },
       })}
       tabBarOptions={{
-        inactiveTintColor: Colors.inactiveTintColor,
-        activeTintColor: Colors.activeTintColor,
+        inactiveTintColor: ConstantColors.inactiveTintColor,
+        activeTintColor: ConstantColors.activeTintColor,
         showLabel: false,
         // activeBackgroundColor:'#00194b',
-        inactiveBackgroundColor: Colors.tintColor,
+        inactiveBackgroundColor: ConstantColors.tintColor,
         style: {
-          backgroundColor: Colors.tintColor,
+          backgroundColor: ConstantColors.tintColor,
         },
       }}
     >

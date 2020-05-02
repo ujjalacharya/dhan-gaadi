@@ -5,29 +5,29 @@ import SettingScreen from "../../screens/SettingScreen";
 import LoginScreen from "../../screens/LoginScreen";
 
 import { connect } from "react-redux";
-import { headerOptions } from "../../utils/common";
 
 const Stack = createStackNavigator();
 
 const HomeStack = ({ isAuth }) => {
   return (
-    <Stack.Navigator>
+    <Stack.Navigator
+      screenOptions={{
+        headerShown: false,
+      }}
+    >
       <Stack.Screen
         name="Home"
         component={HomeScreen}
-        options={headerOptions()}
       />
       {isAuth ? (
         <Stack.Screen
           name="Settings"
           component={SettingScreen}
-          options={headerOptions("Settings")}
-          />
-          ) : (
-            <Stack.Screen
-            name="Login"
-            component={LoginScreen}
-            options={headerOptions("Login")}
+        />
+      ) : (
+        <Stack.Screen
+          name="Login"
+          component={LoginScreen}
         />
       )}
     </Stack.Navigator>
