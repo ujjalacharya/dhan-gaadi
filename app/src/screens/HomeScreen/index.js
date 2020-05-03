@@ -7,16 +7,25 @@ import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
+import FromModal from "./Modals/FromModal";
 
 export class HomeScreen extends Component {
   state = {
     text: "",
-    visible: false,
+    showModal: false,
+
   };
+
+  handleModalVisibility = () => {
+    this.setState({
+      showModal: !this.state.showModal
+    })
+  } 
 
   render() {
     return (
       <>
+      <FromModal handleModalVisibility={this.handleModalVisibility} showModal={this.state.showModal}/>
         <HomeHeader headerTitle="DHAN-GAADI" />
         <View style={styles.container}>
           <Card style={{ height: "75%" }}>
@@ -26,7 +35,7 @@ export class HomeScreen extends Component {
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
                 style={styles.inputField}
-                onPress={() => Alert.alert("Show From modal")}
+                onPress={() => this.handleModalVisibility()}
               >
                 <Text style={styles.inputText}>FROM</Text>
               </TouchableRipple>
@@ -128,7 +137,7 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     alignItems: "center",
   },
-  
+
   submitButton: {
     width: "80%",
     borderRadius: 50,
