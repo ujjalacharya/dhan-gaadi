@@ -118,7 +118,7 @@ export class HomeScreen extends Component {
                           : "gray",
                     }}
                   >
-                    <Ionicons name="ios-attach" size={20} color="white" />
+                    <Ionicons name="ios-calendar" size={20} color="white" />
                   </View>
                 </View>
               </View>
