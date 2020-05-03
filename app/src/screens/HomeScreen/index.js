@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { Colors, TouchableRipple } from "react-native-paper";
+import { Colors, TouchableRipple, Divider } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import moment from "moment";
@@ -115,8 +115,8 @@ export class HomeScreen extends Component {
         />
         <HomeHeader headerTitle="" />
         <Banner />
-        <ScrollView contentContainerStyle={styles.container}>
-          <Card style={{ height: "95%", width: "90%", marginTop: 10 }}>
+        <View style={styles.container}>
+          <Card style={{ height: "55%", width: "90%", marginTop: 10 }}>
             {/* <View style={styles.searchbarContainer}></View> */}
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
@@ -229,9 +229,8 @@ export class HomeScreen extends Component {
               </View>
             </View>
           </Card>
-        </ScrollView>
-          
-        
+          <AllBusScrollView />
+        </View>
       </>
     );
   }
@@ -239,7 +238,7 @@ export class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    height: "70%",
+    height: "100%",
     // marginTop: 30,
     alignItems: "center",
   },

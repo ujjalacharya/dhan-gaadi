@@ -1,21 +1,36 @@
-import * as React from 'react';
-import { Avatar, Button, Card, Title, Paragraph } from 'react-native-paper';
-
-const LeftContent = props => <Avatar.Icon {...props} icon="folder" />
+import * as React from "react";
+import { View, ScrollView, Text } from "react-native";
+import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
 
 const AllBusScrollView = () => (
-  <Card>
-    <Card.Title title="Card Title" subtitle="Card Subtitle" left={LeftContent} />
-    <Card.Content>
-      <Title>Card title</Title>
-      <Paragraph>Card content</Paragraph>
-    </Card.Content>
-    <Card.Cover source={{ uri: 'https://picsum.photos/700' }} />
-    <Card.Actions>
-      <Button>Cancel</Button>
-      <Button>Ok</Button>
-    </Card.Actions>
-  </Card>
+  <View
+    style={{
+      backgroundColor: "gray",
+      height: "40%",
+      width: "100%",
+      position: "absolute",
+      bottom: 0,
+    }}
+  >
+    <ScrollView
+      horizontal={true}
+      showsHorizontalScrollIndicator={false}
+      scrollEventThrottle={200}
+      decelerationRate="fast"
+    >
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+      <Text>dfdgfdgdfgdfgdfgdfgdfgdfgdgdf</Text>
+    </ScrollView>
+  </View>
 );
 
 export default AllBusScrollView;
