@@ -3,12 +3,13 @@ import { Text, View, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { Colors, TouchableRipple } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
+import moment from "moment";
+import _ from "lodash";
 import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
 import AddressModal from "./Modals/AddressModal";
-import moment from "moment";
 import DatePickerModal from "./Modals/DatePickerModal";
 
 export class HomeScreen extends Component {
@@ -85,6 +86,18 @@ export class HomeScreen extends Component {
     let buttonEnabled =
       this.state.From && this.state.To && this.state.pickedDate;
 
+    let fromInputFieldBackground = _.isEmpty(this.state.From)
+      ? "#DCDCDC"
+      : "#77ba99";
+
+    let toInputFieldBackground = _.isEmpty(this.state.To)
+      ? "#DCDCDC"
+      : "#77ba99";
+
+    let fromInputTextColor = _.isEmpty(this.state.From) ? "black" : "white";
+
+    let toInputTextColor = _.isEmpty(this.state.To) ? "black" : "white";
+
     return (
       <>
         <AddressModal
@@ -106,22 +119,30 @@ export class HomeScreen extends Component {
             </View>
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
-                style={styles.inputField}
+                style={{
+                  ...styles.inputField,
+                  backgroundColor: fromInputFieldBackground,
+                }}
                 onPress={() =>
                   this.handleModalVisibility({ addressState: "From" })
                 }
               >
-                <Text style={styles.inputText}>
+                <Text
+                  style={{ ...styles.inputText, color: fromInputTextColor }}
+                >
                   {this.state.From.name || "FROM"}
                 </Text>
               </TouchableRipple>
               <TouchableRipple
-                style={styles.inputField}
+                style={{
+                  ...styles.inputField,
+                  backgroundColor: toInputFieldBackground,
+                }}
                 onPress={() =>
                   this.handleModalVisibility({ addressState: "To" })
                 }
               >
-                <Text style={styles.inputText}>
+                <Text style={{ ...styles.inputText, color: toInputTextColor }}>
                   {this.state.To.name || "TO"}
                 </Text>
               </TouchableRipple>
