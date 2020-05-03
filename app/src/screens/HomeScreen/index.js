@@ -20,7 +20,7 @@ export class HomeScreen extends Component {
     pickedColor: "",
     showDatePickerModal: false,
     From: {},
-    To: {}
+    To: {},
   };
 
   handleModalVisibility = ({ addressState }) => {
@@ -69,13 +69,16 @@ export class HomeScreen extends Component {
   };
 
   handleFromTo = (type, value) => {
-    this.setState({
-      [type]: value,
-    }, ()=>{
-      this.handleModalVisibility({
-        addressState: "",
-      });
-    });
+    this.setState(
+      {
+        [type]: value,
+      },
+      () => {
+        this.handleModalVisibility({
+          addressState: "",
+        });
+      }
+    );
   };
 
   render() {
@@ -105,7 +108,9 @@ export class HomeScreen extends Component {
                   this.handleModalVisibility({ addressState: "From" })
                 }
               >
-                <Text style={styles.inputText}>{this.state.From.name || "FROM"}</Text>
+                <Text style={styles.inputText}>
+                  {this.state.From.name || "FROM"}
+                </Text>
               </TouchableRipple>
               <TouchableRipple
                 style={styles.inputField}
@@ -113,7 +118,9 @@ export class HomeScreen extends Component {
                   this.handleModalVisibility({ addressState: "To" })
                 }
               >
-                <Text style={styles.inputText}>{this.state.To.name || "TO"}</Text>
+                <Text style={styles.inputText}>
+                  {this.state.To.name || "TO"}
+                </Text>
               </TouchableRipple>
 
               <View style={styles.pickerContainer}>
@@ -142,13 +149,9 @@ export class HomeScreen extends Component {
                           ? ConstantColors.bannerColor
                           : "gray",
                     }}
+                    onPress={() => this.handleDatePicker("tomorrow")}
                   >
-                    <Text
-                      style={{ color: "white" }}
-                      onPress={() => this.handleDatePicker("tomorrow")}
-                    >
-                      Tomorrow
-                    </Text>
+                    <Text style={{ color: "white" }}>Tomorrow</Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
