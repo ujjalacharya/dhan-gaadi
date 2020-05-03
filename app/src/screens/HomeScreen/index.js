@@ -9,6 +9,7 @@ import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
 import AddressModal from "./Modals/AddressModal";
 import moment from "moment";
+import DatePickerModal from "./Modals/DatePickerModal";
 
 export class HomeScreen extends Component {
   state = {
@@ -17,6 +18,7 @@ export class HomeScreen extends Component {
     addressState: "",
     pickedDate: "",
     pickedColor: "",
+    showDatePickerModal: false,
   };
 
   handleModalVisibility = ({ addressState }) => {
@@ -40,7 +42,28 @@ export class HomeScreen extends Component {
         pickedDate: moment(tomorrow).format("YYYY-MM-DD"),
         pickedColor: "tomorrow",
       });
+    } else if (when === "custom") {
+      this.setState({
+        pickedColor: "custom",
+        showDatePickerModal: true,
+      });
     }
+  };
+
+  handleCustomPicker = (event, selectedDate, callback) => {
+    if (event.type === "dismissed") {
+      this.setState({
+        showDatePickerModal: false,
+      });
+    } else {
+      const pickedDate = moment(selectedDate).format("YYYY-MM-DD");
+      this.setState({
+        pickedDate,
+        pickedDateForPicker: selectedDate,
+        showDatePickerModal: false,
+      });
+    }
+    callback();
   };
 
   render() {
@@ -50,6 +73,11 @@ export class HomeScreen extends Component {
           handleModalVisibility={this.handleModalVisibility}
           showModal={this.state.showModal}
           addressState={this.state.addressState}
+        />
+        <DatePickerModal
+          showDatePickerModal={this.state.showDatePickerModal}
+          handleCustomPicker={this.handleCustomPicker}
+          pickedDateForPicker={this.state.pickedDateForPicker}
         />
         <HomeHeader headerTitle="DHAN-GAADI" />
         <View style={styles.container}>
@@ -109,7 +137,7 @@ export class HomeScreen extends Component {
                       Tomorrow
                     </Text>
                   </TouchableOpacity>
-                  <View
+                  <TouchableOpacity
                     style={{
                       ...styles.circleButton,
                       backgroundColor:
@@ -117,9 +145,10 @@ export class HomeScreen extends Component {
                           ? ConstantColors.bannerColor
                           : "gray",
                     }}
+                    onPress={() => this.handleDatePicker("custom")}
                   >
                     <Ionicons name="ios-calendar" size={20} color="white" />
-                  </View>
+                  </TouchableOpacity>
                 </View>
               </View>
               <View style={styles.submitButtonContainer}>
