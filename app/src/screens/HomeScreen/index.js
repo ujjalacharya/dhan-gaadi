@@ -7,25 +7,30 @@ import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
-import FromModal from "./Modals/FromModal";
+import AddressModal from "./Modals/AddressModal";
 
 export class HomeScreen extends Component {
   state = {
     text: "",
     showModal: false,
-
+    addressState: "",
   };
 
-  handleModalVisibility = () => {
+  handleModalVisibility = ({ addressState }) => {
     this.setState({
-      showModal: !this.state.showModal
-    })
-  } 
+      showModal: !this.state.showModal,
+      addressState,
+    });
+  };
 
   render() {
     return (
       <>
-      <FromModal handleModalVisibility={this.handleModalVisibility} showModal={this.state.showModal}/>
+        <AddressModal
+          handleModalVisibility={this.handleModalVisibility}
+          showModal={this.state.showModal}
+          addressState={this.state.addressState}
+        />
         <HomeHeader headerTitle="DHAN-GAADI" />
         <View style={styles.container}>
           <Card style={{ height: "75%" }}>
@@ -35,13 +40,17 @@ export class HomeScreen extends Component {
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
                 style={styles.inputField}
-                onPress={() => this.handleModalVisibility()}
+                onPress={() =>
+                  this.handleModalVisibility({ addressState: "From" })
+                }
               >
                 <Text style={styles.inputText}>FROM</Text>
               </TouchableRipple>
               <TouchableRipple
                 style={styles.inputField}
-                onPress={() => Alert.alert("Show To modal")}
+                onPress={() =>
+                  this.handleModalVisibility({ addressState: "To" })
+                }
               >
                 <Text style={styles.inputText}>TO</Text>
               </TouchableRipple>
