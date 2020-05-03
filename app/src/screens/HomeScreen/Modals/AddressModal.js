@@ -23,7 +23,9 @@ export class FromModal extends Component {
         transparent={true}
         visible={this.props.showModal}
         onRequestClose={() => {
-          Alert.alert("Modal has been closed.");
+          this.props.handleModalVisibility({
+            addressState: this.props.addressState,
+          });
         }}
       >
         <View style={styles.centeredView}>
