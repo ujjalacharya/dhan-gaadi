@@ -19,6 +19,8 @@ export class HomeScreen extends Component {
     pickedDate: "",
     pickedColor: "",
     showDatePickerModal: false,
+    From: {},
+    To: {}
   };
 
   handleModalVisibility = ({ addressState }) => {
@@ -66,6 +68,16 @@ export class HomeScreen extends Component {
     callback();
   };
 
+  handleFromTo = (type, value) => {
+    this.setState({
+      [type]: value,
+    }, ()=>{
+      this.handleModalVisibility({
+        addressState: "",
+      });
+    });
+  };
+
   render() {
     return (
       <>
@@ -73,6 +85,7 @@ export class HomeScreen extends Component {
           handleModalVisibility={this.handleModalVisibility}
           showModal={this.state.showModal}
           addressState={this.state.addressState}
+          handleFromTo={this.handleFromTo}
         />
         <DatePickerModal
           showDatePickerModal={this.state.showDatePickerModal}
@@ -92,7 +105,7 @@ export class HomeScreen extends Component {
                   this.handleModalVisibility({ addressState: "From" })
                 }
               >
-                <Text style={styles.inputText}>FROM</Text>
+                <Text style={styles.inputText}>{this.state.From.name || "FROM"}</Text>
               </TouchableRipple>
               <TouchableRipple
                 style={styles.inputField}
@@ -100,7 +113,7 @@ export class HomeScreen extends Component {
                   this.handleModalVisibility({ addressState: "To" })
                 }
               >
-                <Text style={styles.inputText}>TO</Text>
+                <Text style={styles.inputText}>{this.state.To.name || "TO"}</Text>
               </TouchableRipple>
 
               <View style={styles.pickerContainer}>
@@ -195,7 +208,7 @@ const styles = StyleSheet.create({
 
   inputText: {
     padding: 15,
-    color: "gray",
+    color: "black",
     fontSize: 15,
   },
 

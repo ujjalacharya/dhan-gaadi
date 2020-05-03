@@ -10,14 +10,57 @@ import {
 import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { Button, Searchbar, Divider } from "react-native-paper";
+import AddressList from "./AddressList";
+
+const data = [
+  {
+    id: 1,
+    name: "Dhangadhi",
+  },
+  {
+    id: 2,
+    name: "Kathmandu",
+  },
+  {
+    id: 3,
+    name: "Jhapa",
+  },
+  {
+    id: 4,
+    name: "Nepalgunj",
+  },
+  {
+    id: 5,
+    name: "Pokhara",
+  },
+  {
+    id: 6,
+    name: "Lumbini",
+  },
+  {
+    id: 7,
+    name: "Palpa",
+  },
+  {
+    id: 8,
+    name: "Doti",
+  },
+];
 
 export class AddressModal extends Component {
   state = {
     searchQuery: "",
+    data: data,
+    filteredData: data,
   };
 
-  _onChangeSearch = (query) => this.setState({ searchQuery: query });
-  
+  handleTextChange = (query) => {
+    const filteredData = this.state.data.filter((datum) => {
+      return datum.name.toLowerCase().includes(query.toLowerCase());
+    });
+    this.setState({ searchQuery: query, filteredData });
+  };
+
   render() {
     return (
       <Modal
@@ -45,9 +88,14 @@ export class AddressModal extends Component {
             />
             <Searchbar
               placeholder={this.props.addressState}
-              onChangeText={this._onChangeSearch}
+              onChangeText={this.handleTextChange}
               value={this.state.searchQuery}
               style={{ marginTop: 15, borderWidth: 1 }}
+            />
+            <AddressList
+              data={this.state.filteredData}
+              addressState={this.props.addressState}
+              handleFromTo={this.props.handleFromTo}
             />
           </View>
         </View>
