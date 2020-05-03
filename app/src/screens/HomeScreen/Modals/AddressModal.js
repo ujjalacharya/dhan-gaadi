@@ -61,6 +61,15 @@ export class AddressModal extends Component {
     this.setState({ searchQuery: query, filteredData });
   };
 
+  handleFromTo = (type, value) => {
+    this.setState({
+      searchQuery: "",
+      filteredData: data
+    }, ()=>{
+      this.props.handleFromTo(type, value)
+    })
+  }
+
   render() {
     return (
       <Modal
@@ -68,9 +77,17 @@ export class AddressModal extends Component {
         transparent={true}
         visible={this.props.showModal}
         onRequestClose={() => {
-          this.props.handleModalVisibility({
-            addressState: this.props.addressState,
-          });
+          this.setState(
+            {
+              searchQuery: "",
+              filteredData: data
+            },
+            () => {
+              this.props.handleModalVisibility({
+                addressState: this.props.addressState,
+              });
+            }
+          );
         }}
       >
         <View style={styles.centeredView}>
@@ -81,9 +98,17 @@ export class AddressModal extends Component {
               color="red"
               style={{ ...styles.openButton }}
               onPress={() => {
-                this.props.handleModalVisibility({
-                  addressState: this.props.addressState,
-                });
+                this.setState(
+                  {
+                    searchQuery: "",
+                    filteredData: data
+                  },
+                  () => {
+                    this.props.handleModalVisibility({
+                      addressState: this.props.addressState,
+                    });
+                  }
+                );
               }}
             />
             <Searchbar
@@ -95,7 +120,7 @@ export class AddressModal extends Component {
             <AddressList
               data={this.state.filteredData}
               addressState={this.props.addressState}
-              handleFromTo={this.props.handleFromTo}
+              handleFromTo={this.handleFromTo}
             />
           </View>
         </View>
