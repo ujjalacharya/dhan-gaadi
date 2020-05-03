@@ -156,6 +156,7 @@ export class HomeScreen extends Component {
                   mode="contained"
                   onPress={() => console.log("Pressed")}
                   style={styles.submitButton}
+                  disabled={true}
                 >
                   <Text style={{ fontSize: 20 }}>GO !</Text>
                 </Button>

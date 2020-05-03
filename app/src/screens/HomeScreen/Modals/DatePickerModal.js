@@ -8,7 +8,6 @@ const DatePickerModal = ({showDatePickerModal,pickedDateForPicker, handleCustomP
   const [show, setShow] = useState(false);
 
   const onChange = (event, selectedDate) => {
-      console.log(event, selectedDate)
       handleCustomPicker(event, selectedDate, ()=>{
           const currentDate = selectedDate || date;
           setShow(Platform.OS === "ios");
