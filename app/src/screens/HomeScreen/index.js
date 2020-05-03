@@ -1,18 +1,12 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet, Alert } from "react-native";
-import {
-  Modal,
-  Portal,
-  TextInput,
-  Colors,
-  TouchableRipple,
-} from "react-native-paper";
+import { Colors, TouchableRipple } from "react-native-paper";
 import { connect } from "react-redux";
+import Ionicons from "@expo/vector-icons/Ionicons";
 import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
-import Ionicons from "@expo/vector-icons/Ionicons";
-import { TouchableNativeFeedback } from "react-native-gesture-handler";
+import Banner from "../../components/Banner";
 
 export class HomeScreen extends Component {
   state = {
@@ -27,50 +21,25 @@ export class HomeScreen extends Component {
         <View style={styles.container}>
           <Card style={{ height: "75%" }}>
             <View style={styles.searchbarContainer}>
-              <Button
-                mode="contained"
-                color="#2978a0"
-                style={styles.sloganButton}
-                onPress={() => console.log("Pressed")}
-              >
-                <Text style={{ color: "white", fontSize: 20 }}>
-                  Get Seat Go!
-                </Text>
-              </Button>
+              <Banner />
             </View>
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
                 style={styles.inputField}
                 onPress={() => Alert.alert("Show From modal")}
               >
-                <Text style={{ padding: 15, color: "gray", fontSize: 15 }}>
-                  FROM
-                </Text>
+                <Text style={styles.inputText}>FROM</Text>
               </TouchableRipple>
               <TouchableRipple
                 style={styles.inputField}
                 onPress={() => Alert.alert("Show To modal")}
               >
-                <Text style={{ padding: 15, color: "gray", fontSize: 15 }}>
-                  TO
-                </Text>
+                <Text style={styles.inputText}>TO</Text>
               </TouchableRipple>
 
-              <View
-                style={{
-                  marginTop: 20,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <View style={styles.pickerContainer}>
                 <Text style={{ fontSize: 20 }}>Pick a date!</Text>
-                <View
-                  style={{
-                    width: "100%",
-                    flexDirection: "row",
-                    justifyContent: "space-between",
-                  }}
-                >
+                <View style={styles.datePickerCircleContainer}>
                   <View style={styles.circleButton}>
                     <Text style={{ color: "white" }}>Today</Text>
                   </View>
@@ -82,23 +51,11 @@ export class HomeScreen extends Component {
                   </View>
                 </View>
               </View>
-              <View
-                style={{
-                  marginTop: 25,
-                  height: 40,
-                  justifyContent: "center",
-                  alignItems: "center",
-                }}
-              >
+              <View style={styles.submitButtonContainer}>
                 <Button
                   mode="contained"
                   onPress={() => console.log("Pressed")}
-                  style={{
-                    width: "80%",
-                    borderRadius: 50,
-                    flex: 1,
-                    justifyContent: "center",
-                  }}
+                  style={styles.submitButton}
                 >
                   <Text style={{ fontSize: 20 }}>GO !</Text>
                 </Button>
@@ -116,20 +73,14 @@ const styles = StyleSheet.create({
     flex: 1,
     marginTop: 30,
   },
+
   searchbarContainer: {
     height: "15%",
     justifyContent: "center",
     alignItems: "center",
     marginTop: -30,
   },
-  sloganButton: {
-    width: "105%",
-    // height: "40%",
-    // borderRadius: 40,
-    borderWidth: 1,
-    // borderColor: ConstantColors.tintColor,
-    elevation: 20,
-  },
+
   inputField: {
     marginTop: 20,
     height: 40,
@@ -140,6 +91,25 @@ const styles = StyleSheet.create({
     borderRadius: 5,
     elevation: 5,
   },
+
+  inputText: {
+    padding: 15,
+    color: "gray",
+    fontSize: 15,
+  },
+
+  pickerContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  datePickerCircleContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
   circleButton: {
     padding: 5,
     height: 80,
@@ -150,6 +120,20 @@ const styles = StyleSheet.create({
     marginTop: 20,
     backgroundColor: ConstantColors.grayColor,
     elevation: 10,
+  },
+
+  submitButtonContainer: {
+    marginTop: 25,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+  
+  submitButton: {
+    width: "80%",
+    borderRadius: 50,
+    flex: 1,
+    justifyContent: "center",
   },
 });
 
