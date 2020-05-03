@@ -4,6 +4,7 @@ export default {
   tintColor,
   grayColor: "#66727e",
   backgroundColor: '#86909a',
+  bannerColor: "#2978a0",
   cardColor: "#f1f7ff",
   tabIconDefault: '#ccc',
   headerTintColor: "#fff",

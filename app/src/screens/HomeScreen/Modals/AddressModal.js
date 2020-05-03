@@ -11,11 +11,13 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 
 import { Button, Searchbar, Divider } from "react-native-paper";
 
-export class FromModal extends Component {
+export class AddressModal extends Component {
   state = {
     searchQuery: "",
   };
+
   _onChangeSearch = (query) => this.setState({ searchQuery: query });
+  
   render() {
     return (
       <Modal
@@ -98,4 +100,4 @@ const styles = StyleSheet.create({
   },
 });
 
-export default FromModal;
+export default AddressModal;

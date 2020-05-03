@@ -1,13 +1,14 @@
 import React, { Component } from "react";
 import { Text, View, StyleSheet } from "react-native";
-import { Button } from "react-native-paper";
+import { Button, Colors } from "react-native-paper";
+import ConstantColors from "../constants/ConstantColors";
 
 export class Banner extends Component {
   render() {
     return (
       <Button
         mode="contained"
-        color="#2978a0"
+        color={ConstantColors.bannerColor}
         style={styles.sloganButton}
         onPress={() => console.log("Pressed")}
       >

@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Alert } from "react-native";
+import { Text, View, StyleSheet, Alert, TouchableOpacity } from "react-native";
 import { Colors, TouchableRipple } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -8,12 +8,15 @@ import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
 import AddressModal from "./Modals/AddressModal";
+import moment from "moment";
 
 export class HomeScreen extends Component {
   state = {
     text: "",
     showModal: false,
     addressState: "",
+    pickedDate: "",
+    pickedColor: "",
   };
 
   handleModalVisibility = ({ addressState }) => {
@@ -21,6 +24,23 @@ export class HomeScreen extends Component {
       showModal: !this.state.showModal,
       addressState,
     });
+  };
+
+  handleDatePicker = (when) => {
+    const today = new Date();
+    const tomorrow = new Date(today);
+    if (when === "today") {
+      this.setState({
+        pickedDate: moment(today).format("YYYY-MM-DD"),
+        pickedColor: "today",
+      });
+    } else if (when === "tomorrow") {
+      tomorrow.setDate(tomorrow.getDate() + 1);
+      this.setState({
+        pickedDate: moment(tomorrow).format("YYYY-MM-DD"),
+        pickedColor: "tomorrow",
+      });
+    }
   };
 
   render() {
@@ -56,15 +76,48 @@ export class HomeScreen extends Component {
               </TouchableRipple>
 
               <View style={styles.pickerContainer}>
-                <Text style={{ fontSize: 20 }}>Pick a date!</Text>
+                <Text style={{ fontSize: 20 }}>
+                  {this.state.pickedDate || "Pick a date!"}
+                </Text>
                 <View style={styles.datePickerCircleContainer}>
-                  <View style={styles.circleButton}>
+                  <TouchableOpacity
+                    style={{
+                      ...styles.circleButton,
+                      backgroundColor: this.state.pickedColor,
+                      backgroundColor:
+                        this.state.pickedColor === "today"
+                          ? ConstantColors.bannerColor
+                          : "gray",
+                    }}
+                    onPress={() => this.handleDatePicker("today")}
+                  >
                     <Text style={{ color: "white" }}>Today</Text>
-                  </View>
-                  <View style={styles.circleButton}>
-                    <Text style={{ color: "white" }}>Tomorrow</Text>
-                  </View>
-                  <View style={styles.circleButton}>
+                  </TouchableOpacity>
+                  <TouchableOpacity
+                    style={{
+                      ...styles.circleButton,
+                      backgroundColor:
+                        this.state.pickedColor === "tomorrow"
+                          ? ConstantColors.bannerColor
+                          : "gray",
+                    }}
+                  >
+                    <Text
+                      style={{ color: "white" }}
+                      onPress={() => this.handleDatePicker("tomorrow")}
+                    >
+                      Tomorrow
+                    </Text>
+                  </TouchableOpacity>
+                  <View
+                    style={{
+                      ...styles.circleButton,
+                      backgroundColor:
+                        this.state.pickedColor === "custom"
+                          ? ConstantColors.bannerColor
+                          : "gray",
+                    }}
+                  >
                     <Ionicons name="ios-attach" size={20} color="white" />
                   </View>
                 </View>
@@ -136,7 +189,6 @@ const styles = StyleSheet.create({
     alignItems: "center",
     justifyContent: "center",
     marginTop: 20,
-    backgroundColor: ConstantColors.grayColor,
     elevation: 10,
   },
 
