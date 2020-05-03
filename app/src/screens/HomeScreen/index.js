@@ -11,6 +11,8 @@ import ConstantColors from "../../constants/ConstantColors";
 import Banner from "../../components/Banner";
 import AddressModal from "./Modals/AddressModal";
 import DatePickerModal from "./Modals/DatePickerModal";
+import AllBusScrollView from "../../components/AllBusScrollView";
+import { ScrollView } from "react-native-gesture-handler";
 
 export class HomeScreen extends Component {
   state = {
@@ -87,12 +89,12 @@ export class HomeScreen extends Component {
       this.state.From && this.state.To && this.state.pickedDate;
 
     let fromInputFieldBackground = _.isEmpty(this.state.From)
-      ? "#DCDCDC"
-      : "#77ba99";
+      ? ConstantColors.initialColor
+      : ConstantColors.bannerColor;
 
     let toInputFieldBackground = _.isEmpty(this.state.To)
-      ? "#DCDCDC"
-      : "#77ba99";
+      ? ConstantColors.initialColor
+      : ConstantColors.bannerColor;
 
     let fromInputTextColor = _.isEmpty(this.state.From) ? "black" : "white";
 
@@ -111,12 +113,11 @@ export class HomeScreen extends Component {
           handleCustomPicker={this.handleCustomPicker}
           pickedDateForPicker={this.state.pickedDateForPicker}
         />
-        <HomeHeader headerTitle="DHAN-GAADI" />
-        <View style={styles.container}>
-          <Card style={{ height: "75%" }}>
-            <View style={styles.searchbarContainer}>
-              <Banner />
-            </View>
+        <HomeHeader headerTitle="" />
+        <Banner />
+        <ScrollView contentContainerStyle={styles.container}>
+          <Card style={{ height: "95%", width: "90%", marginTop: 10 }}>
+            {/* <View style={styles.searchbarContainer}></View> */}
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
                 style={{
@@ -155,15 +156,23 @@ export class HomeScreen extends Component {
                   <TouchableOpacity
                     style={{
                       ...styles.circleButton,
-                      backgroundColor: this.state.pickedColor,
                       backgroundColor:
                         this.state.pickedColor === "today"
                           ? ConstantColors.bannerColor
-                          : "gray",
+                          : ConstantColors.initialColor,
                     }}
                     onPress={() => this.handleDatePicker("today")}
                   >
-                    <Text style={{ color: "white" }}>Today</Text>
+                    <Text
+                      style={{
+                        color:
+                          this.state.pickedColor === "today"
+                            ? "white"
+                            : ConstantColors.tintColor,
+                      }}
+                    >
+                      Today
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
@@ -171,11 +180,20 @@ export class HomeScreen extends Component {
                       backgroundColor:
                         this.state.pickedColor === "tomorrow"
                           ? ConstantColors.bannerColor
-                          : "gray",
+                          : ConstantColors.initialColor,
                     }}
                     onPress={() => this.handleDatePicker("tomorrow")}
                   >
-                    <Text style={{ color: "white" }}>Tomorrow</Text>
+                    <Text
+                      style={{
+                        color:
+                          this.state.pickedColor === "tomorrow"
+                            ? "white"
+                            : ConstantColors.tintColor,
+                      }}
+                    >
+                      Tomorrow
+                    </Text>
                   </TouchableOpacity>
                   <TouchableOpacity
                     style={{
@@ -183,11 +201,19 @@ export class HomeScreen extends Component {
                       backgroundColor:
                         this.state.pickedColor === "custom"
                           ? ConstantColors.bannerColor
-                          : "gray",
+                          : ConstantColors.initialColor,
                     }}
                     onPress={() => this.handleDatePicker("custom")}
                   >
-                    <Ionicons name="ios-calendar" size={20} color="white" />
+                    <Ionicons
+                      name="ios-calendar"
+                      size={20}
+                      color={
+                        this.state.pickedColor === "custom"
+                          ? "white"
+                          : ConstantColors.tintColor
+                      }
+                    />
                   </TouchableOpacity>
                 </View>
               </View>
@@ -203,7 +229,9 @@ export class HomeScreen extends Component {
               </View>
             </View>
           </Card>
-        </View>
+        </ScrollView>
+          
+        
       </>
     );
   }
@@ -211,21 +239,22 @@ export class HomeScreen extends Component {
 
 const styles = StyleSheet.create({
   container: {
-    flex: 1,
-    marginTop: 30,
+    height: "70%",
+    // marginTop: 30,
+    alignItems: "center",
   },
 
   searchbarContainer: {
     height: "15%",
     justifyContent: "center",
     alignItems: "center",
-    marginTop: -30,
+    // marginTop: -30,
   },
 
   inputField: {
     marginTop: 20,
     height: 40,
-    backgroundColor: "#DCDCDC",
+    backgroundColor: ConstantColors.initialColor,
     justifyContent: "center",
     borderColor: Colors.tintColor,
     borderWidth: 1,
@@ -260,6 +289,8 @@ const styles = StyleSheet.create({
     justifyContent: "center",
     marginTop: 20,
     elevation: 10,
+    borderColor: ConstantColors.tintColor,
+    borderWidth: 1,
   },
 
   submitButtonContainer: {
@@ -267,6 +298,7 @@ const styles = StyleSheet.create({
     height: 40,
     justifyContent: "center",
     alignItems: "center",
+    marginBottom: 20,
   },
 
   submitButton: {

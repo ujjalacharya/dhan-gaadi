@@ -6,26 +6,29 @@ import ConstantColors from "../constants/ConstantColors";
 export class Banner extends Component {
   render() {
     return (
-      <Button
-        mode="contained"
-        color={ConstantColors.bannerColor}
-        style={styles.sloganButton}
-        onPress={() => console.log("Pressed")}
-      >
-        <Text style={{ color: "white", fontSize: 20 }}>Get Seat Go!</Text>
-      </Button>
+      // <View style={{flex: 1, backgroundColor: "green", width: "100%"}}>
+        <Button
+          mode="contained"
+          color={ConstantColors.tintColor}
+          style={styles.sloganButton}
+          onPress={() => console.log("Pressed")}
+        >
+          <Text style={{ color: "white", fontSize: 20 }}>Get Seat Go!</Text>
+        </Button>
+      // </View>
     );
   }
 }
 
 const styles = StyleSheet.create({
   sloganButton: {
-    width: "105%",
+    // width: "150%",
     // height: "40%",
     // borderRadius: 40,
     borderWidth: 1,
-    // borderColor: ConstantColors.tintColor,
-    elevation: 20,
+    borderColor: ConstantColors.tintColor,
+    // elevation: 20,
+    marginTop: -5
   },
 });
 
