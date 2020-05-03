@@ -82,6 +82,9 @@ export class HomeScreen extends Component {
   };
 
   render() {
+    let buttonEnabled =
+      this.state.From && this.state.To && this.state.pickedDate;
+
     return (
       <>
         <AddressModal
@@ -170,9 +173,9 @@ export class HomeScreen extends Component {
               <View style={styles.submitButtonContainer}>
                 <Button
                   mode="contained"
-                  onPress={() => console.log("Pressed")}
+                  onPress={() => console.log(this.state)}
                   style={styles.submitButton}
-                  disabled={true}
+                  disabled={!buttonEnabled}
                 >
                   <Text style={{ fontSize: 20 }}>GO !</Text>
                 </Button>
