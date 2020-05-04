@@ -12,60 +12,7 @@ import Ionicons from "@expo/vector-icons/Ionicons";
 import { Button, Searchbar, Divider } from "react-native-paper";
 import AddressList from "./AddressList";
 
-const data = [
-  {
-    id: 1,
-    name: "Dhangadhi",
-  },
-  {
-    id: 2,
-    name: "Kathmandu",
-  },
-  {
-    id: 3,
-    name: "Jhapa",
-  },
-  {
-    id: 4,
-    name: "Nepalgunj",
-  },
-  {
-    id: 5,
-    name: "Pokhara",
-  },
-  {
-    id: 6,
-    name: "Lumbini",
-  },
-  {
-    id: 7,
-    name: "Palpa",
-  },
-  {
-    id: 8,
-    name: "Doti",
-  },
-  {
-    id: 9,
-    name: "Mahendranagar",
-  },
-  {
-    id: 10,
-    name: "Parsa",
-  },
-  {
-    id: 11,
-    name: "Baglung",
-  },
-  {
-    id: 12,
-    name: "Illam",
-  },
-  {
-    id: 13,
-    name: "Jumla",
-  },
-];
+import {addressData as data} from "../../../utils/mock"
 
 export class AddressModal extends Component {
   state = {
