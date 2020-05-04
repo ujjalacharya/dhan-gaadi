@@ -13,7 +13,7 @@ export class Banner extends Component {
           style={styles.sloganButton}
           onPress={() => console.log("Pressed")}
         >
-          <Text style={{ color: "white", fontSize: 20 }}>Get Seat</Text>
+          <Text style={{ color: "white", fontSize: 20 }}>DHANGAADI</Text>
         </Button>
       // </View>
     );

@@ -1,6 +1,6 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, Alert, TouchableOpacity } from "react-native";
-import { Colors, TouchableRipple, Divider } from "react-native-paper";
+import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Colors, TouchableRipple } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import moment from "moment";
@@ -12,7 +12,7 @@ import Banner from "../../components/Banner";
 import AddressModal from "./Modals/AddressModal";
 import DatePickerModal from "./Modals/DatePickerModal";
 import AllBusScrollView from "../../components/AllBusScrollView";
-import { ScrollView } from "react-native-gesture-handler";
+import { TouchableWithoutFeedback } from "react-native-gesture-handler";
 
 export class HomeScreen extends Component {
   state = {
@@ -86,7 +86,9 @@ export class HomeScreen extends Component {
 
   render() {
     let buttonEnabled =
-      this.state.From && this.state.To && this.state.pickedDate;
+      !_.isEmpty(this.state.From) &&
+      !_.isEmpty(this.state.To) &&
+      !!this.state.pickedDate;
 
     let fromInputFieldBackground = _.isEmpty(this.state.From)
       ? ConstantColors.initialColor
@@ -153,7 +155,7 @@ export class HomeScreen extends Component {
                   {this.state.pickedDate || "Pick a date!"}
                 </Text>
                 <View style={styles.datePickerCircleContainer}>
-                  <TouchableOpacity
+                  <TouchableWithoutFeedback
                     style={{
                       ...styles.circleButton,
                       backgroundColor:
@@ -173,8 +175,8 @@ export class HomeScreen extends Component {
                     >
                       Today
                     </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback
                     style={{
                       ...styles.circleButton,
                       backgroundColor:
@@ -194,8 +196,8 @@ export class HomeScreen extends Component {
                     >
                       Tomorrow
                     </Text>
-                  </TouchableOpacity>
-                  <TouchableOpacity
+                  </TouchableWithoutFeedback>
+                  <TouchableWithoutFeedback
                     style={{
                       ...styles.circleButton,
                       backgroundColor:
@@ -214,7 +216,7 @@ export class HomeScreen extends Component {
                           : ConstantColors.tintColor
                       }
                     />
-                  </TouchableOpacity>
+                  </TouchableWithoutFeedback>
                 </View>
               </View>
               <View style={styles.submitButtonContainer}>
@@ -301,10 +303,12 @@ const styles = StyleSheet.create({
   },
 
   submitButton: {
-    width: "80%",
+    width: "100%",
     borderRadius: 50,
     flex: 1,
     justifyContent: "center",
+    borderColor: ConstantColors.tintColor,
+    borderWidth: 1,
   },
 });
 
