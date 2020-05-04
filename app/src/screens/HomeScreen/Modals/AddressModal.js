@@ -45,6 +45,26 @@ const data = [
     id: 8,
     name: "Doti",
   },
+  {
+    id: 9,
+    name: "Mahendranagar",
+  },
+  {
+    id: 10,
+    name: "Parsa",
+  },
+  {
+    id: 11,
+    name: "Baglung",
+  },
+  {
+    id: 12,
+    name: "Illam",
+  },
+  {
+    id: 13,
+    name: "Jumla",
+  },
 ];
 
 export class AddressModal extends Component {
@@ -62,69 +82,72 @@ export class AddressModal extends Component {
   };
 
   handleFromTo = (type, value) => {
-    this.setState({
-      searchQuery: "",
-      filteredData: data
-    }, ()=>{
-      this.props.handleFromTo(type, value)
-    })
-  }
+    this.setState(
+      {
+        searchQuery: "",
+        filteredData: data,
+      },
+      () => {
+        this.props.handleFromTo(type, value);
+      }
+    );
+  };
 
   render() {
     return (
-      <Modal
-        animationType="slide"
-        transparent={true}
-        visible={this.props.showModal}
-        onRequestClose={() => {
-          this.setState(
-            {
-              searchQuery: "",
-              filteredData: data
-            },
-            () => {
-              this.props.handleModalVisibility({
-                addressState: this.props.addressState,
-              });
-            }
-          );
-        }}
-      >
-        <View style={styles.centeredView}>
-          <View style={styles.modalView}>
-            <Ionicons
-              name="ios-close-circle"
-              size={30}
-              color="red"
-              style={{ ...styles.openButton }}
-              onPress={() => {
-                this.setState(
-                  {
-                    searchQuery: "",
-                    filteredData: data
-                  },
-                  () => {
-                    this.props.handleModalVisibility({
-                      addressState: this.props.addressState,
-                    });
-                  }
-                );
-              }}
-            />
-            <Searchbar
-              placeholder={this.props.addressState}
-              onChangeText={this.handleTextChange}
-              value={this.state.searchQuery}
-              style={{ marginTop: 15, borderWidth: 1 }}
-            />
-            <AddressList
-              data={this.state.filteredData}
-              addressState={this.props.addressState}
-              handleFromTo={this.handleFromTo}
-            />
+        <Modal
+          animationType="slide"
+          transparent={true}
+          visible={this.props.showModal}
+          onRequestClose={() => {
+            this.setState(
+              {
+                searchQuery: "",
+                filteredData: data,
+              },
+              () => {
+                this.props.handleModalVisibility({
+                  addressState: this.props.addressState,
+                });
+              }
+            );
+          }}
+        >
+          <View style={styles.centeredView}>
+            <View style={styles.modalView}>
+              <Ionicons
+                name="ios-close-circle"
+                size={30}
+                color="red"
+                style={{ ...styles.openButton }}
+                onPress={() => {
+                  this.setState(
+                    {
+                      searchQuery: "",
+                      filteredData: data,
+                    },
+                    () => {
+                      this.props.handleModalVisibility({
+                        addressState: this.props.addressState,
+                      });
+                    }
+                  );
+                }}
+              />
+              <Searchbar
+                placeholder={this.props.addressState}
+                onChangeText={this.handleTextChange}
+                value={this.state.searchQuery}
+                style={{ marginTop: 15, borderWidth: 1 }}
+              />
+              <AddressList
+                data={this.state.filteredData}
+                addressState={this.props.addressState}
+                handleFromTo={this.handleFromTo}
+              />
+            </View>
           </View>
-        </View>
-      </Modal>
+        </Modal>
     );
   }
 }
@@ -154,10 +177,6 @@ const styles = StyleSheet.create({
     elevation: 5,
   },
   openButton: {
-    // backgroundColor: "#F194FF",
-    // borderRadius: 20,
-    // padding: 10,
-    // elevation: 2,
     position: "absolute",
     right: 15,
     marginTop: 10,

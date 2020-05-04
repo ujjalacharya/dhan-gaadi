@@ -1,6 +1,7 @@
 import React, { Component } from "react";
 import { Text, View, Alert } from "react-native";
 import { List } from "react-native-paper";
+import { ScrollView } from "react-native-gesture-handler";
 
 export class AddressList extends Component {
   render() {
@@ -14,16 +15,15 @@ export class AddressList extends Component {
           margin: 20,
         }}
       >
-        {data.map((datum) => (
-          <List.Item
-            key={datum.id}
-            title={datum.name}
-            onPress={()=> handleFromTo(addressState, datum)}
-
-            // description="Item description"
-            // left={props => <List.Icon {...props} icon="folder" />}
-          />
-        ))}
+        <ScrollView>
+          {data.map((datum) => (
+            <List.Item
+              key={datum.id}
+              title={datum.name}
+              onPress={() => handleFromTo(addressState, datum)}
+            />
+          ))}
+        </ScrollView>
       </View>
     );
   }
