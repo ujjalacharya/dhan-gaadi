@@ -46,7 +46,7 @@ REACT_APP_JWT_SECRET = "your secret here"
 * #### yarn start
 
 ## Demo (Mobile App => React-Native) *Under construction*
-![](./demo/app.gif)
+![](./demo/App.gif)
 ### To run -> 
 * #### clone the entire repo
 * #### go to app repo
