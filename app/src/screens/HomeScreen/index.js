@@ -1,5 +1,5 @@
 import React, { Component } from "react";
-import { Text, View, StyleSheet, TouchableOpacity } from "react-native";
+import { Text, View, StyleSheet, Alert } from "react-native";
 import { Colors, TouchableRipple } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
@@ -222,7 +222,7 @@ export class HomeScreen extends Component {
               <View style={styles.submitButtonContainer}>
                 <Button
                   mode="contained"
-                  onPress={() => console.log(this.state)}
+                  onPress={() => Alert.alert("Something will happen soon!")}
                   style={styles.submitButton}
                   disabled={!buttonEnabled}
                 >

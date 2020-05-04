@@ -1,4 +1,4 @@
-# API, CRM and client application of dhan-gaadi, an online bus booking system
+# API, CRM, Client and Mobile application of dhan-gaadi, an online bus booking system
 
 ## Demo (Client => NextJS): 
 
