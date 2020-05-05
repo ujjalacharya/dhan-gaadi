@@ -222,7 +222,7 @@ export class HomeScreen extends Component {
               <View style={styles.submitButtonContainer}>
                 <Button
                   mode="contained"
-                  onPress={() => Alert.alert("Something will happen soon!")}
+                  onPress={() => this.props.navigation.navigate("Search")}
                   style={styles.submitButton}
                   disabled={!buttonEnabled}
                 >
