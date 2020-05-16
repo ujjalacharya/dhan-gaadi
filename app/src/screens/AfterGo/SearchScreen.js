@@ -1,9 +1,8 @@
 import React, { Component } from "react";
 import { Text, View } from "react-native";
-import { Appbar, ProgressBar } from "react-native-paper";
+import { Appbar } from "react-native-paper";
 
-var i = 0;
-var color = ["#ad7a99", "#b2cede", "#8cdfd6", "#5a716a"];
+import { connect } from "react-redux";
 
 export class SearchScreen extends Component {
   state = {
@@ -12,49 +11,29 @@ export class SearchScreen extends Component {
     progressColor: "#b2cede",
   };
 
-  componentDidMount() {
-    var intervalId = setInterval(this.timer, 100);
-    // store intervalId in the state so it can be accessed later:
-    this.setState({ intervalId: intervalId });
-  }
-
-  componentWillUnmount() {
-    // use intervalId from the state to clear the interval
-    clearInterval(this.state.intervalId);
-  }
-
-  timer = () => {
-    console.log("running", this.state.progressBar);
-    // setState method is used to update the state
-    var newCount = this.state.progressBar + 5;
-
-    if (newCount <= 300) {
-      this.setState({ progressBar: newCount, progressColor: color[i] }, () => {
-        i = (i + 1) % color.length;
-      });
-    } else {
-      clearInterval(this.state.intervalId);
-    }
-  };
-
   _goBack = () => {
     this.props.navigation.pop();
   };
 
   render() {
+    console.log(this.props)
     return (
       <View>
         <Appbar.Header>
           <Appbar.BackAction onPress={this._goBack} />
           <Appbar.Content title="Search" />
         </Appbar.Header>
-        {this.state.progressBar < 300 && (
-          <ProgressBar progress={100} color={this.state.progressColor} />
-        )}
+        {/* <ActivityIndicator animating={true} color={ConstantColors.tintColor}/> */}
         <Text> Search Screen </Text>
       </View>
     );
   }
 }
 
-export default SearchScreen;
+function mapStateToProps(state) {
+  return {
+    Journey: state.Journey.journey_store,
+  };
+}
+
+export default connect(mapStateToProps)(SearchScreen);

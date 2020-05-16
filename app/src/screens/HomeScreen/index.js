@@ -5,6 +5,7 @@ import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import moment from "moment";
 import _ from "lodash";
+import { bindActionCreators } from "redux";
 import HomeHeader from "../../components/HomeHeader";
 import { Button, Card } from "react-native-paper";
 import ConstantColors from "../../constants/ConstantColors";
@@ -13,6 +14,8 @@ import AddressModal from "./Modals/AddressModal";
 import DatePickerModal from "./Modals/DatePickerModal";
 import AllBusScrollView from "../../components/AllBusScrollView";
 import { TouchableWithoutFeedback } from "react-native-gesture-handler";
+
+import { jorneyAction } from "../../store/actions/journey_actions";
 
 export class HomeScreen extends Component {
   state = {
@@ -222,7 +225,10 @@ export class HomeScreen extends Component {
               <View style={styles.submitButtonContainer}>
                 <Button
                   mode="contained"
-                  onPress={() => this.props.navigation.navigate("Search")}
+                  onPress={() => {
+                    this.props.jorneyAction(this.state);
+                    this.props.navigation.navigate("Search");
+                  }}
                   style={styles.submitButton}
                   disabled={!buttonEnabled}
                 >
@@ -314,8 +320,12 @@ const styles = StyleSheet.create({
 
 function mapStateToProps(state) {
   return {
-    isAuth: state.User.auth.isAuth,
+    Journey: state.Journey.journey_store,
   };
 }
 
-export default connect(mapStateToProps)(HomeScreen);
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ jorneyAction }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(HomeScreen);
