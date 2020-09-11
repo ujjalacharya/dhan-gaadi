@@ -119,125 +119,129 @@ export class HomeScreen extends Component {
           pickedDateForPicker={this.state.pickedDateForPicker}
         />
         <HomeHeader headerTitle="" />
-        <Banner />
-        <View style={styles.container}>
-          <Card style={{ height: "55%", width: "90%", marginTop: 10 }}>
-            {/* <View style={styles.searchbarContainer}></View> */}
-            <View style={{ height: "50%", marginHorizontal: 20 }}>
-              <TouchableRipple
-                style={{
-                  ...styles.inputField,
-                  backgroundColor: fromInputFieldBackground,
-                }}
-                onPress={() =>
-                  this.handleModalVisibility({ addressState: "From" })
-                }
-              >
-                <Text
-                  style={{ ...styles.inputText, color: fromInputTextColor }}
+        <View style={{ flex: 1 }}>
+          <Banner />
+          <View style={styles.container}>
+            <Card style={{ height: "55%", width: "90%", marginTop: 10 }}>
+              {/* <View style={styles.searchbarContainer}></View> */}
+              <View style={{ height: "50%", marginHorizontal: 20 }}>
+                <TouchableRipple
+                  style={{
+                    ...styles.inputField,
+                    backgroundColor: fromInputFieldBackground,
+                  }}
+                  onPress={() =>
+                    this.handleModalVisibility({ addressState: "From" })
+                  }
                 >
-                  {this.state.From.name || "FROM"}
-                </Text>
-              </TouchableRipple>
-              <TouchableRipple
-                style={{
-                  ...styles.inputField,
-                  backgroundColor: toInputFieldBackground,
-                }}
-                onPress={() =>
-                  this.handleModalVisibility({ addressState: "To" })
-                }
-              >
-                <Text style={{ ...styles.inputText, color: toInputTextColor }}>
-                  {this.state.To.name || "TO"}
-                </Text>
-              </TouchableRipple>
+                  <Text
+                    style={{ ...styles.inputText, color: fromInputTextColor }}
+                  >
+                    {this.state.From.name || "FROM"}
+                  </Text>
+                </TouchableRipple>
+                <TouchableRipple
+                  style={{
+                    ...styles.inputField,
+                    backgroundColor: toInputFieldBackground,
+                  }}
+                  onPress={() =>
+                    this.handleModalVisibility({ addressState: "To" })
+                  }
+                >
+                  <Text
+                    style={{ ...styles.inputText, color: toInputTextColor }}
+                  >
+                    {this.state.To.name || "TO"}
+                  </Text>
+                </TouchableRipple>
 
-              <View style={styles.pickerContainer}>
-                <Text style={{ fontSize: 20 }}>
-                  {this.state.pickedDate || "Pick a date!"}
-                </Text>
-                <View style={styles.datePickerCircleContainer}>
-                  <TouchableWithoutFeedback
-                    style={{
-                      ...styles.circleButton,
-                      backgroundColor:
-                        this.state.pickedColor === "today"
-                          ? ConstantColors.bannerColor
-                          : ConstantColors.initialColor,
-                    }}
-                    onPress={() => this.handleDatePicker("today")}
-                  >
-                    <Text
+                <View style={styles.pickerContainer}>
+                  <Text style={{ fontSize: 20 }}>
+                    {this.state.pickedDate || "Pick a date!"}
+                  </Text>
+                  <View style={styles.datePickerCircleContainer}>
+                    <TouchableWithoutFeedback
                       style={{
-                        color:
+                        ...styles.circleButton,
+                        backgroundColor:
                           this.state.pickedColor === "today"
-                            ? "white"
-                            : ConstantColors.tintColor,
+                            ? ConstantColors.bannerColor
+                            : ConstantColors.initialColor,
                       }}
+                      onPress={() => this.handleDatePicker("today")}
                     >
-                      Today
-                    </Text>
-                  </TouchableWithoutFeedback>
-                  <TouchableWithoutFeedback
-                    style={{
-                      ...styles.circleButton,
-                      backgroundColor:
-                        this.state.pickedColor === "tomorrow"
-                          ? ConstantColors.bannerColor
-                          : ConstantColors.initialColor,
-                    }}
-                    onPress={() => this.handleDatePicker("tomorrow")}
-                  >
-                    <Text
+                      <Text
+                        style={{
+                          color:
+                            this.state.pickedColor === "today"
+                              ? "white"
+                              : ConstantColors.tintColor,
+                        }}
+                      >
+                        Today
+                      </Text>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
                       style={{
-                        color:
+                        ...styles.circleButton,
+                        backgroundColor:
                           this.state.pickedColor === "tomorrow"
-                            ? "white"
-                            : ConstantColors.tintColor,
+                            ? ConstantColors.bannerColor
+                            : ConstantColors.initialColor,
                       }}
+                      onPress={() => this.handleDatePicker("tomorrow")}
                     >
-                      Tomorrow
-                    </Text>
-                  </TouchableWithoutFeedback>
-                  <TouchableWithoutFeedback
-                    style={{
-                      ...styles.circleButton,
-                      backgroundColor:
-                        this.state.pickedColor === "custom"
-                          ? ConstantColors.bannerColor
-                          : ConstantColors.initialColor,
+                      <Text
+                        style={{
+                          color:
+                            this.state.pickedColor === "tomorrow"
+                              ? "white"
+                              : ConstantColors.tintColor,
+                        }}
+                      >
+                        Tomorrow
+                      </Text>
+                    </TouchableWithoutFeedback>
+                    <TouchableWithoutFeedback
+                      style={{
+                        ...styles.circleButton,
+                        backgroundColor:
+                          this.state.pickedColor === "custom"
+                            ? ConstantColors.bannerColor
+                            : ConstantColors.initialColor,
+                      }}
+                      onPress={() => this.handleDatePicker("custom")}
+                    >
+                      <Ionicons
+                        name="ios-calendar"
+                        size={20}
+                        color={
+                          this.state.pickedColor === "custom"
+                            ? "white"
+                            : ConstantColors.tintColor
+                        }
+                      />
+                    </TouchableWithoutFeedback>
+                  </View>
+                </View>
+                <View style={styles.submitButtonContainer}>
+                  <Button
+                    mode="contained"
+                    onPress={() => {
+                      this.props.jorneyAction(this.state);
+                      this.props.navigation.navigate("Search");
                     }}
-                    onPress={() => this.handleDatePicker("custom")}
+                    style={styles.submitButton}
+                    disabled={!buttonEnabled}
                   >
-                    <Ionicons
-                      name="ios-calendar"
-                      size={20}
-                      color={
-                        this.state.pickedColor === "custom"
-                          ? "white"
-                          : ConstantColors.tintColor
-                      }
-                    />
-                  </TouchableWithoutFeedback>
+                    <Text style={{ fontSize: 20 }}>GO !</Text>
+                  </Button>
                 </View>
               </View>
-              <View style={styles.submitButtonContainer}>
-                <Button
-                  mode="contained"
-                  onPress={() => {
-                    this.props.jorneyAction(this.state);
-                    this.props.navigation.navigate("Search");
-                  }}
-                  style={styles.submitButton}
-                  disabled={!buttonEnabled}
-                >
-                  <Text style={{ fontSize: 20 }}>GO !</Text>
-                </Button>
-              </View>
-            </View>
-          </Card>
-          <AllBusScrollView />
+            </Card>
+            <AllBusScrollView />
+          </View>
         </View>
       </>
     );

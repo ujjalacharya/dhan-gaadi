@@ -28,7 +28,7 @@ const styles = StyleSheet.create({
     borderWidth: 1,
     borderColor: ConstantColors.tintColor,
     // elevation: 20,
-    marginTop: -5
+    // marginTop: 20
   },
 });
 
