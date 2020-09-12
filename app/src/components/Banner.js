@@ -22,6 +22,8 @@ export class Banner extends Component {
 
 const styles = StyleSheet.create({
   sloganButton: {
+    flex: 1,
+    justifyContent: "center",
     // width: "150%",
     // height: "40%",
     // borderRadius: 40,

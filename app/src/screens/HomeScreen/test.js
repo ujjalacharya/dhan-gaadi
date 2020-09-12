@@ -115,7 +115,7 @@ export class Test extends Component {
     return (
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
-        stickyHeaderIndices={[1]}
+        stickyHeaderIndices={[2]}
         showsVerticalScrollIndicator={false}
       >
         <AddressModal
