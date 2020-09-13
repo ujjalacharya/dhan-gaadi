@@ -1,6 +1,6 @@
 import React, { Component } from "react";
 import { createBottomTabNavigator } from "@react-navigation/bottom-tabs";
-import Ionicons from "@expo/vector-icons/Ionicons";
+import { AntDesign, MaterialCommunityIcons } from "@expo/vector-icons";
 import { HomeStack, MessageStack, ProfileStack } from "./StackNavigators";
 import ConstantColors from "../constants/ConstantColors";
 
@@ -13,21 +13,25 @@ export default function TabNavigators() {
         tabBarIcon: ({ focused, color, size }) => {
           let iconName;
           if (route.name === "Home") {
-            iconName = `ios-home`;
+            iconName = `home`;
           } else if (route.name === "Profile") {
-            iconName = `ios-man`;
+            iconName = `face-profile`;
           } else if (route.name === "Messages") {
-            iconName = `ios-information-circle`;
+            iconName = `infocirlceo`;
           } else if (route.name === "Help") {
             iconName = `ios-call`;
           }
 
-          return <Ionicons name={iconName} size={size} color={color} />;
+          return iconName === "face-profile" ? (
+            <MaterialCommunityIcons name={iconName} size={size} color={color} />
+          ) : (
+            <AntDesign name={iconName} size={size} color={color} />
+          );
         },
       })}
       tabBarOptions={{
         inactiveTintColor: ConstantColors.inactiveTintColor,
-        activeTintColor: ConstantColors.activeTintColor,
+        activeTintColor: ConstantColors.cardColor,
         showLabel: false,
         // activeBackgroundColor:'#00194b',
         inactiveBackgroundColor: ConstantColors.tintColor,
