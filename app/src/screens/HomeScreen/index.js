@@ -131,16 +131,14 @@ export class Test extends Component {
         />
         <SafeAreaView
           style={{
-            height: 250,
+            height: 150,
             backgroundColor: ConstantColors.tintColor,
-            justifyContent: "center",
           }}
         >
           <Banner />
         </SafeAreaView>
-        <View style={{ height: 380, alignItems: "center", marginTop: -100 }}>
+        <View style={{ height: 380, alignItems: "center", marginTop: -50 }}>
           <Card style={{ height: "100%", width: "90%" }}>
-            {/* <View style={styles.searchbarContainer}></View> */}
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
                 style={{
