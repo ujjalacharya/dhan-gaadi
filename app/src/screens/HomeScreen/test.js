@@ -115,7 +115,7 @@ export class Test extends Component {
     return (
       <ScrollView
         contentContainerStyle={{ flexGrow: 1 }}
-        stickyHeaderIndices={[2]}
+        // stickyHeaderIndices={[2]}
         showsVerticalScrollIndicator={false}
       >
         <AddressModal
@@ -131,15 +131,15 @@ export class Test extends Component {
         />
         <SafeAreaView
           style={{
-            height: 150,
+            height: 250,
             backgroundColor: ConstantColors.tintColor,
             justifyContent: "center",
           }}
         >
           <Banner />
         </SafeAreaView>
-        <View style={{ height: 400, backgroundColor: "red" }}>
-          <Card style={{ height: "100%" }}>
+        <View style={{ height: 380, alignItems: "center", marginTop: -100 }}>
+          <Card style={{ height: "100%", width: "90%" }}>
             {/* <View style={styles.searchbarContainer}></View> */}
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
@@ -258,12 +258,13 @@ export class Test extends Component {
         </View>
         <View style={{ height: 350 }}>
           <View style={{ flex: 0.05 }}></View>
-          <View style={{ flex: 0.55 }}>
+          <View style={{ flex: 0.3 }}>
             <Image
               source={require("../../../assets/busbookingbanner.png")}
               style={{ height: "100%" }}
             ></Image>
           </View>
+          <View style={{ flex: 0.05 }}></View>
           <View style={{ flex: .6 }}>
             <AllBusScrollView />
           </View>
