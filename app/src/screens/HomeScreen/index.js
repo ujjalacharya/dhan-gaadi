@@ -7,7 +7,7 @@ import {
   ScrollView,
   SafeAreaView,
 } from "react-native";
-import { Colors, TouchableRipple } from "react-native-paper";
+import { Colors, TouchableRipple, Title } from "react-native-paper";
 import { connect } from "react-redux";
 import Ionicons from "@expo/vector-icons/Ionicons";
 import moment from "moment";
@@ -263,7 +263,7 @@ export class Test extends Component {
             ></Image>
           </View>
           <View style={{ flex: 0.05 }}></View>
-          <View style={{ flex: .6 }}>
+          <View style={{ flex: .6, marginLeft: 10 }}>
             <AllBusScrollView />
           </View>
         </View>

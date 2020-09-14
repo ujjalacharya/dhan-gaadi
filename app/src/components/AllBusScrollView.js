@@ -1,12 +1,17 @@
 import * as React from "react";
 import { View, ScrollView, Text, StyleSheet, Image } from "react-native";
-import { Avatar, Button, Card, Title, Paragraph } from "react-native-paper";
+import { Avatar, Button, Card, Paragraph } from "react-native-paper";
+import Title from "../components/common/Title";
 
 import { busData } from "../utils/mock";
 import { TouchableOpacity } from "react-native-gesture-handler";
 
 const AllBusScrollView = () => (
   <View style={styles.container}>
+    {/* <View style={{marginTop: 20}}>
+    <Title>Our Buses</Title>
+    </View> */}
+
     <ScrollView
       horizontal={true}
       showsHorizontalScrollIndicator={false}
@@ -39,7 +44,7 @@ const styles = StyleSheet.create({
     // alignItems: "center"
   },
   cardContainer: {
-    marginLeft: 10,
+    // marginLeft: 10,
     marginRight: 10,
     width: 150,
     borderTopLeftRadius: 50,
@@ -49,7 +54,7 @@ const styles = StyleSheet.create({
   cardWrapper: {
     flex: 1,
     justifyContent: "center",
-    alignItems: "center"
+    alignItems: "center",
   },
   busDetails: {
     width: "100%",

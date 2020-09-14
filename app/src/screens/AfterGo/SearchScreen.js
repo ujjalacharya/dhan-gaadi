@@ -21,7 +21,7 @@ export class SearchScreen extends Component {
   render() {
     return (
       <View>
-        <Appbar.Header>
+        <Appbar.Header statusBarHeight={0}>
           <Appbar.BackAction onPress={this._goBack} />
           <Appbar.Content title="Search" />
         </Appbar.Header>
