@@ -15,11 +15,13 @@ const AllBusScrollView = () => (
     >
       {busData.map((bus, i) => (
         <TouchableOpacity key={i} style={styles.cardContainer}>
-          <Image style={styles.tinyLogo} source={{ uri: bus.image }} />
-          <Card style={styles.busDetails}>
-            <Text style={{ fontWeight: "bold" }}>{bus.title}</Text>
-            <Text>{bus.price}</Text>
-          </Card>
+          <View style={styles.cardWrapper}>
+            <Image style={styles.tinyLogo} source={{ uri: bus.image }} />
+            <Card style={styles.busDetails}>
+              <Text style={{ fontWeight: "bold" }}>{bus.title}</Text>
+              <Text>{bus.price}</Text>
+            </Card>
+          </View>
         </TouchableOpacity>
       ))}
     </ScrollView>
@@ -28,26 +30,35 @@ const AllBusScrollView = () => (
 
 const styles = StyleSheet.create({
   container: {
-    height: "40%",
+    // height: "40%",
     width: "100%",
-    position: "absolute",
-    bottom: 0,
+    // position: "absolute",
+    // bottom: 5,
+    // flex: 1,
+    // justifyContent: "center",
+    // alignItems: "center"
   },
   cardContainer: {
     marginLeft: 10,
     marginRight: 10,
-    width: 100,
-    borderRadius: 50,
+    width: 150,
+    borderTopLeftRadius: 50,
+    borderTopRightRadius: 50,
     height: "100%",
+  },
+  cardWrapper: {
+    flex: 1,
+    justifyContent: "center",
+    alignItems: "center"
   },
   busDetails: {
     width: "100%",
-    height: "25%",
+    height: "35%",
     padding: 5,
   },
   tinyLogo: {
     width: "100%",
-    height: 60,
+    height: 80,
     borderTopLeftRadius: 4,
     borderTopRightRadius: 4,
   },

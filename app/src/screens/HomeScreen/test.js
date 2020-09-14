@@ -139,7 +139,7 @@ export class Test extends Component {
           <Banner />
         </SafeAreaView>
         <View style={{ height: 400, backgroundColor: "red" }}>
-          <Card style={{height: "100%"}}>
+          <Card style={{ height: "100%" }}>
             {/* <View style={styles.searchbarContainer}></View> */}
             <View style={{ height: "50%", marginHorizontal: 20 }}>
               <TouchableRipple
@@ -256,14 +256,17 @@ export class Test extends Component {
             </View>
           </Card>
         </View>
-        <View style={{height: 300, backgroundColor: ""}}>
-          <View style={{flex: .05}}></View>
-            <View style={{flex: .55}}>
+        <View style={{ height: 350 }}>
+          <View style={{ flex: 0.05 }}></View>
+          <View style={{ flex: 0.55 }}>
             <Image
               source={require("../../../assets/busbookingbanner.png")}
               style={{ height: "100%" }}
             ></Image>
-            </View>
+          </View>
+          <View style={{ flex: .6 }}>
+            <AllBusScrollView />
+          </View>
         </View>
       </ScrollView>
     );
@@ -271,88 +274,87 @@ export class Test extends Component {
 }
 
 const styles = StyleSheet.create({
-    container: {
-      height: "100%",
-      // marginTop: 30,
-      alignItems: "center",
-    },
-  
-    searchbarContainer: {
-      height: "15%",
-      justifyContent: "center",
-      alignItems: "center",
-      // marginTop: -30,
-    },
-  
-    inputField: {
-      marginTop: 20,
-      height: 40,
-      backgroundColor: ConstantColors.initialColor,
-      justifyContent: "center",
-      borderColor: Colors.tintColor,
-      borderWidth: 1,
-      borderRadius: 5,
-      elevation: 5,
-    },
-  
-    inputText: {
-      padding: 15,
-      color: "black",
-      fontSize: 15,
-    },
-  
-    pickerContainer: {
-      marginTop: 20,
-      justifyContent: "center",
-      alignItems: "center",
-    },
-  
-    datePickerCircleContainer: {
-      width: "100%",
-      flexDirection: "row",
-      justifyContent: "space-between",
-    },
-  
-    circleButton: {
-      padding: 5,
-      height: 80,
-      width: 80, //The Width must be the same as the height
-      borderRadius: 200, //Then Make the Border Radius twice the size of width or Height
-      alignItems: "center",
-      justifyContent: "center",
-      marginTop: 20,
-      elevation: 10,
-      borderColor: ConstantColors.tintColor,
-      borderWidth: 1,
-    },
-  
-    submitButtonContainer: {
-      marginTop: 35,
-      height: 40,
-      justifyContent: "center",
-      alignItems: "center",
-      marginBottom: 20,
-    },
-  
-    submitButton: {
-      width: "100%",
-      borderRadius: 50,
-      flex: 1,
-      justifyContent: "center",
-      borderColor: ConstantColors.tintColor,
-      borderWidth: 1,
-    },
-  });
-  
-  function mapStateToProps(state) {
-    return {
-      Journey: state.Journey.journey_store,
-    };
-  }
-  
-  function mapDispatchToProps(dispatch) {
-    return bindActionCreators({ jorneyAction }, dispatch);
-  }
-  
-  export default connect(mapStateToProps, mapDispatchToProps)(Test);
-  
+  container: {
+    height: "100%",
+    // marginTop: 30,
+    alignItems: "center",
+  },
+
+  searchbarContainer: {
+    height: "15%",
+    justifyContent: "center",
+    alignItems: "center",
+    // marginTop: -30,
+  },
+
+  inputField: {
+    marginTop: 20,
+    height: 40,
+    backgroundColor: ConstantColors.initialColor,
+    justifyContent: "center",
+    borderColor: Colors.tintColor,
+    borderWidth: 1,
+    borderRadius: 5,
+    elevation: 5,
+  },
+
+  inputText: {
+    padding: 15,
+    color: "black",
+    fontSize: 15,
+  },
+
+  pickerContainer: {
+    marginTop: 20,
+    justifyContent: "center",
+    alignItems: "center",
+  },
+
+  datePickerCircleContainer: {
+    width: "100%",
+    flexDirection: "row",
+    justifyContent: "space-between",
+  },
+
+  circleButton: {
+    padding: 5,
+    height: 80,
+    width: 80, //The Width must be the same as the height
+    borderRadius: 200, //Then Make the Border Radius twice the size of width or Height
+    alignItems: "center",
+    justifyContent: "center",
+    marginTop: 20,
+    elevation: 10,
+    borderColor: ConstantColors.tintColor,
+    borderWidth: 1,
+  },
+
+  submitButtonContainer: {
+    marginTop: 35,
+    height: 40,
+    justifyContent: "center",
+    alignItems: "center",
+    marginBottom: 20,
+  },
+
+  submitButton: {
+    width: "100%",
+    borderRadius: 50,
+    flex: 1,
+    justifyContent: "center",
+    borderColor: ConstantColors.tintColor,
+    borderWidth: 1,
+  },
+});
+
+function mapStateToProps(state) {
+  return {
+    Journey: state.Journey.journey_store,
+  };
+}
+
+function mapDispatchToProps(dispatch) {
+  return bindActionCreators({ jorneyAction }, dispatch);
+}
+
+export default connect(mapStateToProps, mapDispatchToProps)(Test);
