@@ -19,3 +19,5 @@ export const checkIfTokenExpired = (token=null) => {
     setAuthToken(token);
     return token;
 }
+
+export const defaultAdminImage = "https://www.lansweeper.com/wp-content/uploads/2018/05/ASSET-USER-ADMIN.png"

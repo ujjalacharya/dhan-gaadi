@@ -30,9 +30,8 @@ const Login = () => {
     setState({ ...state, error: false, loading: true });
     const data = await signIn({ email, password }).catch(err => {
       setState({ ...state, error: err.response.data.error });
-    });
+    })
 
-    console.log(data);
     if (data && data.status === 200) {
       authenticate(data, () => {
         if (isAuthenticated()) {
