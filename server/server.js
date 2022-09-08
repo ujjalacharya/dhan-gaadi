@@ -9,9 +9,11 @@ const app = express();
 // Import methods
 const { runEveryMidnight, dbConnection, errorHandler } = require("./helpers");
 const logger = require("./helpers/logger");
+const runSeed = require("./seeds");
 
 // Database Connection
 dbConnection();
+runSeed();
 
 // Middlewares
 logger(app);
@@ -37,9 +39,9 @@ app.use("/api/travels", require("./routes/travel"));
 app.use("/api/users", require("./routes/user"));
 
 // Error handling middleware
-app.use(function(err, req, res, next) {
+app.use(function (err, req, res, next) {
   return res.status(500).json({
-    error: errorHandler(err) || "Something went wrong!"
+    error: errorHandler(err) || "Something went wrong!",
   });
 });
 
