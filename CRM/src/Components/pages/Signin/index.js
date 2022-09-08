@@ -9,7 +9,7 @@ import {
 
 const Login = () => {
   const [state, setState] = useState({
-    email: "john@hotmail.com",
+    email: "sadmin@sadmin.com",
     password: "qwerty12345",
     error: "",
     loading: false
