@@ -102,7 +102,7 @@ exports.requireSuperadminSignin = async (req, res, next) => {
 
     const foundowner = await Owner.findById(owner._id).select("name role");
 
-    if (foundowner.role === "superadmin") {
+    if (foundowner && foundowner.role === "superadmin") {
       req.ownerauth = foundowner;
       next();
     } else res.status(401).json({ error: "Not authorized!" });

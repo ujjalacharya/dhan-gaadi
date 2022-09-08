@@ -1,5 +1,5 @@
 const mongoose = require("mongoose");
-const uuidv1 = require("uuid/v1");
+const { v1 } = require("uuid");
 const crypto = require("crypto");
 
 const ownerSchema = new mongoose.Schema(
@@ -8,39 +8,39 @@ const ownerSchema = new mongoose.Schema(
       type: String,
       trim: true,
       required: true,
-      maxlength: 32
+      maxlength: 32,
     },
     citizenshipNumber: {
       type: String,
       trim: true,
       required: true,
-      maxlength: 32
+      maxlength: 32,
     },
     phone: {
       type: Number,
       max: 9999999999,
-      required: true
+      required: true,
     },
     isVerified: {
-      default: false
+      default: false,
     },
     email: {
       type: String,
-      trim: true
+      trim: true,
     },
     hashed_password: {
       type: String,
-      required: true
+      required: true,
     },
     photo: {
-      type: String
+      type: String,
     },
     salt: String,
     role: {
       type: String,
       enum: ["owner", "superadmin"],
-      default: "owner"
-    }
+      default: "owner",
+    },
   },
   { timestamps: true }
 );
@@ -48,25 +48,25 @@ const ownerSchema = new mongoose.Schema(
 // virtual field
 ownerSchema
   .virtual("password")
-  .set(function(password) {
+  .set(function (password) {
     // create temporary variable called _password
     this._password = password;
     // generate a timestamp
-    this.salt = uuidv1();
+    this.salt = v1();
     // encryptPassword()
     this.hashed_password = this.encryptPassword(password);
   })
-  .get(function() {
+  .get(function () {
     return this._password;
   });
 
 // methods
 ownerSchema.methods = {
-  authenticate: function(plainText) {
+  authenticate: function (plainText) {
     return this.encryptPassword(plainText) === this.hashed_password;
   },
 
-  encryptPassword: function(password) {
+  encryptPassword: function (password) {
     if (!password) return "";
     try {
       return crypto
@@ -76,7 +76,7 @@ ownerSchema.methods = {
     } catch (err) {
       return "";
     }
-  }
+  },
 };
 
 module.exports = mongoose.model("Owner", ownerSchema);

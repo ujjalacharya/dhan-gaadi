@@ -8,25 +8,25 @@
   "scripts": {
     "start": "node server.js",
     "client": "cd client && yarn start",
-    "server": "nodemon server.js",
+    "server": "npx nodemon server.js",
     "heroku-postbuild": "NPM_CONFIG_PRODUCTION=false npm install --prefix client && npm run build --prefix client "
   },
   "dependencies": {
     "cors": "^2.8.5",
-    "cron": "^1.7.2",
-    "dotenv": "^8.1.0",
-    "express": "^4.17.1",
+    "cron": "^2.1.0",
+    "dotenv": "^16.0.2",
+    "express": "^4.18.1",
     "express-async-errors": "^3.1.1",
     "express-validator": "^5.3.1",
     "jsonwebtoken": "^8.5.1",
-    "lodash": "^4.17.15",
-    "mongoose": "^5.6.10",
+    "lodash": "^4.17.21",
+    "mongoose": "^6.5.4",
     "mongoose-slug-generator": "^1.0.4",
-    "morgan": "^1.9.1",
+    "morgan": "^1.10.0",
     "multer": "^1.4.2",
-    "nodemailer": "^6.3.0",
-    "rotating-file-stream": "^1.4.3",
-    "sharp": "^0.23.0",
-    "uuid": "^3.3.3"
+    "nodemailer": "^6.7.8",
+    "rotating-file-stream": "^3.0.4",
+    "sharp": "^0.31.0",
+    "uuid": "^9.0.0"
   }
 }
