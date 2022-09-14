@@ -34,7 +34,7 @@ class SingleCard extends React.Component {
   };
 
   encryptInfo = seat => {
-    const {startLocation, endLocation, fare, journeyDate, travel, slug} = this.props.bus;
+    const {startLocation, endLocation, fare, journeyDate, travel={}, slug} = this.props.bus;
     let start = startLocation.name;
     let end = endLocation.name;
     let travelName = travel.name;
@@ -103,7 +103,7 @@ class SingleCard extends React.Component {
             </Col>
             <Col span={1}></Col>
             <Col span={4}>
-              <p>{bus.travel.name}</p>
+              <p>{bus.travel ? bus.travel.name: null}</p>
             </Col>
             <Col span={4}>
               <p>{bus.type}</p>
@@ -114,7 +114,7 @@ class SingleCard extends React.Component {
               </strong>
             </Col>
             <Col span={4}>
-              <p>20 seats</p>
+              <p>{bus.seatsAvailable} seats</p>
             </Col>
             <Col span={4}>
               <p>Rs {`${bus.fare}`}</p>
