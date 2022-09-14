@@ -128,6 +128,7 @@ exports.create = async (req, res) => {
   }
 
   const bus = new Bus(req.body);
+  bus.seatsAvailable = req.body.numberOfSeats
 
   if (!checkDateAvailability(req.body.journeyDate)) {
     bus.isAvailable = false;
