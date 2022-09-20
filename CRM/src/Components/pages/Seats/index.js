@@ -8,6 +8,7 @@ import Loading from '../../core/Loading';
 function BusCaller(props) {
 	const [sold, setSold] = useState([]);
 	const [booked, setBooked] = useState([]);
+	const [numberOfSeats, setNumberOfSeats] = useState(0);
 	const [error, setError] = useState('');
 	const [details, setDetails] = useState({ name: 'Bus' });
 	const [loading, setLoading] = useState(true);
@@ -25,13 +26,13 @@ function BusCaller(props) {
 			setDetails(resp.data);
 			setBooked(resp.data.bookedSeat);
 			setSold(resp.data.soldSeat);
+			setNumberOfSeats(resp.data.numberOfSeats);
 			setLoading(false);
 		}
 	};
 
 	return (
 		<Layout title="Seat Details">
-			{console.log(details)}
 			<h1 className="mt-2 text-primary">{`Seat Details of ${details.name}`}</h1>
 			{loading ? (
 				<Loading />
@@ -46,6 +47,7 @@ function BusCaller(props) {
 							booked={booked}
 							setBooked={setBooked}
 							slug={props.match.params.slug}
+							numberOfSeats={numberOfSeats}
 						/>
 					)}
 				</>

@@ -94,7 +94,7 @@ class AddNewBus extends Component {
       value = e.target.value;
     }
 
-    this.state.formData.set(input, value);
+    // this.state.formData.set(input, value);
 
     this.setState({ [input]: value });
   };

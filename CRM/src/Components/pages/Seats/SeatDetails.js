@@ -9,10 +9,10 @@ class SeatDetails extends Component {
     oddA: ["A1", "A3", "A5", "A7", "A9", "A11", "A13", "A15"],
     evenA: ["A2", "A4", "A6", "A8", "A10", "A12", "A14"],
     oddB: ["B1", "B3", "B5", "B7", "B9", "B11", "B13", "B15"],
-    evenB: ["B2", "B4", "B6", "B8", "B10", "B12", "B14"]
+    evenB: ["B2", "B4", "B6", "B8", "B10", "B12", "B14"],
   };
 
-  handleClick = async seat => {
+  handleClick = async (seat) => {
     Swal.fire({
       title: "Are you sure?",
       text: "Seats sold !",
@@ -20,8 +20,8 @@ class SeatDetails extends Component {
       showCancelButton: true,
       confirmButtonColor: "#3085d6",
       cancelButtonColor: "#d33",
-      confirmButtonText: "Yes, update it!"
-    }).then(async result => {
+      confirmButtonText: "Yes, update it!",
+    }).then(async (result) => {
       if (result.value) {
         this.props.setSold([...this.props.sold, seat]);
         await postSoldSeat(this.props.slug, seat);
@@ -29,15 +29,51 @@ class SeatDetails extends Component {
     });
   };
 
+  componentDidMount() {
+    if (this.props.numberOfSeats) {
+      let numberOfSeats = this.props.numberOfSeats;
+      let arr = [];
+      let oddA = [];
+      let oddB = [];
+      let evenA = [];
+      let evenB = [];
+      for (let i = 0; i < Math.ceil(numberOfSeats / 2); i++) {
+        if (i === 0) arr.push(i);
+        else arr.push(arr[i - 1] + 4);
+
+        if (i % 2 == 0) {
+          oddA.push("A" + (i + 1));
+          oddB.push("B" + (i + 1));
+        } else {
+          evenA.push("A" + (i + 1));
+          evenB.push("B" + (i + 1));
+        }
+      }
+      arr.length = Math.ceil(numberOfSeats / 4);
+      this.setState({
+        arr,
+        oddA,
+        oddB,
+        evenA,
+        evenB,
+      });
+    }
+  }
+
   render() {
     const { size, arr, oddA, oddB, evenA, evenB } = this.state;
     const { sold, booked } = this.props;
     return (
       <div style={styles.wrapper}>
-        <div className="steer" style={styles.steer}>
+        {/* <div className="steer" style={styles.steer}>
           <img style={styles.img} src="/img/steer.png" />
-        </div>
-        <div style={styles.busDiv}>
+        </div> */}
+        <div
+          style={{
+            ...styles.busDiv,
+            height: `${this.props.numberOfSeats} rem`,
+          }}
+        >
           {arr.map((le, i) => {
             return (
               <div key={i}>
@@ -143,45 +179,43 @@ class SeatDetails extends Component {
 
 const styles = {
   wrapper: {
-    height: "60vh",
     display: "flex",
     position: "relative",
     top: "6rem",
-    left: "29%"
+    left: "29%",
   },
   steer: {
-    margin: "4rem"
+    margin: "4rem",
   },
   img: {
     height: "3rem",
-    transform: "rotate(90deg)"
+    transform: "rotate(90deg)",
   },
   busDiv: {
     background: "#434343",
-    height: "29rem",
     position: "relative",
     width: "23rem",
     color: "#ffff",
-    transform: "rotate(270deg)"
+    transform: "rotate(270deg)",
   },
   secondCol: {
     position: "absolute",
     top: 0,
-    right: 0
+    right: 0,
   },
   soldButton: {
     background: "#ff4d4f",
     color: "#ffff",
-    margin: ".5rem"
+    margin: ".5rem",
   },
   bookedButton: {
     background: "#434343",
     color: "#ffff",
-    margin: ".5rem"
+    margin: ".5rem",
   },
   button: {
-    margin: ".5rem"
-  }
+    margin: ".5rem",
+  },
 };
 
 export default SeatDetails;
