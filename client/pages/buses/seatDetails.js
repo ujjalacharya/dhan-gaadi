@@ -16,6 +16,37 @@ class SeatDetails extends Component {
     };
   }
 
+  componentDidMount() {
+    if (this.props.numberOfSeats) {
+      let numberOfSeats = this.props.numberOfSeats;
+      let arr = [];
+      let oddA = [];
+      let oddB = [];
+      let evenA = [];
+      let evenB = [];
+      for (let i = 0; i < Math.ceil(numberOfSeats / 2); i++) {
+        if (i === 0) arr.push(i);
+        else arr.push(arr[i - 1] + 2.5);
+
+        if (i % 2 == 0) {
+          oddA.push("A" + (i + 1));
+          oddB.push("B" + (i + 1));
+        } else {
+          evenA.push("A" + (i + 1));
+          evenB.push("B" + (i + 1));
+        }
+      }
+      arr.length = Math.ceil(numberOfSeats / 4);
+      this.setState({
+        arr,
+        oddA,
+        oddB,
+        evenA,
+        evenB,
+      });
+    }
+  }
+
   handleClick = async seat => {
     Swal.fire({
       title: "Are you sure?",
@@ -152,7 +183,6 @@ class SeatDetails extends Component {
 
 const styles = {
   wrapper: {
-    height: "60vh",
     display: "flex",
     flexDirection: "column",
     position: "relative",
@@ -170,7 +200,6 @@ const styles = {
   },
   busDiv: {
     background: "#434343",
-    height: "18rem",
     position: "relative",
     width: "17rem",
     color: "#ffff"

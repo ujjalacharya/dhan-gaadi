@@ -72,6 +72,7 @@ class SingleCard extends React.Component {
       footer={[
         this.seatColorMeaning()
       ]}
+      width={1000}
       >
       <SeatDetails
         sold={this.props.bus.soldSeat}
@@ -80,6 +81,7 @@ class SingleCard extends React.Component {
         setBooked={() => {}}
         slug={"ss"}
         handleUserBooked={this.handleUserBooked}
+        numberOfSeats={this.props.bus.numberOfSeats}
       />
     </Modal>
   );
