@@ -14,7 +14,7 @@
     "react-dropzone": "^10.1.8",
     "react-images-upload": "^1.2.7",
     "react-router-dom": "^5.0.1",
-    "react-scripts": "3.1.1",
+    "react-scripts": "5.0.1",
     "sweetalert2": "^8.17.1"
   },
   "scripts": {
