@@ -1,4 +1,4 @@
-// Packages
+// Dependencies
 const expressValidator = require("express-validator");
 const express = require("express");
 require("express-async-errors");
@@ -15,7 +15,7 @@ const runSeed = require("./seeds");
 dbConnection();
 runSeed();
 
-// Middlewares
+// Middlewares]
 logger(app);
 app.use(cors());
 app.use(express.json());
@@ -39,7 +39,7 @@ app.use("/api/travels", require("./routes/travel"));
 app.use("/api/users", require("./routes/user"));
 
 // Error handling middleware
-app.use(function (err, req, res, next) {
+app.use(() => (err, req, res, next) {
   return res.status(500).json({
     error: errorHandler(err) || "Something went wrong!",
   });
