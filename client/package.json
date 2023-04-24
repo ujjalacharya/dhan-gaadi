@@ -14,7 +14,7 @@
     "isomorphic-unfetch": "^3.0.0",
     "jsonwebtoken": "^8.5.1",
     "next": "9.0.7",
-    "node-sass": "^4.12.0",
+    "node-sass": "^7.0.0",
     "nprogress": "^0.2.0",
     "query-string": "^6.9.0",
     "react": "16.10.1",
